@@ -17,9 +17,10 @@
 	<select id="selectMotoristaAtu" name="selectMotoristaAtu">
 	 <option value="">..</option>
     <c:forEach var="motoristas" items="${motorista}">
-        <option value= "${motoista.codigoMotorista}">
-           				${motorista.nomeMotorista}
-            			${motorista.sobrenomeMotorista}
+        <option value= "${motorista.nomeMotorista}">
+                        ${motorista.sobrenomeMotorista}">
+            			
+            			
         </option>
      </c:forEach>
 	</select>
@@ -40,31 +41,38 @@
 			<fieldset>
 			<label for="cpfMotoristaAtu">Cpf</label><br>
 			<input type="text" id="cpfMotoristaAtu" name="cpfMotoristaAtu" maxlength ="11" required ><br>
+			${motorista.cpfMotorista}
 			</fieldset>
+			
 			
 			<fieldset>
 			<label for="cnhMotoristaAtu">Cnh</label><br>
 			<input type="text" id="cnhMotoristaAtu" name="cnhMotoristaAtu" maxlength ="11" required  ><br>
+			${motorista.cnhMotorista}
 			</fieldset>
 			
 			<fieldset>
 			<label for="idadeMotoristaAtu">Idade</label><br>
 			<input type="text" id="idadeMotoristaAtu" name="idadeMotoristaAtu" maxlength ="3" required  ><br>
+			${motorista.idadeMotorista}
 			</fieldset>
 			
 			<fieldset>
 			<label for="emailMotoristaAtu">Email</label><br>
 			<input type="text" id="emailMotoristaAtu" name="emailMotoristaAtu" maxlength ="35" required  ><br>
+			${motorista.emailMotorista}
 			</fieldset>
 			
 			<fieldset>
 			<label for = "telefoneMotoristaAtu">Telefone</label><br>
 			<input type ="tel" id="telefoneMotoristaAtu" name = "telefoneMotoristaAtu" maxlength ="11" required  placeholder="(99)99999-9999" pattern="[0-9]{2}[0-9]{1}-[0-9]{4}-[0-9]{4}"><br>
-			 </fieldset>
+			${motorista.telefoneMotorista}
+			</fieldset>
 			 
 			<fieldset>
 			<label for="UsuarioMotoristaAtu">Usuário</label><br>
 			<input type="text" id="UsuarioMotoristaAtu" name="UsuarioMotoristaAtu" maxlength ="125" required  ><br>
+
 			</fieldset>
 			
 			<fieldset> 
