@@ -31,36 +31,14 @@ public class Tutor extends Usuario {
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tutor", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Corrida> corridas = new ArrayList<Corrida>();
+
+	public Tutor(String nomeUsuario, String sobreNomeUsuario, String cpfUsuario, int idadeUsuario, String emailUsuario,
+			String telefoneUsuario, String login_usuario, String senha_usuario) {
+		super(nomeUsuario, sobreNomeUsuario, cpfUsuario, idadeUsuario, emailUsuario, telefoneUsuario, login_usuario,
+				senha_usuario);
+	}
 	
-
-	public Tutor(int idUsuario, String nomeUsuario, String sobreNomeUsuario, String cpfUsuario, String telefoneUsuario,
-			String login_usuario, String senha_usuario, List<Endereco> enderecos,
-			List<AnimalDomestico> animais, List<Corrida> corridas) {
-		super(idUsuario, nomeUsuario, sobreNomeUsuario, cpfUsuario, telefoneUsuario, login_usuario, senha_usuario);
-		this.enderecos = enderecos;
-		this.animais = animais;
-		this.corridas = corridas;
-	}
-
-	public Tutor(long idUsuario, String nomeUsuario, String sobreNomeUsuario, String cpfUsuario, String telefoneUsuario,
-			String login_usuario, String senha_usuario, List<Endereco> enderecos, List<AnimalDomestico> animais,
-			List<Corrida> corridas) {
-		super(idUsuario, nomeUsuario, sobreNomeUsuario, cpfUsuario, telefoneUsuario, login_usuario, senha_usuario);
-		this.enderecos = enderecos;
-		this.animais = animais;
-		this.corridas = corridas;
-	}
-
-	public Tutor(long idUsuario, String nomeUsuario, String sobreNomeUsuario, String cpfUsuario, String telefoneUsuario,
-			String login_usuario, String senha_usuario) {
-		super(idUsuario, nomeUsuario, sobreNomeUsuario, cpfUsuario, telefoneUsuario, login_usuario, senha_usuario);
-	}
-
-	public Tutor() {
-		
-	}
-
-	
+	public Tutor() {}
 
 	public List<Endereco> getEnderecos() {
 		return enderecos;
@@ -74,16 +52,18 @@ public class Tutor extends Usuario {
 		return animais;
 	}
 
-	public void adicionarAnimais(AnimalDomestico animail) {
-		this.animais.add(animail);
+	public void setAnimais(List<AnimalDomestico> animais) {
+		this.animais = animais;
 	}
 
 	public List<Corrida> getCorridas() {
 		return corridas;
 	}
 
-	public void adicionarCorrida(Corrida corrida) {
-		this.corridas.add(corrida);
+	public void setCorridas(List<Corrida> corridas) {
+		this.corridas = corridas;
 	}
+	
 
+	
 }
