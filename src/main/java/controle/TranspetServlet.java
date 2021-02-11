@@ -3,6 +3,7 @@ package controle;
 import java.io.IOException;
 import java.util.List;
 
+import javax.persistence.metamodel.SetAttribute;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -96,30 +97,38 @@ public class TranspetServlet extends HttpServlet {
 
 		case "/iniciar-corrida":
 
-			listarTutoresCorrida(request, response);
+			listarTutoresIniciarCorrida(request, response);
 
 			break;
 
 		case "/iniciar-corrida-tutor":
-			
+
+			carregarDadosTutor(request, response);
+
+			break;
+
+		case "/iniciar-corrida-tutor-ins":
+
 			iniciarCorridaTutor(request, response);
 
 			break;
-			
+
 		case "/atualizar-corrida":
-			
+
 			listarTutoresAtualizar(request, response);
-			
+
 			break;
-			
+
 		case "/atualizar-corrida-tutor":
-			
+
 			listarCorridasTutor(request, response);
-			
+
 			break;
-			
+
 		case "/atualizar-corrida-tutor-campos":
-			
+
+			atualizarCorridaTutor(request, response);
+
 			break;
 
 		}
@@ -143,13 +152,11 @@ public class TranspetServlet extends HttpServlet {
 		long id = ((UsuarioDAO<Motorista>) tutorDao).procurarUsuarioLogin(usuario);
 		if ((((TutorDAOSGDBImpl) tutorDao).procurarTutorId(id))) {
 
-			RequestDispatcher dispatcher = request.getRequestDispatcher("listar-corrida-aberto-tutor.jsp");
-			dispatcher.forward(request, response);
+			listarTutoresCorrida(request, response);
 
 		} else {
 
-			RequestDispatcher dispatcher = request.getRequestDispatcher("procurar-corrida-motorista.jsp");
-			dispatcher.forward(request, response);
+			listarMotoristasCorrida(request, response);
 
 		}
 
@@ -168,8 +175,7 @@ public class TranspetServlet extends HttpServlet {
 		tutor.setLogin_usuario(request.getParameter("loginTutorCad"));
 		tutor.setSenha_usuario(request.getParameter("senhaTutorCad"));
 		tutorDao.inserir(tutor);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("corrida-tutor.jsp");
-		dispatcher.forward(request, response);
+		listarTutoresCorrida(request, response);
 
 	}
 
@@ -187,8 +193,7 @@ public class TranspetServlet extends HttpServlet {
 		motorista.setLogin_usuario(request.getParameter("loginMotoristaCad"));
 		motorista.setSenha_usuario(request.getParameter("senhaMotoristaCad"));
 		motoristaDao.inserir(motorista);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("procurar-corrida-motorista.jsp");
-		dispatcher.forward(request, response);
+		listarMotoristasCorrida(request, response);
 
 	}
 
@@ -199,7 +204,28 @@ public class TranspetServlet extends HttpServlet {
 
 		tutores = tutorDao.listar();
 		request.setAttribute("tutores", tutores);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("corrida-tutor.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-corrida-tutor.jsp");
+		dispatcher.forward(request, response);
+
+	}
+
+	private void listarTutoresIniciarCorrida(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		List<Tutor> tutores;
+
+		tutores = tutorDao.listar();
+		request.setAttribute("tutores", tutores);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("iniciar-corrida-tutor.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void listarMotoristasCorrida(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		List<Motorista> motoristas = motoristaDao.listar();
+		request.setAttribute("motoristas", motoristas);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("procurar-corrida-motorista.jsp");
 		dispatcher.forward(request, response);
 
 	}
@@ -234,9 +260,11 @@ public class TranspetServlet extends HttpServlet {
 				.listarEnderecoPorIdEndereco(Long.parseLong(request.getParameter("idEnderecoFinalCorrida")));
 		corrida.setEnderecoInicial(enderecoInicial);
 		corrida.setEnderecoFinal(enderecoFinal);
+		AnimalDomestico animal = (AnimalDomestico) ((AnimalDomesticoDAOSGDBImpl) animalDao)
+				.listarAnimalPorIdTutor(tutor);
+		corrida.setAnimal(animal);
 		corridaDao.inserir(corrida);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("corrida-tutor.jsp");
-		dispatcher.forward(request, response);
+		listarTutoresCorrida(request, response);
 	}
 
 	private void listarTutoresAtualizar(HttpServletRequest request, HttpServletResponse response)
@@ -261,6 +289,44 @@ public class TranspetServlet extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("atualizar-corrida-tutor.jsp");
 		dispatcher.forward(request, response);
 
+	}
+
+	private void atualizarCorridaTutor(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao)
+				.listarTutorId(Long.parseLong(request.getParameter("idTutorIniciarCorrida")));
+		request.setAttribute("tutor", tutor);
+		Endereco enderecoInicial = ((EnderecoDAOSGDBImpl) enderecoDao)
+				.listarEnderecoPorIdEndereco(Long.parseLong(request.getParameter("idEnderecoInicialCorrida")));
+		Endereco enderecoFinal = ((EnderecoDAOSGDBImpl) enderecoDao)
+				.listarEnderecoPorIdEndereco(Long.parseLong(request.getParameter("idEnderecoFinalCorrida")));
+		request.setAttribute("enderecoFinal", enderecoFinal);
+		request.setAttribute("enderecoInicial", enderecoInicial);
+		AnimalDomestico animalId = new AnimalDomestico();
+		animalId.setIdAnimal(Long.parseLong(request.getParameter("idAnimalCorrida")));
+		AnimalDomestico animal = (AnimalDomestico) ((AnimalDomesticoDAOSGDBImpl) animalDao)
+				.listarAnimalPorIdAnimal(animalId);
+		request.setAttribute("animal", animal);
+		List<Endereco> enderecos = ((EnderecoDAOSGDBImpl) enderecoDao).listarEnderecoPorIdUsuario(tutor);
+		List<AnimalDomestico> animais = ((AnimalDomesticoDAOSGDBImpl) animalDao).listarAnimalPorIdTutor(tutor);
+		request.setAttribute("enderecos", enderecos);
+		request.setAttribute("animais", animais);
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("atualizar-corrida-tutor.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void carregarDadosTutor(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao)
+				.listarTutorId(Long.parseLong(request.getParameter("idTutorIniciarCorrida")));
+		List<Endereco> enderecos = (List<Endereco>) ((EnderecoDAOSGDBImpl) enderecoDao)
+				.listarEnderecoPorIdUsuario(tutor);
+		List<AnimalDomestico> animais = ((AnimalDomesticoDAOSGDBImpl) animalDao).listarAnimalPorIdTutor(tutor);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("iniciar-corrida-tutor.jsp");
+		dispatcher.forward(request, response);
 	}
 
 }

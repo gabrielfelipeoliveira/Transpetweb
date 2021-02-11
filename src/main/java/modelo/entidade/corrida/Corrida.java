@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import modelo.entidade.animal.AnimalDomestico;
 import modelo.entidade.endereco.Endereco;
 import modelo.entidade.usuario.motorista.Motorista;
 import modelo.entidade.usuario.tutor.Tutor;
@@ -41,6 +42,10 @@ public class Corrida implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_motorista")
 	private Motorista motorista;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_animal")
+	private AnimalDomestico animal;
 
 	public Corrida(long idCorrida, Endereco enderecoInicial, Endereco enderecoFinal, Tutor tutor, Motorista motorista) {
 		this.idCorrida = idCorrida;
@@ -98,5 +103,13 @@ public class Corrida implements Serializable {
 
 	public void setMotorista(Motorista motorista) {
 		this.motorista = motorista;
+	}
+
+	public AnimalDomestico getAnimal() {
+		return animal;
+	}
+
+	public void setAnimal(AnimalDomestico animal) {
+		this.animal = animal;
 	}
 }
