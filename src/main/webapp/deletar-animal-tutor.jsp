@@ -15,12 +15,11 @@
 		<label for="selectTutorAnimalDel">Tutores Cadastrados</label><br>
 		<select name="selectTutorAnimalDel">
 		
-		<option value="AnimalTutorDel">..</option>
-    <c:forEach var="AnimalTutorDel" items="${animal}">
-        <option value="${animal.codigoAnimal}">
-            ${animal.NomeAnimal}
-            ${animal.PesoAnimal}
-            ${animal.RacaAnimal}
+		<option value="tutores">..</option>
+    <c:forEach var="tutores" items="${tutor}">
+        <option value="${tutor.codigoTutores}">
+            ${tutor.Nome}
+            ${tutor.Sobrenome}
         </option>
      </c:forEach>
 		</select><br>
