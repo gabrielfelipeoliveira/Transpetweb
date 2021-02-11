@@ -185,7 +185,7 @@ public class CorridaDAOSGDBImpl extends GenericoJPADAO {
 
 		return corridas;
 	}
-	
+
 	public List<Corrida> listarCorridaFeitaPorTutor(Tutor tutor) {
 		Session sessao = null;
 		List<Corrida> corridas = null;
@@ -200,9 +200,9 @@ public class CorridaDAOSGDBImpl extends GenericoJPADAO {
 			CriteriaQuery<Corrida> criteria = construtor.createQuery(Corrida.class);
 			Root<Corrida> raiz = criteria.from(Corrida.class);
 			ParameterExpression<Long> id_motorista = construtor.parameter(Long.class);
-			criteria.where(construtor.and(construtor.isNotNull(raiz.get("motorista")),construtor.equal(raiz.get("tutor"), tutor.getIdUsuario())));
+			criteria.where(construtor.and(construtor.isNotNull(raiz.get("motorista")),
+					construtor.equal(raiz.get("tutor"), tutor.getIdUsuario())));
 
-			
 			criteria.select(raiz);
 
 			corridas = sessao.createQuery(criteria).getResultList();
@@ -226,6 +226,7 @@ public class CorridaDAOSGDBImpl extends GenericoJPADAO {
 
 		return corridas;
 	}
+
 	public List<Corrida> listarCorridaAbertaPorTutor(Tutor tutor) {
 		Session sessao = null;
 		List<Corrida> corridas = null;
@@ -240,10 +241,9 @@ public class CorridaDAOSGDBImpl extends GenericoJPADAO {
 			CriteriaQuery<Corrida> criteria = construtor.createQuery(Corrida.class);
 			Root<Corrida> raiz = criteria.from(Corrida.class);
 			ParameterExpression<Long> id_motorista = construtor.parameter(Long.class);
-			criteria.where(construtor.and(construtor.isNull(raiz.get("motorista")),construtor.equal(raiz.get("tutor"), tutor.getIdUsuario())));
+			criteria.where(construtor.and(construtor.isNull(raiz.get("motorista")),
+					construtor.equal(raiz.get("tutor"), tutor.getIdUsuario())));
 
-			
-			
 			criteria.select(raiz);
 
 			corridas = sessao.createQuery(criteria).getResultList();
@@ -267,7 +267,46 @@ public class CorridaDAOSGDBImpl extends GenericoJPADAO {
 
 		return corridas;
 	}
-	
-	
+
+
+	public Corrida listarCorridaPorIdCorrida(Corrida corrida) {
+		Session sessao = null;
+		Corrida corridaReturn = null;
+
+		try {
+
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Corrida> criteria = construtor.createQuery(Corrida.class);
+			Root<Corrida> raiz = criteria.from(Corrida.class);
+			ParameterExpression<Long> id_tutor = construtor.parameter(Long.class);
+			criteria.where(construtor.equal(raiz.get("id_corrida"), corrida.getIdCorrida()));
+
+			criteria.select(raiz);
+
+			corridaReturn = sessao.createQuery(criteria).getSingleResult();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return corridaReturn;
+	}
 
 }

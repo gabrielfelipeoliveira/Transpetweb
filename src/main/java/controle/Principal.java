@@ -21,7 +21,7 @@ import modelo.enumeracao.TipoAnimal;
 public class Principal {
 	public static void main(String[] args) {
 
-		GenericoDAO<AnimalDomestico> animalDao = new AnimalDomesticoDAOSGDBImpl(AnimalDomestico.class);
+		GenericoDAO<AnimalDomestico> animalDao = new AnimalDomesticoDAOSGDBImpl<AnimalDomestico>(AnimalDomestico.class);
 		GenericoDAO<Corrida> corridaDao = new CorridaDAOSGDBImpl(Corrida.class);
 		GenericoDAO<Endereco> enderecoDao = new EnderecoDAOSGDBImpl(Endereco.class);
 		GenericoDAO<Tutor> tutorDao = new TutorDAOSGDBImpl(Tutor.class);
@@ -47,7 +47,6 @@ public class Principal {
 		motorista.setTelefoneUsuario("123412");
 		motorista.setCpfUsuario("241241");
 		motorista.setCnh(4212134);
-		motorista.setIdade(23);
 		motoristaDao.inserir(motorista);
 
 		Veiculo veiculo = new Veiculo();

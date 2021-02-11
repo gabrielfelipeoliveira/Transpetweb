@@ -1,7 +1,9 @@
 package modelo.entidade.animal;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,9 +12,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import modelo.entidade.usuario.Usuario;
+import modelo.entidade.corrida.Corrida;
 import modelo.entidade.usuario.tutor.Tutor;
 import modelo.enumeracao.TipoAnimal;
 
@@ -44,41 +47,19 @@ public class AnimalDomestico implements Serializable {
 	@JoinColumn(name = "id_tutor")
 	private Tutor tutor;
 	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "animal", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Corrida> corridas;
+	
 	@Column(name = "tipo_animal", length = 1, nullable = false, unique = false)
 	private TipoAnimal tipoAnimal;
 
-	public AnimalDomestico(Long idAnimal, String nomeAnimal, double peso, String raca, double tamanho,
-			String observacao, Tutor tutor, TipoAnimal tipoAnimal) {
-		this.idAnimal = idAnimal;
-		this.nomeAnimal = nomeAnimal;
-		this.peso = peso;
-		this.raca = raca;
-		this.tamanho = tamanho;
-		this.observacao = observacao;
-		this.tutor = tutor;
-		this.tipoAnimal = tipoAnimal;
-	}
+	public AnimalDomestico() {	}
 
-	public AnimalDomestico(String nomeAnimal, double peso, String raca, double tamanho, String observacao,
-			Tutor tutor, TipoAnimal tipoAnimal) {
-		this.nomeAnimal = nomeAnimal;
-		this.peso = peso;
-		this.raca = raca;
-		this.tamanho = tamanho;
-		this.observacao = observacao;
-		this.tutor = tutor;
-		this.tipoAnimal = tipoAnimal;
-	}
-
-	public AnimalDomestico() {
-		
-	}
-
-	public Long getIdAnimal() {
+	public long getIdAnimal() {
 		return idAnimal;
 	}
 
-	public void setIdAnimal(Long idAnimal) {
+	public void setIdAnimal(long idAnimal) {
 		this.idAnimal = idAnimal;
 	}
 
@@ -130,6 +111,14 @@ public class AnimalDomestico implements Serializable {
 		this.tutor = tutor;
 	}
 
+	public List<Corrida> getCorridas() {
+		return corridas;
+	}
+
+	public void setCorridas(Corrida corridas) {
+		this.corridas.add(corridas);
+	}
+
 	public TipoAnimal getTipoAnimal() {
 		return tipoAnimal;
 	}
@@ -138,5 +127,6 @@ public class AnimalDomestico implements Serializable {
 		this.tipoAnimal = tipoAnimal;
 	}
 
+	
 
 }

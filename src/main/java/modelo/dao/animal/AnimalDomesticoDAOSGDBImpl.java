@@ -19,12 +19,11 @@ public class AnimalDomesticoDAOSGDBImpl<AnimalDomesticoDAOSGDBImpl> extends Gene
 
 	public AnimalDomesticoDAOSGDBImpl(Class<AnimalDomestico> classe) {
 		super(classe);
-		
+
 	}
-	
+
 	ConexaoFactory fabrica = new ConexaoFactory();
 
-	
 	public List<AnimalDomestico> listarAnimalPorIdTutor(Tutor tutor) {
 		Session sessao = null;
 		List<AnimalDomestico> animais = null;
@@ -63,9 +62,45 @@ public class AnimalDomesticoDAOSGDBImpl<AnimalDomesticoDAOSGDBImpl> extends Gene
 
 		return animais;
 	}
-
 	
+	public AnimalDomestico listarAnimalPorIdAnimal(AnimalDomestico animal) {
+		Session sessao = null;
+		AnimalDomestico animailReturn = null;
+
+		try {
+
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<AnimalDomestico> criteria = construtor.createQuery(AnimalDomestico.class);
+			Root<AnimalDomestico> raiz = criteria.from(AnimalDomestico.class);
+			criteria.where(construtor.equal(raiz.get("id_animal"), animal.getIdAnimal()));
+
+			criteria.select(raiz);
+
+			animailReturn = sessao.createQuery(criteria).getSingleResult();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return animailReturn;
 	}
 
 
-
+}
