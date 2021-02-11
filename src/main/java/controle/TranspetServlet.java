@@ -3,7 +3,6 @@ package controle;
 import java.io.IOException;
 import java.util.List;
 
-import javax.persistence.metamodel.SetAttribute;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,6 +25,7 @@ import modelo.entidade.usuario.Usuario;
 import modelo.entidade.usuario.motorista.Motorista;
 import modelo.entidade.usuario.tutor.Tutor;
 import modelo.entidade.veiculo.Veiculo;
+import modelo.enumeracao.TipoAnimal;
 
 @WebServlet("/")
 public class TranspetServlet extends HttpServlet {
@@ -129,6 +129,96 @@ public class TranspetServlet extends HttpServlet {
 
 			atualizarCorridaTutor(request, response);
 
+			break;
+
+		case "/deletar-corrida":
+
+			deletarCorrida(request, response);
+
+			break;
+
+		case "/deletar-corrida-tutor":
+
+			deletarCorridaTutor(request, response);
+
+			break;
+
+		case "/deletar-corrida-tutor-del":
+
+			deletarCorridaTutorDel(request, response);
+
+			break;
+
+		case "cadastrar-animal":
+
+			listarTutorAnimal(request, response);
+
+			break;
+
+		case "cadastrar-animal-tutor":
+
+			cadastrarAnimalTutor(request, response);
+
+			break;
+
+		case "cadastrar-animal-tutor-inserir":
+
+			cadastrarAnimalTutorInserir(request, response);
+
+			break;
+
+		case "atualizar-animal":
+
+			listarTutorAnimalAtualizar(request, response);
+
+			break;
+
+		case "atualizar-animal-tutor":
+
+			atualizarAnimalTutor(request, response);
+
+			break;
+
+		case "atualizar-animal-tutor-atu":
+
+			atualizarAnimalTutorDados(request, response);
+
+			break;
+
+		case "deletar-animal":
+
+			listarTutorAnimalDeletar(request, response);
+
+			break;
+
+		case "deletar-animal-tutor":
+
+			deletarAnimalTutor(request, response);
+
+			break;
+
+		case "deletar-animal-tutor-del":
+
+			deletarAnimalTutorDel(request, response);
+
+			break;
+
+		case "dados-tutor":
+
+			listarTutoresDados(request, response);
+
+			break;
+
+		case "dados-tutor-atualizar":
+
+			atualizarDadosTutor(request, response);
+
+			break;
+			
+		case "dados-tutor-atualizar-atu":
+			
+			atualizarDadosTutorDados(request,response);
+			
 			break;
 
 		}
@@ -327,6 +417,207 @@ public class TranspetServlet extends HttpServlet {
 		List<AnimalDomestico> animais = ((AnimalDomesticoDAOSGDBImpl) animalDao).listarAnimalPorIdTutor(tutor);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("iniciar-corrida-tutor.jsp");
 		dispatcher.forward(request, response);
+	}
+
+	private void deletarCorrida(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		List<Tutor> tutores;
+
+		tutores = tutorDao.listar();
+		request.setAttribute("tutores", tutores);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("deletar-corrida-tutor.jsp");
+		dispatcher.forward(request, response);
+
+	}
+
+	private void deletarCorridaTutor(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao)
+				.listarTutorId(Long.parseLong(request.getParameter("idTutorIniciarCorrida")));
+		List<Corrida> corridas = ((CorridaDAOSGDBImpl) corridaDao).listarCorridaAbertaPorTutor(tutor);
+		request.setAttribute("corridas", corridas);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("deletar-corrida-tutor.jsp");
+		dispatcher.forward(request, response);
+
+	}
+
+	private void deletarCorridaTutorDel(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		Corrida corrida = new Corrida();
+		corrida.setIdCorrida(Long.parseLong(request.getParameter("idCorridaTutor")));
+		Corrida corridaDel = ((CorridaDAOSGDBImpl) corridaDao).listarCorridaPorIdCorrida(corrida);
+
+		corridaDao.deletar(corridaDel);
+		listarTutoresCorrida(request, response);
+
+	}
+
+	private void listarTutorAnimal(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		List<Tutor> tutores;
+
+		tutores = tutorDao.listar();
+		request.setAttribute("tutores", tutores);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastrar-animal-tutor.jsp");
+		dispatcher.forward(request, response);
+
+	}
+
+	private void cadastrarAnimalTutor(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao)
+				.listarTutorId(Long.parseLong(request.getParameter("idTutorIniciarCorrida")));
+		request.setAttribute("tutor", tutor);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastrar-animal-tutor.jsp");
+		dispatcher.forward(request, response);
+
+	}
+
+	private void cadastrarAnimalTutorInserir(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao)
+				.listarTutorId(Long.parseLong(request.getParameter("idTutorIniciarCorrida")));
+
+		AnimalDomestico animal = new AnimalDomestico();
+		animal.setNomeAnimal(request.getParameter("nomeAnimalTutorCad"));
+		animal.setRaca(request.getParameter("racaAnimalTutorCad"));
+		animal.setPeso(Double.parseDouble(request.getParameter("pesoAnimalTutorCad")));
+		animal.setTamanho(Double.parseDouble(request.getParameter("tamanhoAnimalTutorCad")));
+		TipoAnimal tipoAnimal = TipoAnimal.values()[Integer.parseInt(request.getParameter("tipoAnimalTutorCad"))];
+		animal.setTipoAnimal(tipoAnimal);
+		animal.setTutor(tutor);
+		animalDao.inserir(animal);
+		listarTutoresCorrida(request, response);
+
+	}
+
+	private void listarTutorAnimalAtualizar(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		List<Tutor> tutores;
+
+		tutores = tutorDao.listar();
+		request.setAttribute("tutores", tutores);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("atualizar-animal-tutor.jsp");
+		dispatcher.forward(request, response);
+
+	}
+
+	private void atualizarAnimalTutor(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao)
+				.listarTutorId(Long.parseLong(request.getParameter("idTutorIniciarCorrida")));
+
+		List<AnimalDomestico> animais = ((AnimalDomesticoDAOSGDBImpl) animalDao).listarAnimalPorIdTutor(tutor);
+		request.setAttribute("tutor", tutor);
+		request.setAttribute("animais", animais);
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("atualizar-animal-tutor.jsp");
+		dispatcher.forward(request, response);
+
+	}
+
+	private void atualizarAnimalTutorDados(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao)
+				.listarTutorId(Long.parseLong(request.getParameter("idTutorIniciarCorrida")));
+
+		AnimalDomestico animal = new AnimalDomestico();
+		animal.setNomeAnimal(request.getParameter("nomeAnimalTutorCad"));
+		animal.setRaca(request.getParameter("racaAnimalTutorCad"));
+		animal.setPeso(Double.parseDouble(request.getParameter("pesoAnimalTutorCad")));
+		animal.setTamanho(Double.parseDouble(request.getParameter("tamanhoAnimalTutorCad")));
+		animalDao.atualizar(animal);
+		listarTutoresCorrida(request, response);
+
+	}
+
+	private void listarTutorAnimalDeletar(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		List<Tutor> tutores;
+
+		tutores = tutorDao.listar();
+		request.setAttribute("tutores", tutores);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("deletar-animal-tutor.jsp");
+		dispatcher.forward(request, response);
+
+	}
+
+	private void deletarAnimalTutor(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao)
+				.listarTutorId(Long.parseLong(request.getParameter("idTutorIniciarCorrida")));
+
+		List<AnimalDomestico> animais = ((AnimalDomesticoDAOSGDBImpl) animalDao).listarAnimalPorIdTutor(tutor);
+		request.setAttribute("tutor", tutor);
+		request.setAttribute("animais", animais);
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("deletar-animal-tutor.jsp");
+		dispatcher.forward(request, response);
+
+	}
+
+	private void deletarAnimalTutorDel(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		AnimalDomestico animalId = new AnimalDomestico();
+		animalId.setIdAnimal(Long.parseLong(request.getParameter("idAnimalTutorDel")));
+		AnimalDomestico animal = ((AnimalDomesticoDAOSGDBImpl) animalDao).listarAnimalPorIdAnimal(animalId);
+		listarTutoresCorrida(request, response);
+
+	}
+
+	private void listarTutoresDados(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		List<Tutor> tutores;
+
+		tutores = tutorDao.listar();
+		request.setAttribute("tutores", tutores);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("atualizar-dados-tutor.jsp");
+		dispatcher.forward(request, response);
+
+	}
+	
+	
+
+	private void atualizarDadosTutor(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao)
+				.listarTutorId(Long.parseLong(request.getParameter("idTutorIniciarCorrida")));
+		
+		request.setAttribute("tutor", tutor);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("atualizar-dados-tutor.jsp");
+		dispatcher.forward(request, response);
+		
+	}
+	
+	private void atualizarDadosTutorDados(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao)
+				.listarTutorId(Long.parseLong(request.getParameter("idTutorIniciarCorrida")));
+		tutor.setNomeUsuario(request.getParameter("nomeTutorAtu"));
+		tutor.setSobreNomeUsuario(request.getParameter("sobrenomeTutorAtu"));
+		tutor.setCpfUsuario((request.getParameter("cpfutorAtu")));
+		tutor.setTelefoneUsuario(request.getParameter("telefoneTutorAtu"));
+		tutor.setIdadeUsuario(Integer.parseInt(request.getParameter("idadeTutorAtu")));
+		tutor.setEmailUsuario(request.getParameter("emailTutorAtu"));
+		tutor.setLogin_usuario(request.getParameter("usuarioTutorAtu"));
+		tutor.setSenha_usuario(request.getParameter("senhaTutorAtu"));
+		tutorDao.atualizar(tutor);
+		listarTutoresCorrida(request, response);
+		
+		
 	}
 
 }
