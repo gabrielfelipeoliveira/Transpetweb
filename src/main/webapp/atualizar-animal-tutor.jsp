@@ -16,14 +16,38 @@
 	<select id="selectTutorAnimalAtu" name="selectTutorAnimalAtu">
 	 <option value="">..</option>
     <c:forEach var="animais" items="${animal}">
-        <option value= "${animal.nomeAnimal}">
-           				${animal.racaAnimal}
+        <option value= "${animal.nome">
+           				${animal.raca}
             			
             			
         </option>
      </c:forEach>
 	</select><br>
 	</form>
+	
+	<table>
+
+		<tr>
+			<td>Nome</td>
+			<td>Peso</td>
+			<td>Raça</td>
+			<td>Tamanho</td>
+			<td>Observação</td>
+		</tr>
+
+				<tbody>
+					<c:forEach var="CorridasTutorLis" items="${corridas}">
+						<tr>
+							<td><c:out value="${animal.nome}" /></td>
+							<td><c:out value="${animal.peso}" /></td>
+							<td><c:out value="${animal.raca}" /></td>
+							<td><c:out value="${animal.tamanho}" /></td>
+							<td><c:out value="${animal.observacao}" /></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+
+		</table>
 		
 			<h3>Animal Doméstico</h3>
 			
@@ -37,7 +61,7 @@
 			<fieldset>
 			<label for="pesoAnimalTutorAtu">Peso</label><br>
 			<input type ="text" id="pesoAnimalTutorAtu" name="pesoAnimalTutorAtu" value="" maxlength="5" required><br>
-			${animal.pesoAnimal}
+			${animal.peso}
 			</fieldset>
 			
 			<fieldset>
@@ -48,13 +72,13 @@
 			<fieldset>
 			<label for="tamanhoAnimalTutorAtu">Tamanho</label><br>
 			<input type ="text" id="tamanhoAnimalTutorAtu" name="tamanhoAnimalTutorAtu" value="" maxlength="5" required><br>
-			${animal.tamanhoAnimal}
+			${animal.tamanho}
 			</fieldset>
 			
 			<fieldset>
 			<label for="observacaoAnimalTutorAtu">Observação</label><br>
 			<textarea id="observacaoAnimalTutorAtu" name="observacaoAnimalTutorAtu" value="" maxlength="100">
-			${animal.observacaoAnimal}
+			${animal.observacao}
 			</textarea><br><br>
 			</fieldset>
 					
