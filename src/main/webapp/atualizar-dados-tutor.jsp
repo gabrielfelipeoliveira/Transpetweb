@@ -13,7 +13,7 @@
 	<form action="dados-tutor">
 		<label for="selectTutorAtu">Tutor</label>
 	<select id="selectTutorAtu" name="selectTutorAtu">
-	 <option value="">..</option>
+	 <option value="tutores">..</option>
     <c:forEach var="tutores" items="${tutor}">
         <option value="${tutor.codigoTutor}">
             ${tutor.nomeTutor}
