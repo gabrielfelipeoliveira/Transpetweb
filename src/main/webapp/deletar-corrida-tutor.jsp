@@ -17,10 +17,10 @@
 		<select name = "deletarCorridaTutor" id="deletarCorridaTutor">
 		
 		<option value="CorridaTutorDel">..</option>
-    <c:forEach var="CorridaTutorDel" items="${corrida}">
-        <option value="${corrida.codigoCorrida}">
-            ${corrida.EnderecoInicial}
-            ${corrida.EnderecoFinal}
+    <c:forEach var="CorridaTutorDel" items="${tutor}">
+        <option value="${tutor.codigoTutores}">
+             ${tutor.Nome}
+            ${tutor.Sobrenome}
         </option>
      </c:forEach>
 		</select><br>
