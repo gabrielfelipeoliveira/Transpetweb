@@ -16,8 +16,8 @@
 	<select id="selectTutorAnimalAtu" name="selectTutorAnimalAtu">
 	 <option value="">..</option>
     <c:forEach var="animais" items="${animal}">
-        <option value= "${animal.nome">
-           				${animal.raca}
+        <option value= "${animal.nome}
+           				${animal.raca}">
             			
             			
         </option>

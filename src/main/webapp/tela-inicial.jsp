@@ -11,7 +11,7 @@
 		<h1>TransPet!</h1>
 			<p>Preencha os campos informados,</p> 
 			<p>caso você ja tenha uma conta!</p>
-				<form action=>
+				<form action="" method="post">
   					<label for="usuario">Usuario</label><br>
   					<input type="text" id="usuario" name="usuario"><br>
   					<label for="senha">Senha</label><br>
