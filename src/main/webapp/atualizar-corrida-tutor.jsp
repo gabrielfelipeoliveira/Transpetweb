@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Atualizar Corrida Tutor</title>
 </head>
 <body>
 
@@ -17,11 +17,11 @@
 		<label for="selectCorridaAtu">Tutor</label>
 		<select id="selectCorridaAtu" name="selectCorridaAtu">
 		
-		<option value="CorridaTutorAtua">..</option>
-    <c:forEach var="CorridatutorAtua" items="${corrida}">
-        <option value="${corrida.codigoCorrida}">
-            ${corrida.EnderecoInicial}
-            ${corrida.EnderecoFinal}
+		<option value="tutores">..</option>
+    <c:forEach var="tutores" items="${tutor}">
+        <option value="${tutor.codigoTutores}">
+            ${tutor.Nome}
+            ${tutor.Sobrenome}
         </option>
      </c:forEach>
 		</select>
