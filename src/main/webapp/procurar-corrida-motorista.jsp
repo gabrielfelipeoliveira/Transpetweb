@@ -8,21 +8,24 @@
 <title>Procurar Corrida Motorista</title>
 </head>
 <body>
-
+	<c:if test="${motoristas "=null}">
 	<h1>Selecione a corrida</h1>
-	<form id="formselectMotoristaIns" action="">
-		<label for="selectMotoristaIns">Motorista</label> <br> <select
-			name="selectMotoristaIns">
+	<form id="formselectMotoristaIns" action="<%=request.getContextPath()%>">
+		<label for="selectMotoristaIns">Motorista</label> <br> 
+		<select	name="idMotorista">
 
-			
-			<c:forEach var="motorista" items="${motoristas}">
+				<c:forEach var="motorista" items="${motoristas}">
 				<option id="idMotorista" value="${motorista.idUsuario}">
 					${motorista.nomeUsuario} ${motorista.sobreNomeUsuario}</option>
 			</c:forEach>
 		</select>
 	</form>
+	
+	</c:if>
 	<br>
 
+
+	<c:if test="${motoristas != null }">
 	<form action="" hidden id="FormTabelaProcurarCorrida">
 		<table id="tabelaProcurarCorrida">
 
@@ -34,20 +37,18 @@
 			</tr>
 
 			<tbody>
-				<c:forEach var="CorridaMotoristaProcurar" items="${corridas}">
+				<c:forEach var="corrida" items="${corridas}">
 					<tr>
-						<td><c:out value="${corrida.NomeSolicitante}" /></td>
-						<td><c:out value="${corrida.EnderecoInicial}" /></td>
-						<td><c:out value="${corrida.EnderecoFinal}" /></td>
-						<td><c:out value="${corrida.Pet}" /></td>
-						<td><a
-							href="procurarCorrida?id=<c:out value='${contato.id}'/>">Aceitar
-								Corrida</a></td>
+						<td><c:out value="${corrida.motorista.nomeUsuario}" /></td>
+						<td><c:out value="${corrida.enderecoInicial}" /></td>
+						<td><c:out value="${corrida.enderecoFinal}" /></td>
+						<td><c:out value="${corrida.animal}" /></td>
+						<td><a href="procurarCorrida?id=<c:out value='${contato.id}'/>"> Aceitar Corrida</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	</form>
-
+	</c:if>
 </body>
 </html>
