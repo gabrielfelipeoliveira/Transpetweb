@@ -20,7 +20,7 @@ public class ConexaoFactory {
 		configuracao.addAnnotatedClass(modelo.entidade.corrida.Corrida.class);
 
 		
-		configuracao.configure("hibernate.cfg.xml");
+		configuracao.configure("hibernate-cfg.xml");
 
 		ServiceRegistry servico = new StandardServiceRegistryBuilder().applySettings(configuracao.getProperties()).build();
 

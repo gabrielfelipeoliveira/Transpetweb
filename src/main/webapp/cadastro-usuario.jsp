@@ -108,12 +108,12 @@
 			
 			<fieldset>
 			<label for="emailMotoristaCad">Email</label><br>
-			<input type ="text" id="emailTutorCad" name ="emailMotoristaCad" maxlength ="35" required><br>
+			<input type ="text" id="emailTutorCad" name ="emailTutorCad" maxlength ="35" required><br>
 			</fieldset>
 			
 			<fieldset>
 			<label for="usuarioTutorCad">Login</label><br>
-			<input type="text" id="usuarioTutorCad" name="usuarioTutorCad" maxlength ="25" required><br>
+			<input type="text" id="usuarioTutorCad" name="loginTutorCad" maxlength ="25" required><br>
 			</fieldset>
 			
 			<fieldset>

@@ -44,7 +44,7 @@ public class TranspetServlet extends HttpServlet {
 		enderecoDao = new EnderecoDAOSGDBImpl(Endereco.class);
 		tutorDao = new TutorDAOSGDBImpl(Tutor.class);
 		motoristaDao = new MotoristaDAOSGDBImpl(Motorista.class);
-		veiculoDao = new VeiculoDAOSGDBImpl(Veiculo.class);
+		veiculoDao = new VeiculoDAOSGDBImpl(Veiculo.class) ;
 
 	}
 
@@ -257,7 +257,7 @@ public class TranspetServlet extends HttpServlet {
 
 		Tutor tutor = new Tutor();
 		tutor.setNomeUsuario(request.getParameter("nomeTutorCad"));
-		tutor.setSobreNomeUsuario(request.getParameter("sobreNomeTutorCad"));
+		tutor.setSobreNomeUsuario(request.getParameter("sobrenomeTutorCad"));
 		tutor.setCpfUsuario(request.getParameter("cpfTutorCad"));
 		tutor.setTelefoneUsuario(request.getParameter("telefoneTutorCad"));
 		tutor.setIdadeUsuario(Integer.parseInt(request.getParameter("idadeTutorCad")));
