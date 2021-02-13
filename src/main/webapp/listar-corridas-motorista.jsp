@@ -12,7 +12,7 @@
 <h1>Histórico de Corrida Motorista</h1>
 	<form action="">
 		<label for="selectCorridaMotorista">Motorista</label><br>
-		<select name="selectCorridaMotorista">
+		<select name="idMotorista">
 		
 		<option value="motorista">..</option>
     <c:forEach var="motorista" items="${motoristas}">

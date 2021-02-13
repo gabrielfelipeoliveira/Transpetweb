@@ -54,5 +54,45 @@ public class MotoristaDAOSGDBImpl extends UsuarioDAO<Motorista> {
 
 		return motoristaRetorno != null;
 	}
+	
+	public Motorista listarMotoristaId(long id) {
+		Session sessao = null;
+		Motorista motoristaRetorno = null;
+
+		try {
+
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Motorista> criteria = construtor.createQuery(Motorista.class);
+			Root<Motorista> raiz = criteria.from(Motorista.class);
+			criteria.where(construtor.equal(raiz.get("id_usuario"), id));
+
+			criteria.select(raiz);
+
+			motoristaRetorno = sessao.createQuery(criteria).getSingleResult();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return motoristaRetorno;
+	}
+	
 
 }

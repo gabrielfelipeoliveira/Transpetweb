@@ -13,17 +13,8 @@
 	
 		<h3>Motorista</h3>
 		
-		<form action="usuario-motorista" method="post">
-		
-		<label for="selectMotoristaCad">Tutor</label>
-	<select id="selectMotoristaCad" name="selectMotoristaCad">
-	 <option value="">..</option>
-    <c:forEach var="motoristas" items="${motorista}">
-     </c:forEach>
-	</select><br>
-		</form>
-				
-			<form action="cadastrar-motorista" method="post">
+						
+			<form action="<%=request.getContextPath()%>/cadastrar-motorista" method="post">
 			
 			<fieldset>
 			<label for="nomeMotoristaCad">Nome</label><br>
@@ -47,7 +38,7 @@
 			
 			<fieldset>
 			<label for = "telefoneMotoristaCad">Telefone</label><br>
-			<input type ="tel" id="telefoneMotoristaCad" name = "telefoneMotoristaCad" maxlength ="11" placeholder="(99)9-9999-9999" pattern="[0-9]{2}-[0-9]{1}-[0-9]{4}-[0-9]{4}"required><br>
+			<input type ="tel" id="telefoneMotoristaCad" name = "telefoneMotoristaCad" maxlength ="11" placeholder="(99)9-9999-9999" pattern="[0-9]{2}[0-9]{1}[0-9]{4}[0-9]{4}"required><br>
 			</fieldset>
 		
 			<fieldset>
@@ -86,7 +77,7 @@
 	
 	<div id="divTutorCadastro">
 		
-		<form action="cadastrar-tutor" method="post">
+		<form action="<%=request.getContextPath()%>/cadastrar-tutor" method="post">
 		
 			<h3>Tutor</h3>
 			
@@ -107,22 +98,22 @@
 			
 			<fieldset>			
 			<label for = "telefoneTutorCad">Telefone</label><br>
-			<input type ="tel" id="telefoneTutorCad" name = "telefoneTutorCad" maxlength ="11" placeholder="(99)99999-9999" pattern="[0-9]{2}[0-9]{1}-[0-9]{4}-[0-9]{4}"required><br>
+			<input type ="tel" id="telefoneTutorCad" name = "telefoneTutorCad" maxlength ="11" placeholder="(99)99999-9999" pattern="[0-9]{2}[0-9]{1}[0-9]{4}[0-9]{4}"required><br>
 			</fieldset>
 			
 			<fieldset>
-			<label for="idadeMotoristaCad">Idade</label><br>
-			<input type ="text" id="idadeTutorCad" name="idadeMotoristaCad" maxlength ="3" required><br>
+			<label for="idadeTutorCad">Idade</label><br>
+			<input type ="text" id="idadeTutorCad" name="idadeTutorCad" maxlength ="3" required><br>
 			</fieldset>
 			
 			<fieldset>
 			<label for="emailMotoristaCad">Email</label><br>
-			<input type ="text" id="emailTutorCad" name ="emailMotoristaCad" maxlength ="35" required><br>
+			<input type ="text" id="emailTutorCad" name ="emailTutorCad" maxlength ="35" required><br>
 			</fieldset>
 			
 			<fieldset>
 			<label for="usuarioTutorCad">Login</label><br>
-			<input type="text" id="usuarioTutorCad" name="usuarioTutorCad" maxlength ="25" required><br>
+			<input type="text" id="usuarioTutorCad" name="loginTutorCad" maxlength ="25" required><br>
 			</fieldset>
 			
 			<fieldset>

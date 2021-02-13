@@ -149,76 +149,168 @@ public class TranspetServlet extends HttpServlet {
 
 			break;
 
-		case "cadastrar-animal":
+		case "/cadastrar-animal":
 
 			listarTutorAnimal(request, response);
 
 			break;
 
-		case "cadastrar-animal-tutor":
+		case "/cadastrar-animal-tutor":
 
 			cadastrarAnimalTutor(request, response);
 
 			break;
 
-		case "cadastrar-animal-tutor-inserir":
+		case "/cadastrar-animal-tutor-inserir":
 
 			cadastrarAnimalTutorInserir(request, response);
 
 			break;
 
-		case "atualizar-animal":
+		case "/atualizar-animal":
 
 			listarTutorAnimalAtualizar(request, response);
 
 			break;
 
-		case "atualizar-animal-tutor":
+		case "/atualizar-animal-tutor":
 
 			atualizarAnimalTutor(request, response);
 
 			break;
 
-		case "atualizar-animal-tutor-atu":
+		case "/atualizar-animal-tutor-atu":
 
 			atualizarAnimalTutorDados(request, response);
 
 			break;
 
-		case "deletar-animal":
+		case "/deletar-animal":
 
 			listarTutorAnimalDeletar(request, response);
 
 			break;
 
-		case "deletar-animal-tutor":
+		case "/deletar-animal-tutor":
 
 			deletarAnimalTutor(request, response);
 
 			break;
 
-		case "deletar-animal-tutor-del":
+		case "/deletar-animal-tutor-del":
 
 			deletarAnimalTutorDel(request, response);
 
 			break;
 
-		case "dados-tutor":
+		case "/dados-tutor":
 
 			listarTutoresDados(request, response);
 
 			break;
 
-		case "dados-tutor-atualizar":
+		case "/dados-tutor-atualizar":
 
 			atualizarDadosTutor(request, response);
 
 			break;
-			
-		case "dados-tutor-atualizar-atu":
-			
-			atualizarDadosTutorDados(request,response);
-			
+
+		case "/dados-tutor-atualizar-atu":
+
+			atualizarDadosTutorDados(request, response);
+
+			break;
+
+		// CASES MOTORISTAS
+
+		case "/listar-motoristas-historico":
+
+			listarMotoristasHistorico(request, response);
+
+			break;
+
+		case "/listar-corridas-motoristas":
+
+			listarCorridasMotorista(request, response);
+
+			break;
+
+		case "/procurar-corrida":
+
+			procurarCorrida(request, response);
+
+			break;
+
+		case "/procurar-corrida-motorista":
+
+			procurarCorridaMotorista(request, response);
+
+			break;
+
+		case "/cadastrar-veiculo":
+
+			cadastrarVeiculo(request, response);
+
+			break;
+
+		case "/cadastrar-veiculo-motorista":
+
+			cadastrarVeiculoMotorista(request, response);
+
+			break;
+
+		case "/atualizar-veiculo":
+
+			atualizarVeiculo(request, response);
+
+			break;
+
+		case "/atualizar-veiculo-motorista":
+
+			atualizarVeiculoMotorista(request, response);
+
+			break;
+
+		case "/atualizar-dados-veiculo":
+
+			atualizarDadosVeiculos(request, response);
+
+			break;
+
+		case "/deletar-veiculo":
+
+			deletarVeiculo(request, response);
+
+			break;
+
+		case "/deletar-veiculo-motorista":
+
+			deletarVeiculoMotorista(request, response);
+
+			break;
+
+		case "/deletar-veiculo-motorista-del":
+
+			deletarVeiculoMotoristaDel(request, response);
+
+			break;
+
+		case "/dados-motorista":
+
+			dadosMotorista(request, response);
+
+			break;
+
+		case "/atualizar-dados-motorista":
+
+			atualizarDadosMotorista(request, response);
+
+			break;
+
+		case "/atualizar-dados-motorista-atu":
+
+			atualizarDadosMotoristaAtu(request, response);
+
 			break;
 
 		}
@@ -257,7 +349,7 @@ public class TranspetServlet extends HttpServlet {
 
 		Tutor tutor = new Tutor();
 		tutor.setNomeUsuario(request.getParameter("nomeTutorCad"));
-		tutor.setSobreNomeUsuario(request.getParameter("sobreNomeTutorCad"));
+		tutor.setSobreNomeUsuario(request.getParameter("sobrenomeTutorCad"));
 		tutor.setCpfUsuario(request.getParameter("cpfTutorCad"));
 		tutor.setTelefoneUsuario(request.getParameter("telefoneTutorCad"));
 		tutor.setIdadeUsuario(Integer.parseInt(request.getParameter("idadeTutorCad")));
@@ -324,7 +416,7 @@ public class TranspetServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		Tutor tutor = new Tutor();
-		tutor.setIdUsuario(Integer.parseInt(request.getParameter("idTutor")));
+		tutor.setIdUsuario(Long.parseLong(request.getParameter("idTutor")));
 
 		List<Corrida> corridasFeitas;
 		corridasFeitas = ((CorridaDAOSGDBImpl) corridaDao).listarCorridaFeitaPorTutor(tutor);
@@ -332,7 +424,7 @@ public class TranspetServlet extends HttpServlet {
 		corridasAbertas = ((CorridaDAOSGDBImpl) corridaDao).listarCorridaAbertaPorTutor(tutor);
 		request.setAttribute("corridasAbertas", corridasAbertas);
 		request.setAttribute("corridasFeitas", corridasFeitas);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("corrida-tutor.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-corrida-tutor.jsp");
 		dispatcher.forward(request, response);
 
 	}
@@ -588,22 +680,22 @@ public class TranspetServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 
 	}
-	
-	
 
-	private void atualizarDadosTutor(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	private void atualizarDadosTutor(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao)
 				.listarTutorId(Long.parseLong(request.getParameter("idTutorIniciarCorrida")));
-		
+
 		request.setAttribute("tutor", tutor);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("atualizar-dados-tutor.jsp");
 		dispatcher.forward(request, response);
-		
+
 	}
-	
-	private void atualizarDadosTutorDados(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
+	private void atualizarDadosTutorDados(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao)
 				.listarTutorId(Long.parseLong(request.getParameter("idTutorIniciarCorrida")));
 		tutor.setNomeUsuario(request.getParameter("nomeTutorAtu"));
@@ -616,8 +708,187 @@ public class TranspetServlet extends HttpServlet {
 		tutor.setSenha_usuario(request.getParameter("senhaTutorAtu"));
 		tutorDao.atualizar(tutor);
 		listarTutoresCorrida(request, response);
-		
-		
+
 	}
 
+	private void listarMotoristasHistorico(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		List<Motorista> motoristas = motoristaDao.listar();
+		request.setAttribute("motoristas", motoristas);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-corridas-motorista.jsp");
+		dispatcher.forward(request, response);
+
+	}
+
+	private void listarCorridasMotorista(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		Motorista motorista = ((MotoristaDAOSGDBImpl) motoristaDao)
+				.listarMotoristaId(Long.parseLong(request.getParameter(("idMotorista"))));
+
+		List<Corrida> corridas = ((CorridaDAOSGDBImpl) corridaDao).listarCorridaPorIdMotorista(motorista);
+		request.setAttribute("corridas", corridas);
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-corridas-motorista.jsp");
+		dispatcher.forward(request, response);
+
+	}
+
+	private void procurarCorrida(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		List<Motorista> motoristas = motoristaDao.listar();
+		request.setAttribute("motoristas", motoristas);
+		List<Corrida> corridas = ((CorridaDAOSGDBImpl) corridaDao).listarCorridaAberta();
+		request.setAttribute("corridas", corridas);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("procurar-corrida-motorista.jsp");
+		dispatcher.forward(request, response);
+
+	}
+
+	private void procurarCorridaMotorista(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		Motorista motoristas = ((MotoristaDAOSGDBImpl) motoristaDao)
+				.listarMotoristaId(Long.parseLong(request.getParameter("idMotorista")));
+		Corrida corrida = new Corrida();
+		corrida.setIdCorrida(Long.parseLong(request.getParameter("idCorrida")));
+		Corrida corridaAtu = ((CorridaDAOSGDBImpl) corridaDao).listarCorridaPorIdCorrida(corrida);
+		corridaAtu.setMotorista(motoristas);
+		corridaDao.atualizar(corridaAtu);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-corridas-motorista.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void cadastrarVeiculo(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		List<Motorista> motoristas = motoristaDao.listar();
+		request.setAttribute("motoristas", motoristas);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastrar-carro-motorista.jsp");
+		dispatcher.forward(request, response);
+
+	}
+
+	private void cadastrarVeiculoMotorista(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		Motorista motorista = ((MotoristaDAOSGDBImpl) motoristaDao)
+				.listarMotoristaId(Long.parseLong(request.getParameter("idMotorista")));
+		Veiculo veiculo = new Veiculo();
+		veiculo.setMarcaVeiculo(request.getParameter("marcaVeiculo"));
+		veiculo.setModeloVeiculo(request.getParameter("modeloVeiculo"));
+		veiculo.setPlacaVeiculo(request.getParameter("placaVeiculo"));
+		veiculo.setAnoVeiculo(Integer.parseInt(request.getParameter("anoVeiculo")));
+		veiculo.setMotoristaVeiculo(motorista);
+		veiculoDao.inserir(veiculo);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-corridas-motorista.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void atualizarVeiculo(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		List<Motorista> motoristas = motoristaDao.listar();
+		request.setAttribute("motoristas", motoristas);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("atualizar-carro-motorista.jsp");
+		dispatcher.forward(request, response);
+
+	}
+
+	private void atualizarVeiculoMotorista(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		Motorista motorista = ((MotoristaDAOSGDBImpl) motoristaDao)
+				.listarMotoristaId(Long.parseLong(request.getParameter("idMotorista")));
+		List<Veiculo> veiculos = ((VeiculoDAOSGDBImpl) veiculoDao).listarVeiculoPorIdMotorista(motorista);
+		request.setAttribute("veiculos", veiculos);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("atualizar-carro-motorista.jsp");
+		dispatcher.forward(request, response);
+
+	}
+
+	private void atualizarDadosVeiculos(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		Veiculo veiculoId = new Veiculo();
+		veiculoId.setIdVeiculo(Long.parseLong(request.getParameter("IdVeiculo")));
+
+		Veiculo veiculo = ((VeiculoDAOSGDBImpl) veiculoDao).listarVeiculoPorIdVeiculo(veiculoId);
+		veiculo.setMarcaVeiculo(request.getParameter("marcaVeiculo"));
+		veiculo.setModeloVeiculo(request.getParameter("modeloVeiculo"));
+		veiculo.setPlacaVeiculo(request.getParameter("placaVeiculo"));
+		veiculo.setAnoVeiculo(Integer.parseInt(request.getParameter("anoVeiculo")));
+		veiculoDao.atualizar(veiculo);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("procurar-corrida-motorista.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void deletarVeiculo(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		List<Motorista> motoristas = motoristaDao.listar();
+		request.setAttribute("motoristas", motoristas);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("deletar-carro-motorista.jsp");
+		dispatcher.forward(request, response);
+
+	}
+
+	private void deletarVeiculoMotorista(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		Motorista motorista = ((MotoristaDAOSGDBImpl) motoristaDao)
+				.listarMotoristaId(Long.parseLong(request.getParameter("idMotorista")));
+		List<Veiculo> veiculos = ((VeiculoDAOSGDBImpl) veiculoDao).listarVeiculoPorIdMotorista(motorista);
+		request.setAttribute("veiculos", veiculos);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("deletar-carro-motorista.jsp");
+		dispatcher.forward(request, response);
+
+	}
+
+	private void deletarVeiculoMotoristaDel(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		Veiculo veiculoId = new Veiculo();
+		veiculoId.setIdVeiculo(Long.parseLong(request.getParameter("IdVeiculo")));
+		Veiculo veiculo = ((VeiculoDAOSGDBImpl) veiculoDao).listarVeiculoPorIdVeiculo(veiculoId);
+		veiculoDao.deletar(veiculo);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("procurar-corrida-motorista.jsp");
+		dispatcher.forward(request, response);
+
+	}
+
+	private void dadosMotorista(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		List<Motorista> motoristas = motoristaDao.listar();
+		request.setAttribute("motoristas", motoristas);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("atualizar-dados-motorista.jsp");
+		dispatcher.forward(request, response);
+
+	}
+
+	private void atualizarDadosMotorista(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		Motorista motorista = ((MotoristaDAOSGDBImpl) motoristaDao)
+				.listarMotoristaId(Long.parseLong(request.getParameter("idMotorista")));
+		request.setAttribute("motorista", motorista);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("atualizar-dados-motorista.jsp");
+		dispatcher.forward(request, response);
+
+	}
+
+	private void atualizarDadosMotoristaAtu(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		Motorista motorista = ((MotoristaDAOSGDBImpl) motoristaDao)
+				.listarMotoristaId(Long.parseLong(request.getParameter("idMotorista")));
+		motorista.setNomeUsuario(request.getParameter("nomeUsuario"));
+		motorista.setSobreNomeUsuario(request.getParameter("sobrenomeUsuario"));
+		motorista.setCnh(Long.parseLong(request.getParameter("cnhMotorista")));
+		motorista.setCpfUsuario(request.getParameter("cpfMotorista"));
+		motorista.setEmailUsuario(request.getParameter("emailMotorista"));
+		motorista.setIdadeUsuario(Integer.parseInt(request.getParameter("idadeMotorista")));
+		motorista.setLogin_usuario(request.getParameter("loginMotorista"));
+		motorista.setTelefoneUsuario(request.getParameter("telefoneMotorista"));
+		motoristaDao.atualizar(motorista);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("procurar-corrida-motorista.jsp");
+		dispatcher.forward(request, response);
+	}
 }
