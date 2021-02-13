@@ -8,10 +8,10 @@
 <title>Procurar Corrida Motorista</title>
 </head>
 <body>
-	<c:if test="${motoristas "=null}">
+	
 	<h1>Selecione a corrida</h1>
-	<form id="formselectMotoristaIns" action="<%=request.getContextPath()%>">
-		<label for="selectMotoristaIns">Motorista</label> <br> 
+	<form id="formProcurarCorrida" action="<%=request.getContextPath()%>">
+		<label for="idMotorista">Motorista</label> <br> 
 		<select	name="idMotorista">
 
 				<c:forEach var="motorista" items="${motoristas}">
@@ -19,14 +19,8 @@
 					${motorista.nomeUsuario} ${motorista.sobreNomeUsuario}</option>
 			</c:forEach>
 		</select>
-	</form>
 	
-	</c:if>
 	<br>
-
-
-	<c:if test="${motoristas != null }">
-	<form action="" hidden id="FormTabelaProcurarCorrida">
 		<table id="tabelaProcurarCorrida">
 
 			<tr>

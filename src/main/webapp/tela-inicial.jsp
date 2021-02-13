@@ -5,6 +5,8 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Tela Inicial TransPet</title>
+
+<style type="text/css"> @import url("../resources/NewFile.css"); </style>
 </head>
 <body>
 
