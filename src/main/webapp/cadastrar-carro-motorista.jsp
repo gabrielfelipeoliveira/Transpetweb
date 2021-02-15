@@ -9,6 +9,7 @@
 </head>
 <body>
 
+<%@ include file="cabecalho-motorista.jsp" %>
 
 <h1>Insira os dados para cadastrar seu Veículo e seu Dono!</h1>
 		

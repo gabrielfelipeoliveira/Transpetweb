@@ -269,7 +269,7 @@ public class CorridaDAOSGDBImpl extends GenericoJPADAO {
 	}
 
 
-	public Corrida listarCorridaPorIdCorrida(Corrida corrida) {
+	public Corrida listarCorridaPorIdCorrida(Long id) {
 		Session sessao = null;
 		Corrida corridaReturn = null;
 
@@ -283,7 +283,7 @@ public class CorridaDAOSGDBImpl extends GenericoJPADAO {
 			CriteriaQuery<Corrida> criteria = construtor.createQuery(Corrida.class);
 			Root<Corrida> raiz = criteria.from(Corrida.class);
 			ParameterExpression<Long> id_tutor = construtor.parameter(Long.class);
-			criteria.where(construtor.equal(raiz.get("id_corrida"), corrida.getIdCorrida()));
+			criteria.where(construtor.equal(raiz.get("idCorrida"), id));
 
 			criteria.select(raiz);
 

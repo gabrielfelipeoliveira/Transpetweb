@@ -9,6 +9,9 @@
 </head>
 <body>
 
+
+<%@ include file="cabecalho-motorista.jsp" %>
+
 	<h1>Insira os dados para atualizar seu Veículo!</h1>
 		
 		<form action="veiculo-motorista" method="post">

@@ -22,7 +22,7 @@ import modelo.entidade.usuario.Usuario;
 public class Tutor extends Usuario {
 	
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable(name = "tutor_endereco", joinColumns = @JoinColumn(name = "id_usuario"), inverseJoinColumns = @JoinColumn(name = "id_endereco"))
 	private List<Endereco> enderecos = new ArrayList<Endereco>();
 

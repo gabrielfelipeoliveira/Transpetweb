@@ -17,52 +17,52 @@
 			<form action="<%=request.getContextPath()%>/cadastrar-motorista" method="post">
 			
 			<fieldset>
-			<label for="nomeMotoristaCad">Nome</label><br>
+			<label >Nome</label><br>
 			<input type ="text" id="nomeMotoristaCad" name="nomeMotoristaCad" maxlength ="25" required><br>
-			</fieldset>
 			
-			<fieldset>
-			<label for="sobrenomeMotoristaCad">Sobrenome</label><br>
-			<input type ="text" id="sobrenomeMotoristaCad" name="sobrenomeMotoristaCad" maxlength ="25" required><br>
-			</fieldset>
 			
-			<fieldset>
-			<label for="cpfMotoristaCad">CPF</label><br>
+			
+			<label>Sobrenome</label><br>
+			<input type ="text" id="sobreNomeMotoristaCad" name="sobreNomeMotoristaCad" maxlength ="25" required><br>
+			
+			
+			
+			<label >CPF</label><br>
 			<input type ="text" id="cpfMotoristaCad" name ="cpfMotoristaCad" maxlength ="11" required><br>
-			</fieldset>
 			
-			<fieldset>
-			<label for="cnhMotoristaCad">CNH</label><br>
+			
+			
+			<label >CNH</label><br>
 			<input type ="text" id="cnhMotoristaCad" name="cnhMotoristaCad" maxlength ="11" required><br>
-			</fieldset>
 			
-			<fieldset>
-			<label for = "telefoneMotoristaCad">Telefone</label><br>
+			
+			
+			<label >Telefone</label><br>
 			<input type ="tel" id="telefoneMotoristaCad" name = "telefoneMotoristaCad" maxlength ="11" placeholder="(99)9-9999-9999" pattern="[0-9]{2}[0-9]{1}[0-9]{4}[0-9]{4}"required><br>
-			</fieldset>
+			
 		
-			<fieldset>
+			
 			<label for="idadeMotoristaCad">Idade</label><br>
 			<input type ="text" id="idadeMotoristaCad" name="idadeMotoristaCad" maxlength ="3" required><br>
-			</fieldset>
 			
-			<fieldset>
-			<label for="emailMotoristaCad">Email</label><br>
+			
+			
+			<label >Email</label><br>
 			<input type ="text" id="emailMotoristaCad" name ="emailMotoristaCad" maxlength ="35" required><br>
-			</fieldset>
 			
-			<fieldset>
-			<label for = "loginMotoristaCad">Login</label><br>
+			
+			
+			<label >Login</label><br>
 			<input type ="text" id="loginMotoristaCad" name ="loginMotoristaCad" maxlength ="25" required><br>
-			</fieldset>
 			
-			<fieldset>
-			<label for = "senhaMotoristaCad">Senha</label><br>
+			
+			
+			<label >Senha</label><br>
 			<input type ="password" id="senhaMotoristaCad" name ="senhaMotoristaCad" maxlength ="25" required><br>
-			</fieldset>
 			
-			<fieldset>
-			<label for = "confirmarSenhaMotoristaCad">Confirmar Senha</label><br>
+			
+			
+			<label >Confirmar Senha</label><br>
 			<input type ="password" id="confirmarSenhaMotoristaCad" name ="confrimarSenhaMotoristaCad" required><br>
 			</fieldset>
 			

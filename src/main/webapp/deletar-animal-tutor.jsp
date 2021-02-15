@@ -9,49 +9,51 @@
 </head>
 <body>
 
+	<%@ include file="cabecalho-tutor.jsp"%>
+
 <h1>Escolha algum dos Tutores cadastrados!</h1>
 
-	<form action="">
-		<label for="selectTutorAnimalDel">Tutores Cadastrados</label><br>
-		<select name="selectTutorAnimalDel">
-		
-		<option value="tutores">..</option>
-    <c:forEach var="tutores" items="${tutor}">
-        <option value="${tutor.codigoTutores}">
-            ${tutor.Nome}
-            ${tutor.Sobrenome}
-        </option>
-     </c:forEach>
-		</select><br>
+	<c:if test="${tutores!=null }">
+	<form action="<%=request.getContextPath()%>/deletar-animal-tutor"
+		method="post">
+		<label>Tutor</label> <select name="idTutor">
+			<c:forEach var="tutor" items="${tutores}">
+				<option value="${tutor.idUsuario}">${tutor.nomeUsuario}
+					${tutor.sobreNomeUsuario}</option>
+			</c:forEach>
+		</select><br> <input type="submit" value="selecionar">
 	</form>
-
-	<form action="" hidden>
+	</c:if>
+	
+	<c:if test="${animais!=null }">
+	<form action="<%=request.getContextPath()%>/deletar-animal-tutor-del" >
 		<h3>Selecione um Pet para Deletar</h3>
 		<table>
 
 			<tr>
-				<td>Nome</td>
-				<td>Peso</td>
-				<td>Raça</td>
-				<td>Tamanho</td>
-				<td>Observaçao</td>
+				<th>Nome</th>
+				<th>Peso</th>
+				<th>Raça</td>
+				<th>Tamanho</th>
+				<th>Observaçao</th>
 			</tr>
 			
 			<tbody>
-					<c:forEach var="AnimalTutorDel" items="${animais}">
+					<c:forEach var="animal" items="${animais}">
 						<tr>
-							<td><c:out value="${animal.Nome}" /></td>
-							<td><c:out value="${animal.Peso}" /></td>
-							<td><c:out value="${animal.Raca}" /></td>
-							<td><c:out value="${animal.Tamanho}" /></td>
-							<td><c:out value="${animal.Observacao}" />
-							<a href="deletar?id=<c:out value='${animal.id}'/>">Deletar</a>
+							<td><c:out value="${animal.nomeAnimal}" /></td>
+							<td><c:out value="${animal.peso}" /></td>
+							<td><c:out value="${animal.raca}" /></td>
+							<td><c:out value="${animal.tamanho}" /></td>
+							<td><c:out value="${animal.observacao}" /></td>
+							<td><a
+							href="<%=request.getContextPath()%>/deletar-animal-tutor-del?idAnimalTutorDel=<c:out value='${animal.idAnimal}'/>">Selecionar</a>
 							</td>
 						</tr>
 					</c:forEach>
 				</tbody>
 		</table>
 	</form>
-
+</c:if>
 </body>
 </html>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,64 +9,93 @@
 </head>
 <body>
 
+	<%@ include file="cabecalho-tutor.jsp"%>
 
-<h1>Selecione a corrida para atualizar</h1>
-		
+	<h1>Selecione a corrida para atualizar</h1>
 
-		<form action="" >
-		<label for="selectCorridaAtu">Tutor</label>
-		<select id="selectCorridaAtu" name="selectCorridaAtu">
-		
-		<option value="tutores">..</option>
-    <c:forEach var="tutores" items="${tutor}">
-        <option value="${tutor.codigoTutores}">
-            ${tutor.Nome}
-            ${tutor.Sobrenome}
-        </option>
-     </c:forEach>
-		</select>
+
+	<form action="<%=request.getContextPath()%>/atualizar-corrida-tutor">
+		<label for="idTutor">Tutor</label> <select name="idTutor">
+			<c:forEach var="tutor" items="${tutores}">
+				<option value="${tutor.idUsuario}">${tutor.nomeUsuario}
+					${tutor.sobreNomeUsuario}</option>
+			</c:forEach>
+		</select> <br> <input type="submit" value="Selecionar Tutor"
+			id="selecionarTutor">
 	</form>
-	
-	<form action="" hidden>	
-		<table>
 
-		<tr>
-			<td>Endereço Inicial</td>
-			<td>Endereço Final</td>
-			<td>Pet</td>
-		</tr>
-				<tbody>
-					<c:forEach var="CorridaTutorAtua" items="${corridas}">
-						<tr>
-							<td><c:out value="${corrida.EnderecoInicial}" /></td>
-							<td><c:out value="${corrida.EnderecoFinal}" /></td>
-							<td><c:out value="${corrida.Pet}" /></td>
-						</tr>
-					</c:forEach>
-				</tbody>
+	<form action="<%=request.getContextPath()%>/atualizar-corrida-tutor-tabela">
+	
+			<input type ="text" name="idTutorAtu" hidden value="${tutor.idUsuario}">
+	
+		<table>
+	
+			<tr>
+				<th>Endereço Inicial</th>
+				<th>Endereço Final</th>
+				<th>Pet</th>
+			</tr>
+			<tbody>
+				<c:forEach var="corrida" items="${corridas}">
+					<tr>
+						<td><c:out value="${corrida.enderecoInicial.ruaEndereco}" /></td>
+						<td><c:out value="${corrida.enderecoFinal.ruaEndereco}" /></td>
+						<td><c:out value="${corrida.animal.nomeAnimal}" /></td>
+						<td><a
+							href="<%=request.getContextPath()%>/atualizar-corrida-tutor-tabela?idCorridaTabela=<c:out value='${corrida.idCorrida}'/>&idTutorTabela=<c:out value='${tutor.idUsuario }'/>">Selecionar</a>
+						</td>
+					</tr>
+				</c:forEach>
+			</tbody>
 		</table>
 	</form>
-		
-		<form action="" hidden>
-		
+
+	<form action="<%=request.getContextPath()%>/atualizar-corrida-tutor-dados">
+
+			<input type ="text" name="idCorridaAtu" hidden value="${corrida.idCorrida }">
 		<fieldset>
-		<label for = "selectEnderecoInicial">Endereço Inicial</label><br>
-			<select name="selectEnderecoInicialAtu">  
-			</select><br>
-			</fieldset>
-			
-		<fieldset>
-		<label for = "selectEnderecoFinal">Endereço Final</label><br>
-			<select name="selectEnderecoFinalAtu">  
-			</select><br>
+			<label>Endereço Inicial</label><br> <select
+				name="idEnderecoInicialAtu">
+				<c:forEach var="endereco" items="${enderecos}">
+					<c:if test="${endereco.idEndereco !=enderecoInicial.idEndereco}">
+						<option value="${endereco.idEndereco}">${endereco.ruaEndereco}<
+							${endereco.numeroEndereco}</option>
+					</c:if>
+					<c:if test="${endereco.idEndereco ==enderecoInicial.idEndereco}">
+						<option value="${endereco.idEndereco}" selected>${endereco.ruaEndereco}<
+							${endereco.numeroEndereco}</option>
+					</c:if>
+				</c:forEach>
+			</select><br> <label>Endereço Final</label><br> <select
+				name="idEnderecoFinalAtu">
+				<c:forEach var="endereco" items="${enderecos}">
+					<c:if test="${endereco.idEndereco !=enderecoFinal.idEndereco}">
+						<option value="${endereco.idEndereco}">${endereco.ruaEndereco}<
+							${endereco.numeroEndereco}</option>
+					</c:if>
+					<c:if test="${endereco.idEndereco ==enderecoFinal.idEndereco}">
+						<option value="${endereco.idEndereco}" selected>${endereco.ruaEndereco}<
+							${endereco.numeroEndereco}</option>
+					</c:if>
+				</c:forEach>
+			</select><br> <label>Escolha seu pet</label><br> <select
+				name="idAnimalAtu">
+
+				<c:forEach var="animal" items="${animais}">
+					<c:if test="${animal.idAnimal != animalRetorno.idAnimal }">
+						<option value="${animal.idAnimal}">${animal.nomeAnimal}
+							${animal.raca}</option>
+					</c:if>
+					<c:if test="${animal.idAnimal == animalRetorno.idAnimal }">
+						<option value="${animal.idAnimal}" selected >${animal.nomeAnimal}
+							${animal.raca}</option>
+					</c:if>
+				</c:forEach>
+
+			</select><br> <br>
 		</fieldset>
-		
-		<fieldset>
-		<label for = "selectAnimal">Escolha seu pet</label><br>
-			<select name="selectAnimalAtu">  
-			</select><br><br>
-		</fieldset>
-			
+		<input type="submit" value="Atualizar Corrida"
+			id="atualizarCorrida">
 	</form>
 
 </body>

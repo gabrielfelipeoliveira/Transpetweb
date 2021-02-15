@@ -9,44 +9,62 @@
 </head>
 <body>
 
+	<%@ include file="cabecalho-tutor.jsp"%>
+
 	<h1>Insira os dados da corrida</h1>
-	<form>
-		<label for= "selectTutorCorridaIns">Tutor</label>
-		<select name="selectTutorCorridaIns">
-		
-		<option value="tutores">..</option>
-    <c:forEach var="tutores" items="${tutores}">
-        <option value="${tutor.corrida}">
-        </option>
-     </c:forEach>
-		
-		
-		</select>
-	</form>
-	
-	<form action="">
-	
-		<fieldset>
-		<label for = "selectEnderecoInicial">Endereço Inicial</label><br>
-			<select name="selectEnderecoInicialIns">  
-			</select><br>
-		</fieldset>
-		
-		<fieldset>
-		<label for = "selectEnderecoFinal">Endereço Final</label><br>
-			<select name="selectEnderecoFinalIns">  
-			</select><br>
-		</fieldset>
-			
-		<fieldset>
-		<label for = "selectAnimal">Escolha seu pet</label><br>
-			<select name="selectAnimalIns">  
-			</select><br><br>
-		</fieldset>
-			
-			<input type="submit" value="Solicitar">
+
+
+	<form action="<%=request.getContextPath()%>/iniciar-corrida-tutor">
+		<label >Tutor</label> <select name="idTutor">
+			<c:forEach var="tutor" items="${tutores}">
+				<option value="${tutor.idUsuario}">${tutor.nomeUsuario}
+					${tutor.sobreNomeUsuario}</option>
+			</c:forEach>
+		</select> <br> <input type="submit" value="Selecionar Tutor"
+			id="selecionarTutor">
 	</form>
 
+
+
+
+	<c:if test="${tutor!=null }">
+		<form action="<%=request.getContextPath()%>/iniciar-corrida-tutor-ins">
+			
+			<input type="text" id="idTutorIns" name="idTutorIns" value="${tutor.idUsuario }" hidden>
+
+			<fieldset>
+				<label >Endereço Inicial</label><br>
+				<select name="idEnderecoInicial">
+					<c:forEach var="endereco" items="${enderecos}">
+						<option value="${endereco.idEndereco}">${endereco.ruaEndereco}
+							${endereco.numeroEndereco}</option>
+					</c:forEach>
+				</select><br>
+			</fieldset>
+
+			<fieldset>
+				<label >Endereço Final</label><br> <select
+					name="idEnderecoFinal">
+					<c:forEach var="endereco" items="${enderecos}">
+						<option value="${endereco.idEndereco}">${endereco.ruaEndereco}
+							${endereco.numeroEndereco}</option>
+					</c:forEach>
+				</select><br>
+			</fieldset>
+
+			<fieldset>
+				<label >Escolha seu pet</label><br> <select
+					name="idAnimal">
+					<c:forEach var="animal" items="${animais}">
+						<option value="${animal.idAnimal}">${animal.nomeAnimal}
+							${animal.raca}</option>
+					</c:forEach>
+				</select><br> <br>
+			</fieldset>
+
+			<input type="submit" value="Solicitar">
+		</form>
+	</c:if>
 
 </body>
 </html>

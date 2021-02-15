@@ -9,25 +9,21 @@
 </head>
 <body>
 
-
+<%@ include file="cabecalho-tutor.jsp" %>
+<c:if test="${tutores!=null }">
 <h1>Selecione a corrida para Deletar</h1>
-		
-	<form for="deletarCorridaTutor" action="" >
-		<label>Selecione o tutor</label>
-		<select name = "deletarCorridaTutor" id="deletarCorridaTutor">
-		
-		<option value="CorridaTutorDel">..</option>
-    <c:forEach var="CorridaTutorDel" items="${tutor}">
-        <option value="${tutor.codigoTutores}">
-             ${tutor.Nome}
-            ${tutor.Sobrenome}
-        </option>
-     </c:forEach>
-		</select><br>
+	<form action="<%=request.getContextPath()%>/deletar-corrida-tutor">
+		<label>Tutor</label> <select name="idTutor">
+			<c:forEach var="tutor" items="${tutores}">
+				<option value="${tutor.idUsuario}">${tutor.nomeUsuario}
+					${tutor.sobreNomeUsuario}</option>
+			</c:forEach>
+		</select> <br> <input type="submit" value="Selecionar Tutor"
+			id="selecionarTutor">
 	</form>
-	
-		
-	<form action="" hidden>	
+	</c:if>
+	<c:if test="${corridas!=null }">	
+	<form action="" >	
 	
 	<h3>Selecione a corrida</h3>
 	
@@ -40,17 +36,17 @@
 		</tr>
 		
 		<tbody>
-					<c:forEach var="CorridaTutorDel" items="${corridas}">
+					<c:forEach var="corrida" items="${corridas}">
 						<tr>
-							<td><c:out value="${corrida.EnderecoInicial}" /></td>
-							<td><c:out value="${corrida.EnderecoFinal}" /></td>
-							<td><c:out value="${corrida.Pet}" /></td>
-							<td><a href="deletar?id=<c:out value='${animal.id}'/>">Deletar</a></td>
+							<td><c:out value="${corrida.enderecoInicial.ruaEndereco}" /></td>
+							<td><c:out value="${corrida.enderecoFinal.ruaEndereco}" /></td>
+							<td><c:out value="${corrida.animal.nomeAnimal}" /></td>
+							<td><a href="<%=request.getContextPath()%>/deletar-corrida-tutor-del?idCorridaTabela=<c:out value='${corrida.idCorrida}'/>">Deletar</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
 	</table>
 	</form>
-
+</c:if>
 </body>
 </html>

@@ -9,6 +9,8 @@
 </head>
 <body>
 
+
+
 <style>
 body {
   font-family: Arial, Helvetica, sans-serif;
@@ -73,7 +75,7 @@ body {
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="#">Atualizar</a>
+      <a href="<%=request.getContextPath()%>/dados-motorista">Atualizar</a>
     </div>
   </div>
   
@@ -82,10 +84,10 @@ body {
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="#">Cadastrar</a>
-      <a href="#">Atualizar</a>
-      <a href="#">Deletar</a>
-      <a href="#">Listar</a>
+      <a href="<%=request.getContextPath()%>/cadastrar-veiculo">Cadastrar</a>
+      <a href="<%=request.getContextPath()%>/atualizar-veiculo">Atualizar</a>
+      <a href="<%=request.getContextPath()%>/deletar-veiculo">Deletar</a>
+      <a href="<%=request.getContextPath()%>/listar-veiculo">Listar</a>
     </div>
   </div>
   
@@ -94,8 +96,8 @@ body {
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="#">Procurar</a>
-      <a href="#">Listar</a>
+      <a href="<%=request.getContextPath()%>/procurar-corrida">Procurar</a>
+      <a href="<%=request.getContextPath()%>/listar-motoristas-historico">Listar</a>
       
     </div>
   </div> 

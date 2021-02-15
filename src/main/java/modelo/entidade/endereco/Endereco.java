@@ -39,7 +39,7 @@ public class Endereco implements Serializable {
 	private long cepEndereco;
 
 	@ManyToMany(mappedBy = "enderecos")
-	private List<Tutor> tutores;
+	private List<Tutor> tutores = new ArrayList<Tutor>();;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "enderecoInicial", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Corrida> corridasInicial = new ArrayList<Corrida>();

@@ -9,6 +9,8 @@
 </head>
 <body>
 
+<%@ include file="cabecalho-motorista.jsp" %>
+
 	<h1>Editar Dados Pessoais</h1>
 	
 		<form action="dados-motorista" method="post">

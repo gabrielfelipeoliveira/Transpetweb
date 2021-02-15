@@ -40,7 +40,7 @@ public class AnimalDomestico implements Serializable {
 	@Column(name = "tamanho_animal", length = 5, nullable = false, unique = false)
 	private double tamanho;
 
-	@Column(name = "observacao_animal", length = 100, nullable = false, unique = false)
+	@Column(name = "observacao_animal", length = 100, nullable = true, unique = false)
 	private String observacao;
 
 	@ManyToOne(fetch = FetchType.LAZY)

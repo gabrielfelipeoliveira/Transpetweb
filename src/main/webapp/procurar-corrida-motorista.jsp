@@ -9,13 +9,15 @@
 </head>
 <body>
 	
+	<%@ include file="cabecalho-motorista.jsp" %>
+	
 	<h1>Selecione a corrida</h1>
-	<form id="formProcurarCorrida" action="<%=request.getContextPath()%>">
-		<label for="idMotorista">Motorista</label> <br> 
+	<form id="formProcurarCorrida" action="<%=request.getContextPath()%>/procurar-corrida-motorista">
+		<label >Motorista</label> <br> 
 		<select	name="idMotorista">
 
 				<c:forEach var="motorista" items="${motoristas}">
-				<option id="idMotorista" value="${motorista.idUsuario}">
+				<option value="${motorista.idUsuario}">
 					${motorista.nomeUsuario} ${motorista.sobreNomeUsuario}</option>
 			</c:forEach>
 		</select>
@@ -33,16 +35,15 @@
 			<tbody>
 				<c:forEach var="corrida" items="${corridas}">
 					<tr>
-						<td><c:out value="${corrida.motorista.nomeUsuario}" /></td>
-						<td><c:out value="${corrida.enderecoInicial}" /></td>
-						<td><c:out value="${corrida.enderecoFinal}" /></td>
-						<td><c:out value="${corrida.animal}" /></td>
-						<td><a href="procurarCorrida?id=<c:out value='${contato.id}'/>"> Aceitar Corrida</a></td>
+						<td><c:out value="${corrida.tutor.nomeUsuario}" /></td>
+						<td><c:out value="${corrida.enderecoInicial.ruaEndereco}" /></td>
+						<td><c:out value="${corrida.enderecoFinal.ruaEndereco}" /></td>
+						<td><c:out value="${corrida.animal.nomeAnimal}" /></td>
+						<td><a href="procurarCorrida?idMotorista=<c:out value='${motorista.idUsuario}'/>&idCorrida=<c:out value='${corrida.idCorrida}'/>"> Aceitar Corrida</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	</form>
-	</c:if>
 </body>
 </html>

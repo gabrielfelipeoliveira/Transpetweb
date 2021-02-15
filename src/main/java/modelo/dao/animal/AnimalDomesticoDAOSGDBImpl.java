@@ -63,7 +63,7 @@ public class AnimalDomesticoDAOSGDBImpl<AnimalDomesticoDAOSGDBImpl> extends Gene
 		return animais;
 	}
 	
-	public AnimalDomestico listarAnimalPorIdAnimal(AnimalDomestico animal) {
+	public AnimalDomestico listarAnimalPorIdAnimal(Long id) {
 		Session sessao = null;
 		AnimalDomestico animailReturn = null;
 
@@ -76,7 +76,7 @@ public class AnimalDomesticoDAOSGDBImpl<AnimalDomesticoDAOSGDBImpl> extends Gene
 
 			CriteriaQuery<AnimalDomestico> criteria = construtor.createQuery(AnimalDomestico.class);
 			Root<AnimalDomestico> raiz = criteria.from(AnimalDomestico.class);
-			criteria.where(construtor.equal(raiz.get("id_animal"), animal.getIdAnimal()));
+			criteria.where(construtor.equal(raiz.get("idAnimal"), id));
 
 			criteria.select(raiz);
 

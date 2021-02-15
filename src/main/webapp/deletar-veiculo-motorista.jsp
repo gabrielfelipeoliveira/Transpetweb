@@ -9,6 +9,8 @@
 </head>
 <body>
 
+<%@ include file="cabecalho-motorista.jsp" %>
+
 <h1>Selecione o veiculo para deletar</h1>
 
 	<form action="">

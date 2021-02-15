@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" 
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
 <!DOCTYPE html>
@@ -73,7 +73,7 @@ body {
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="#">Atualizar</a>
+      <a href="<%=request.getContextPath()%>/dados-tutor">Atualizar</a>
     </div>
   </div>
   
@@ -82,10 +82,22 @@ body {
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="#">Cadastrar</a>
-      <a href="#">Atualizar</a>
-      <a href="#">Deletar</a>
-      <a href="#">Listar</a>
+      <a href="<%=request.getContextPath()%>/cadastrar-animal">Cadastrar</a>
+      <a href="<%=request.getContextPath()%>/atualizar-animal">Atualizar</a>
+      <a href="<%=request.getContextPath()%>/deletar-animal">Deletar</a>
+      <a href="<%=request.getContextPath()%>/listar-animal">Listar</a>
+    </div>
+  </div>
+  
+  <div class="dropdown">
+    <button class="dropbtn">ENDEREÇO 
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="<%=request.getContextPath()%>/endereco-tutor">Cadastrar</a>
+      <a href="<%=request.getContextPath()%>/atualizar-endereco">Atualizar</a>
+      <a href="<%=request.getContextPath()%>/deletar-endereco">Deletar</a>
+      <a href="<%=request.getContextPath()%>/listar-endereco">Listar</a>
     </div>
   </div>
   
@@ -94,10 +106,10 @@ body {
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="#">Iniciar</a>
-      <a href="#">Listar</a>
-      <a href="#">Editar</a>
-      <a href="#">Deletar</a>
+      <a href="<%=request.getContextPath()%>/iniciar-corrida">Iniciar</a>
+      <a href="<%=request.getContextPath()%>/atualizar-corrida">Editar</a>
+      <a href="<%=request.getContextPath()%>/deletar-corrida">Deletar</a>
+      <a href="<%=request.getContextPath()%>/corrida-tutor">Listar</a>
       
     </div>
   </div> 

@@ -9,44 +9,50 @@
 </head>
 <body>
 
+<%@ include file="cabecalho-motorista.jsp" %>
+
 <h1>Histórico de Corrida Motorista</h1>
-	<form action="">
-		<label for="selectCorridaMotorista">Motorista</label><br>
+	<form action="<%=request.getContextPath()%>/listar-corridas-motoristas">
+		<label >Motorista</label><br>
 		<select name="idMotorista">
 		
-		<option value="motorista">..</option>
     <c:forEach var="motorista" items="${motoristas}">
-        <option value="${motorista.codigoMotorista}">
-            ${motorista.Nome}
-            ${motorista.Sobrenome}
+        <option value="${motorista.idUsuario}">
+            ${motorista.nomeUsuario}
+            ${motorista.sobreNomeUsuario}
         </option>
      </c:forEach>
 		</select>
 	</form>
 	<br>
 	
-	<form action="">
-		<table id="TabelaListarCorridaMotorista" hidden\>
 	
-			<td>Tutor</td>
-			<td>Endereço Inicial</td>
-			<td>Endereço Final</td>
-			<td>Pet</td>
-			
+		<table>
+	
+			<tr>
+				<th>Tutor</th>
+				<th>Telefone</th>
+				<th>E-mail</th>
+				<th>Endereço Inicial</th>
+				<th>Endereço Final</th>
+				<th>Pet</th>
+			<tr>
 			<tbody>
-					<c:forEach var="CorridaMotoristaList" items="${corridas}">
+					<c:forEach var="corrida" items="${corridas}">
 						<tr>
-							<td><c:out value="${corrida.Tutor}" /></td>
-							<td><c:out value="${corrida.EnderecoInicial}" /></td>
-							<td><c:out value="${corrida.EnderecoFinal}" /></td>
-							<td><c:out value="${corrida.Pet}" /></td>
+							<td><c:out value="${corrida.tutor.nomeUsuario}" /></td>
+							<td><c:out value="${corrida.tutor.telefoneUsuario}" /></td>
+							<td><c:out value="${corrida.tutor.emailUsuario}" /></td>
+							<td><c:out value="${corrida.enderecoInicial.ruaEndereco}" /></td>
+							<td><c:out value="${corrida.enderecoFinal.ruaEndereco}" /></td>
+							<td><c:out value="${corrida.animal.nomeAnimal}" /></td>
 						</tr>
 					</c:forEach>
 				</tbody>
 	
 		</table>
 
-	</form>
+	
 
 </body>
 </html>
