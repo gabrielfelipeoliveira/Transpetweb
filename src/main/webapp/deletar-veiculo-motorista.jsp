@@ -11,44 +11,45 @@
 
 <%@ include file="cabecalho-motorista.jsp" %>
 
-<h1>Selecione o veiculo para deletar</h1>
+<h1>Deletar veiculo</h1>
 
-	<form action="">
-		<label for="motorista">Escolha o Motorista</label><br> 
-		<select name="motorista" id="deletarVeiculoMotorista">
-		
-		<option value="motorista">..</option>
-    <c:forEach var="motorista" items="${motoristas}">
-        <option value="${motorista.codigoMotorista}">
-            ${motorista.Nome}
-            ${motorista.Sobrenome}
-        </option>
-     </c:forEach>
-		</select><br>
-	</form>
+	<c:if test="${motoristas!=null }">
+	<h3>Selecione o motorista</h3>
+		<form
+			action="<%=request.getContextPath()%>/deletar-veiculo-motorista">
+			<label>Motorista</label><br> <select name="idMotorista">
 
+				<c:forEach var="motorista" items="${motoristas}">
+					<option value="${motorista.idUsuario}">
+						${motorista.nomeUsuario} ${motorista.sobreNomeUsuario}</option>
+				</c:forEach>
+			</select><br><br>
+			<input type="submit" value="selecionar">
+		</form>
+	</c:if>
 
-	<form action="" hidden>
+<c:if test="${veiculos!=null }">
+	<form action="" >
 	
 	<h3>Selecione o Veiculo</h3>
 	
 		<table>
 			
 			<tr>
-				<td>Veiculo</td>
 				<td>Marca</td>
 				<td>Modelo</td>
+				<td>Placa</td>
 				<td>Ano</td>
 			</tr>
 			
 			<tbody>
-					<c:forEach var="VeiculoMotoristaDel" items="${veiculos}">
+					<c:forEach var="veiculo" items="${veiculos}">
 						<tr>
-							<td><c:out value="${veiculo.Veiculo}" /></td>
-							<td><c:out value="${veiculo.Marca}" /></td>
-							<td><c:out value="${veiculo.Modelo}" /></td>
-							<td><c:out value="${veiculo.Ano}" /></td>
-							<td><a href="deletar?id=<c:out value='${veiculo.id}'/>">Deletar</a>
+							<td><c:out value="${veiculo.marcaVeiculo}" /></td>
+							<td><c:out value="${veiculo.modeloVeiculo}" /></td>
+							<td><c:out value="${veiculo.placaVeiculo}" /></td>
+							<td><c:out value="${veiculo.anoVeiculo}" /></td>
+							<td><a href="<%=request.getContextPath()%>/deletar-veiculo-motorista-del?idVeiculoTabela=<c:out value='${veiculo.idVeiculo}'/>">Deletar</a>
 							</td>
 						</tr>
 					</c:forEach>
@@ -57,7 +58,7 @@
 		</form>
 		<br>
 
-
+</c:if>
 
 
 

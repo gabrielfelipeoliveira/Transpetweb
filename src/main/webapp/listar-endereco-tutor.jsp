@@ -12,7 +12,7 @@
 	<%@ include file="cabecalho-tutor.jsp"%>
 
 	<c:if test="${tutores != null}">
-		<h1>Endereços</h1>
+		<h3>Selecione o ttor</h3>
 
 		<form action="<%=request.getContextPath()%>/listar-endereco-tutor"
 			method="post">
@@ -29,7 +29,7 @@
 
 	<c:if test="${enderecos!=null }">
 		<div>
-			<h3>Lista</h3>
+			<h3>Lista de endereços</h3>
 			<table>
 
 				<tr>

@@ -4,18 +4,18 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Lista de veiculos</title>
 </head>
 <body>
 
 	<%@ include file="cabecalho-motorista.jsp"%>
 
 	<c:if test="${motoristas != null}">
-		<h1>Veiculos</h1>
+		<h3>Selecione o motorista</h3>
 
 		<form action="<%=request.getContextPath()%>/listar-veiculo-motorista"
-			method="post">
-			<label>Selecione o tutor</label> <br> <select name="idTutor">
+			method="get">
+			<label>Selecione o tutor</label> <br> <select name="idMotoristaLis">
 				<c:forEach var="motorista" items="${motoristas}">
 					<option value="${motorista.idUsuario}">${motorista.nomeUsuario}
 						${motorista.sobreNomeUsuario}</option>
@@ -26,9 +26,9 @@
 		</form>
 	</c:if>
 
-	<c:if test="${motoristas=null }">
+	<c:if test="${veiculos!=null }">
 		<div>
-			<h3>Lista</h3>
+			<h3>Lista de veiculos</h3>
 			<table>
 
 				<tr>

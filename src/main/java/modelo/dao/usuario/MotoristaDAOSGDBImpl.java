@@ -68,7 +68,7 @@ public class MotoristaDAOSGDBImpl extends UsuarioDAO<Motorista> {
 
 			CriteriaQuery<Motorista> criteria = construtor.createQuery(Motorista.class);
 			Root<Motorista> raiz = criteria.from(Motorista.class);
-			criteria.where(construtor.equal(raiz.get("id_usuario"), id));
+			criteria.where(construtor.equal(raiz.get("idUsuario"), id));
 
 			criteria.select(raiz);
 

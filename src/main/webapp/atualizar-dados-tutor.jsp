@@ -11,8 +11,9 @@
 
 <%@ include file="cabecalho-tutor.jsp" %>
 
-			<h1>Atualizar Dados Pessoais</h1>
-	
+			
+	<c:if test="${tutores!=null }">
+	<h3>Selecione o tutor</h3>
 	<form action="<%=request.getContextPath()%>/dados-tutor-atualizar">
 		<label>Tutor</label> <select name="idTutor">
 			<c:forEach var="tutor" items="${tutores}">
@@ -22,7 +23,11 @@
 		</select> <br> <input type="submit" value="Selecionar Tutor"
 			id="selecionarTutor">
 	</form>
+	</c:if>
 	
+	<c:if test="${tutor!=null }"></c:if>
+	
+	<h3>Atualize os dados</h3>
 	<form action="<%=request.getContextPath()%>/dados-tutor-atualizar-atu">
 	
 			

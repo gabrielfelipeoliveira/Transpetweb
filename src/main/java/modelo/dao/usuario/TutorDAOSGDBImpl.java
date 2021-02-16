@@ -33,7 +33,7 @@ public class TutorDAOSGDBImpl  extends UsuarioDAO<Tutor>{
 
 			CriteriaQuery<Tutor> criteria = construtor.createQuery(Tutor.class);
 			Root<Tutor> raiz = criteria.from(Tutor.class);
-			criteria.where(construtor.equal(raiz.get("id_usuario"), id));
+			criteria.where(construtor.equal(raiz.get("idUsuario"), id));
 
 			criteria.select(raiz);
 

@@ -11,9 +11,10 @@
 
 	<%@ include file="cabecalho-tutor.jsp"%>
 
-	<h1>Insira os dados da corrida</h1>
-
-
+	
+	<h1>Iniciar Corrida</h1><br>
+	<c:if test="${tutores!=null }">
+	<h3>Selecione o tutor</h3>
 	<form action="<%=request.getContextPath()%>/iniciar-corrida-tutor">
 		<label >Tutor</label> <select name="idTutor">
 			<c:forEach var="tutor" items="${tutores}">
@@ -24,10 +25,11 @@
 			id="selecionarTutor">
 	</form>
 
-
+</c:if>
 
 
 	<c:if test="${tutor!=null }">
+	<h3>Insira os dados para iniciar a corrida</h3>
 		<form action="<%=request.getContextPath()%>/iniciar-corrida-tutor-ins">
 			
 			<input type="text" id="idTutorIns" name="idTutorIns" value="${tutor.idUsuario }" hidden>

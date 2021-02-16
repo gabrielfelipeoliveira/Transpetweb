@@ -12,8 +12,10 @@
 	<%@ include file="cabecalho-tutor.jsp"%>
 
 	<h1>Selecione a corrida para atualizar</h1>
-
-
+	
+	
+	<c:if test="${tutores!=null }">
+	<h3>Selecione o tutor</h3>
 	<form action="<%=request.getContextPath()%>/atualizar-corrida-tutor">
 		<label for="idTutor">Tutor</label> <select name="idTutor">
 			<c:forEach var="tutor" items="${tutores}">
@@ -23,7 +25,9 @@
 		</select> <br> <input type="submit" value="Selecionar Tutor"
 			id="selecionarTutor">
 	</form>
-
+	</c:if>
+	<c:if test="${corridas!=null }">
+	<h3>Selecione a corrida</h3>
 	<form action="<%=request.getContextPath()%>/atualizar-corrida-tutor-tabela">
 	
 			<input type ="text" name="idTutorAtu" hidden value="${tutor.idUsuario}">
@@ -49,7 +53,9 @@
 			</tbody>
 		</table>
 	</form>
+</c:if>
 
+<c:if test="${corrida!=null }">
 	<form action="<%=request.getContextPath()%>/atualizar-corrida-tutor-dados">
 
 			<input type ="text" name="idCorridaAtu" hidden value="${corrida.idCorrida }">
@@ -97,6 +103,6 @@
 		<input type="submit" value="Atualizar Corrida"
 			id="atualizarCorrida">
 	</form>
-
+</c:if>
 </body>
 </html>

@@ -5,13 +5,15 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Procurar Corrida Motorista</title>
+<title>Procurar Uma Corrida</title>
 </head>
 <body>
 	
 	<%@ include file="cabecalho-motorista.jsp" %>
+	<h1>Procurar Corrida</h1><br>
 	
-	<h1>Selecione a corrida</h1>
+	<c:if test="${motoristas !=null }">
+	<h3>Selecione o motorista</h3>
 	<form id="formProcurarCorrida" action="<%=request.getContextPath()%>/procurar-corrida-motorista">
 		<label >Motorista</label> <br> 
 		<select	name="idMotorista">
@@ -20,10 +22,16 @@
 				<option value="${motorista.idUsuario}">
 					${motorista.nomeUsuario} ${motorista.sobreNomeUsuario}</option>
 			</c:forEach>
-		</select>
+			
+		</select><br>
+		<input type="submit" value="selecionar">
+	</form>
+	</c:if>
 	
+	<c:if test="${motorista !=null }">
 	<br>
-		<table id="tabelaProcurarCorrida">
+	 <h3>Selecione a corrida</h3>
+		<table>
 
 			<tr>
 				<td>Nome Solicitante</td>
@@ -39,11 +47,11 @@
 						<td><c:out value="${corrida.enderecoInicial.ruaEndereco}" /></td>
 						<td><c:out value="${corrida.enderecoFinal.ruaEndereco}" /></td>
 						<td><c:out value="${corrida.animal.nomeAnimal}" /></td>
-						<td><a href="procurarCorrida?idMotorista=<c:out value='${motorista.idUsuario}'/>&idCorrida=<c:out value='${corrida.idCorrida}'/>"> Aceitar Corrida</a></td>
+						<td><a href="<%=request.getContextPath()%>/procurar-corrida-motorista-aceitar?idMotoristaTabela=<c:out value='${motorista.idUsuario}'/>&idCorrida=<c:out value='${corrida.idCorrida}'/>"> Aceitar Corrida</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
-	</form>
+	</c:if>
 </body>
 </html>

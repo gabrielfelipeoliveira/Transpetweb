@@ -8,9 +8,10 @@
 </head>
 <body>
 <%@ include file="cabecalho-tutor.jsp"%>
-	<h1>Insira os dados para Atualizar seu Pet!</h1>
+	
 
 	<c:if test="${tutores!=null }">
+	<h3>Selecione o tutor</h3>
 	<form action="<%=request.getContextPath()%>/atualizar-endereco-tutor"
 		method="post">
 		<label>Tutor</label> <select name="idTutor">
@@ -22,6 +23,7 @@
 	</form>
 	</c:if>
 	<c:if test="${enderecos !=null}">
+	<h3>Selecione o endereço para atualizar</h3>
 		<table>
 
 			<tr>
@@ -47,7 +49,7 @@
 </c:if>
 
 <c:if test="${endereco!= null }">
-		<h3>Endereço</h3>
+		<h3>Atualize o endereço</h3>
 	
 		<form
 			action="<%=request.getContextPath()%>/atualizar-endereco-tutor-dados"

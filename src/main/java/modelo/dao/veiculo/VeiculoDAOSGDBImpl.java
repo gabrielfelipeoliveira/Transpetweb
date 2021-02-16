@@ -62,7 +62,7 @@ ConexaoFactory fabrica = new ConexaoFactory();
 		return veiculos;
 	}
 
-	public Veiculo listarVeiculoPorIdVeiculo(Veiculo veiculo) {
+	public Veiculo listarVeiculoPorIdVeiculo(Long id) {
 		Session sessao = null;
 		Veiculo veiculoReturn = null;
 
@@ -75,7 +75,7 @@ ConexaoFactory fabrica = new ConexaoFactory();
 
 			CriteriaQuery<Veiculo> criteria = construtor.createQuery(Veiculo.class);
 			Root<Veiculo> raiz = criteria.from(Veiculo.class);
-			criteria.where(construtor.equal(raiz.get("id_veiculo"), veiculo.getIdVeiculo()));
+			criteria.where(construtor.equal(raiz.get("idVeiculo"), id));
 
 			criteria.select(raiz);
 

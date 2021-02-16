@@ -15,8 +15,7 @@
 
 	
 	<c:if test="${tutores != null}">
-	<h1>Corridas</h1>
-
+	
 	<form action="<%=request.getContextPath()%>/listar-corrida-tutor" method="post">
 		<label>Selecione o tutor</label> <br> 
 		<select name="idTutor">

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -11,74 +10,74 @@
 
 <%@ include file="cabecalho-motorista.jsp" %>
 
-	<h1>Editar Dados Pessoais</h1>
-	
-		<form action="dados-motorista" method="post">
+	<c:if test="${motoristas != null}">
+		<h1>Selecione o tutor</h1>
+
+		<form action="<%=request.getContextPath()%>/atualizar-dados-motorista"
+			method="get">
+			<label>Selecione o tutor</label> <br> <select name="idMotoristaDados">
+				<c:forEach var="motorista" items="${motoristas}">
+					<option value="${motorista.idUsuario}">${motorista.nomeUsuario}
+						${motorista.sobreNomeUsuario}</option>
+				</c:forEach>
+
+			</select><br> <input type="submit" value="Selecionar Tutor"
+				id="selecionarTutor">
+		</form>
+	</c:if>
+		<c:if test="${motorista!=null }">
+		<h3>Atualize os dados</h3>
+		<form action="<%=request.getContextPath()%>/atualizar-dados-motorista-atu" method="post">
 		
-		<label for="selectMotoristaAtu">Tutor</label>
-	<select id="selectMotoristaAtu" name="selectMotoristaAtu">
-	 <option value="">..</option>
-    <c:forEach var="motoristas" items="${motorista}">
-        <option value= "${motorista.nome}">
-                        ${motorista.sobrenome}">
-            			
-        </option>
-     </c:forEach>
-	</select>
-	</form>
-		
-		<form action="atualizar-dados-motorista" method="post">
-		
+			<input type="text" id="idMotoristaAtu" name="idMotoristaAtu" maxlength ="25" value="${motorista.idUsuario }" hidden>
 			<fieldset>
 			<label for="nomeMotoristaAtu">Nome</label><br>
-			<input type="text" id="nomeMotoristaAtu" name="nomeMotoristaAtu" maxlength ="25"><br>
-			</fieldset>
-			
-			 <fieldset>
-			<label for="sobrenomeMotoristaAtu">Sobrenome</label><br>
-			<input type="text" id="sobrenomeMotoristaAtu" name="sobrenomeMotoristaAtu" maxlength ="25" ><br>
-			</fieldset>
-			
-			<fieldset>
-			<label for="cpfMotoristaAtu">Cpf</label><br>
-			<input type="text" id="cpfMotoristaAtu" name="cpfMotoristaAtu" maxlength ="11" required ><br>
-			${motorista.cpf}
-			</fieldset>
+			<input type="text" id="nomeMotoristaAtu" name="nomeMotoristaAtu" maxlength ="25" value="${motorista.nomeUsuario }"><br>
 			
 			
-			<fieldset>
-			<label for="cnhMotoristaAtu">Cnh</label><br>
-			<input type="text" id="cnhMotoristaAtu" name="cnhMotoristaAtu" maxlength ="11" required  ><br>
-			${motorista.cnh}
-			</fieldset>
-			
-			<fieldset>
-			<label for="idadeMotoristaAtu">Idade</label><br>
-			<input type="text" id="idadeMotoristaAtu" name="idadeMotoristaAtu" maxlength ="3" required  ><br>
-			${motorista.idade}
-			</fieldset>
-			
-			<fieldset>
-			<label for="emailMotoristaAtu">Email</label><br>
-			<input type="text" id="emailMotoristaAtu" name="emailMotoristaAtu" maxlength ="35" required  ><br>
-			${motorista.email}
-			</fieldset>
-			
-			<fieldset>
-			<label for = "telefoneMotoristaAtu">Telefone</label><br>
-			<input type ="tel" id="telefoneMotoristaAtu" name = "telefoneMotoristaAtu" maxlength ="11" required  placeholder="(99)99999-9999" pattern="[0-9]{2}[0-9]{1}-[0-9]{4}-[0-9]{4}"><br>
-			${motorista.telefone}
-			</fieldset>
 			 
-			<fieldset>
-			<label for="UsuarioMotoristaAtu">Usuário</label><br>
-			<input type="text" id="UsuarioMotoristaAtu" name="UsuarioMotoristaAtu" maxlength ="125" required  ><br>
-
-			</fieldset>
+			<label for="sobrenomeMotoristaAtu">Sobrenome</label><br>
+			<input type="text" id="sobrenomeMotoristaAtu" name="sobrenomeMotoristaAtu" value="${motorista.sobreNomeUsuario }" maxlength ="25" ><br>
 			
-			<fieldset> 
+			
+			
+			<label for="cpfMotoristaAtu">Cpf</label><br>
+			<input type="text" id="cpfMotoristaAtu" name="cpfMotoristaAtu" maxlength ="11" required value="${motorista.cpfUsuario }" ><br>
+			
+					
+			
+			<label for="cnhMotoristaAtu">Cnh</label><br>
+			<input type="text" id="cnhMotoristaAtu" name="cnhMotoristaAtu" maxlength ="11" required value="${motorista.cnh }" ><br>
+			
+			
+			
+			
+			<label for="idadeMotoristaAtu">Idade</label><br>
+			<input type="text" id="idadeMotoristaAtu" name="idadeMotoristaAtu" maxlength ="3" required value="${motorista.idadeUsuario }" ><br>
+			
+			
+			
+			
+			<label for="emailMotoristaAtu">Email</label><br>
+			<input type="text" id="emailMotoristaAtu" name="emailMotoristaAtu" maxlength ="35" required value="${motorista.emailUsuario}" ><br>
+			
+			
+			
+			
+			<label for = "telefoneMotoristaAtu">Telefone</label><br>
+			<input type ="tel" id="telefoneMotoristaAtu" name = "telefoneMotoristaAtu" maxlength ="11" required value="${motorista.telefoneUsuario}" placeholder="(99)99999-9999" pattern="[0-9]{2}[0-9]{1}[0-9]{4}[0-9]{4}"><br>
+		
+			
+			 
+			
+			<label for="UsuarioMotoristaAtu">Usuário</label><br>
+			<input type="text" id="loginMotoristaAtu" name="loginMotoristaAtu" maxlength ="125" required value="${motorista.login_usuario}" ><br>
+
+			
+			
+			
 			<label for="senhaMotoristaAtu">Senha</label><br>
-			<input type="password" id="senhaMotoristaAtu" name="senhaMotoristaAtu" maxlength ="25" required  ><br>
+			<input type="password" id="senhaMotoristaAtu" name="senhaMotoristaAtu" maxlength ="25" required value="${motorista.senha_usuario}" ><br>
 			</fieldset>
 			
 			<input type="submit" id="submitMotoristaAtu" value="Atualizar">
@@ -86,7 +85,7 @@
 							
 		</form><br>
 
-
+</c:if>
 
 </body>
 </html>

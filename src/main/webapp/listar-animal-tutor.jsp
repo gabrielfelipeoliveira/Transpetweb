@@ -13,7 +13,7 @@
 	<%@ include file="cabecalho-tutor.jsp"%>
 
 	<c:if test="${tutores != null}">
-		<h1>Animais</h1>
+		<h1>Selecione o tutor</h1>
 
 		<form action="<%=request.getContextPath()%>/listar-animal-tutor"
 			method="post">
@@ -29,6 +29,7 @@
 	</c:if>
 
 	<c:if test="${animais!=null }">
+		<h3> Lista de animais</h3>
 		<div>
 			<h3>Lista</h3>
 			<table>

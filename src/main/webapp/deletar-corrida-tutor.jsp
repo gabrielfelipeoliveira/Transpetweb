@@ -11,7 +11,7 @@
 
 <%@ include file="cabecalho-tutor.jsp" %>
 <c:if test="${tutores!=null }">
-<h1>Selecione a corrida para Deletar</h1>
+<h3>Selecione o tutor</h3>
 	<form action="<%=request.getContextPath()%>/deletar-corrida-tutor">
 		<label>Tutor</label> <select name="idTutor">
 			<c:forEach var="tutor" items="${tutores}">

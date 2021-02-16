@@ -11,9 +11,10 @@
 
 	<%@ include file="cabecalho-tutor.jsp"%>
 
-<h1>Escolha algum dos Tutores cadastrados!</h1>
+
 
 	<c:if test="${tutores!=null }">
+	<h3>Selecione o Tutor</h3>
 	<form action="<%=request.getContextPath()%>/deletar-animal-tutor"
 		method="post">
 		<label>Tutor</label> <select name="idTutor">
