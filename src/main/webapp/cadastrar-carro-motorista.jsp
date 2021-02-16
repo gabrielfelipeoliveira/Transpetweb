@@ -10,7 +10,7 @@
 <body>
 
 <%@ include file="cabecalho-motorista.jsp" %>
-
+	<div class="formCadastro" >
 <h1>Insira os dados para cadastrar seu Veículo e seu Dono!</h1>
 		
 		
@@ -45,6 +45,6 @@
 			
 		</form>
 		
-
+</div>
 </body>
 </html>

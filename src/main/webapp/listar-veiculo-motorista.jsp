@@ -11,11 +11,12 @@
 	<%@ include file="cabecalho-motorista.jsp"%>
 
 	<c:if test="${motoristas != null}">
+	<div class="formCadastro" >
 		<h3>Selecione o motorista</h3>
-
+	
 		<form action="<%=request.getContextPath()%>/listar-veiculo-motorista"
 			method="get">
-			<label>Selecione o tutor</label> <br> <select name="idMotoristaLis">
+			 <select name="idMotoristaLis">
 				<c:forEach var="motorista" items="${motoristas}">
 					<option value="${motorista.idUsuario}">${motorista.nomeUsuario}
 						${motorista.sobreNomeUsuario}</option>
@@ -24,10 +25,11 @@
 			</select><br> <input type="submit" value="Selecionar Tutor"
 				id="selecionarTutor">
 		</form>
+		</div>
 	</c:if>
 
 	<c:if test="${veiculos!=null }">
-		<div>
+			<div class="formCadastro" >
 			<h3>Lista de veiculos</h3>
 			<table>
 

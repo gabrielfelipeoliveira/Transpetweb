@@ -575,7 +575,7 @@ public class TranspetServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		Motorista motorista = ((MotoristaDAOSGDBImpl) motoristaDao)
-				.listarMotoristaId(Long.parseLong(request.getParameter(("idMotoristaAtu"))));
+				.listarMotoristaId(Long.parseLong(request.getParameter(("idMotoristaLis"))));
 		List<Veiculo> veiculos = ((VeiculoDAOSGDBImpl) veiculoDao).listarVeiculoPorIdMotorista(motorista);
 		request.setAttribute("veiculos", veiculos);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-veiculo-motorista.jsp");

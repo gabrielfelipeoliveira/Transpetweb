@@ -10,7 +10,7 @@
 <body>
 	
 	<%@ include file="cabecalho-motorista.jsp" %>
-	<h1>Procurar Corrida</h1><br>
+	<div class="formCadastro"><h3>Procurar Corrida</h3><br>
 	
 	<c:if test="${motoristas !=null }">
 	<h3>Selecione o motorista</h3>
@@ -27,17 +27,19 @@
 		<input type="submit" value="selecionar">
 	</form>
 	</c:if>
+	</div>
 	
+	<div class="formCadastro" >
 	<c:if test="${motorista !=null }">
 	<br>
 	 <h3>Selecione a corrida</h3>
 		<table>
 
 			<tr>
-				<td>Nome Solicitante</td>
-				<td>Endereço Inicial</td>
-				<td>Endereço Final</td>
-				<td>Pet</td>
+				<th>Nome Solicitante</th>
+				<th>Endereço Inicial</th>
+				<th>Endereço Final</th>
+				<th>Pet</th>
 			</tr>
 
 			<tbody>
@@ -53,5 +55,6 @@
 			</tbody>
 		</table>
 	</c:if>
+	</div>
 </body>
 </html>

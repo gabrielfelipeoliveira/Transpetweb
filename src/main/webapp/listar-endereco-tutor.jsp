@@ -12,11 +12,12 @@
 	<%@ include file="cabecalho-tutor.jsp"%>
 
 	<c:if test="${tutores != null}">
-		<h3>Selecione o ttor</h3>
-
+	<div class="formCadastro" >	
+	<h3>Selecione o tutor</h3>
+	
 		<form action="<%=request.getContextPath()%>/listar-endereco-tutor"
 			method="post">
-			<label>Selecione o tutor</label> <br> <select name="idTutor">
+			 <br> <select name="idTutor">
 				<c:forEach var="tutor" items="${tutores}">
 					<option value="${tutor.idUsuario}">${tutor.nomeUsuario}
 						${tutor.sobreNomeUsuario}</option>
@@ -25,10 +26,11 @@
 			</select><br> <input type="submit" value="Selecionar Tutor"
 				id="selecionarTutor">
 		</form>
+		</div>
 	</c:if>
 
 	<c:if test="${enderecos!=null }">
-		<div>
+			<div class="formCadastro" >
 			<h3>Lista de endereços</h3>
 			<table>
 

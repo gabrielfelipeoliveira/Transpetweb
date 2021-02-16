@@ -13,10 +13,11 @@
 
 	
 	<c:if test="${motoristas!=null }">
+		<div class="formCadastro" >
 	<h3>Selecione o motorista</h3>
 		<form
 			action="<%=request.getContextPath()%>/atualizar-veiculo-motorista">
-			<label>Motorista</label><br> <select name="idMotorista">
+			<select name="idMotorista">
 
 				<c:forEach var="motorista" items="${motoristas}">
 					<option value="${motorista.idUsuario}">
@@ -25,9 +26,11 @@
 			</select><br><br>
 			<input type="submit" value="selecionar">
 		</form>
+		</div>
 	</c:if>
 
 <c:if test="${veiculos!=null }">
+	<div class="formCadastro" >
 	<h3>Selecione o veiculo para atualizar</h3>
 	<table>
 		<tr>
@@ -35,6 +38,7 @@
 			<th>Modelo</th>
 			<th>Placa</th>
 			<th>Ano</th>
+			<th>Atualizar</th>
 		</tr>
 		<tbody>
 		<c:forEach var="veiculo" items="${veiculos}">
@@ -45,16 +49,18 @@
 				<td><c:out value="${veiculo.placaVeiculo}" /></td>
 				<td><c:out value="${veiculo.anoVeiculo}" /></td>
 				
-				<td><a
+				<td><a class="atualizarBotao"
 					href="<%=request.getContextPath()%>/atualizar-veiculo-tabela?idVeiculoTabela=<c:out value='${veiculo.idVeiculo}'/>">Selecionar</a></td>
 
 			</tr>
 			</c:forEach>
 		</tbody>
 	</table>
+	</div>
 </c:if>
 
 <c:if test="${veiculo!=null }">
+	<div class="formCadastro" >
 	<h3>Atualize os dados</h3>
 
 	<form action="<%=request.getContextPath()%>/atualizar-veiculo-dados" method="post">
@@ -93,6 +99,7 @@
 			id="botaoAtuaVeiculoMotorista">
 
 	</form>
+	</div>
 </c:if>
 </body>
 </html>

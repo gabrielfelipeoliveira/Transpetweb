@@ -14,19 +14,22 @@
 
 
 	<c:if test="${tutores!=null }">
+		<div class="formCadastro" >
 	<h3>Selecione o Tutor</h3>
 	<form action="<%=request.getContextPath()%>/deletar-animal-tutor"
 		method="post">
-		<label>Tutor</label> <select name="idTutor">
+		<select name="idTutor">
 			<c:forEach var="tutor" items="${tutores}">
 				<option value="${tutor.idUsuario}">${tutor.nomeUsuario}
 					${tutor.sobreNomeUsuario}</option>
 			</c:forEach>
 		</select><br> <input type="submit" value="selecionar">
 	</form>
+		<div class="formCadastro" >
 	</c:if>
 	
 	<c:if test="${animais!=null }">
+		<div class="formCadastro" >
 	<form action="<%=request.getContextPath()%>/deletar-animal-tutor-del" >
 		<h3>Selecione um Pet para Deletar</h3>
 		<table>
@@ -47,7 +50,7 @@
 							<td><c:out value="${animal.raca}" /></td>
 							<td><c:out value="${animal.tamanho}" /></td>
 							<td><c:out value="${animal.observacao}" /></td>
-							<td><a
+							<td><a class ="deletarBotao"
 							href="<%=request.getContextPath()%>/deletar-animal-tutor-del?idAnimalTutorDel=<c:out value='${animal.idAnimal}'/>">Selecionar</a>
 							</td>
 						</tr>
@@ -55,6 +58,7 @@
 				</tbody>
 		</table>
 	</form>
+	</div>
 </c:if>
 </body>
 </html>

@@ -11,11 +11,12 @@
 <%@ include file="cabecalho-motorista.jsp" %>
 
 	<c:if test="${motoristas != null}">
-		<h1>Selecione o tutor</h1>
+		<div class="formCadastro" >
+		<h3>Selecione o tutor</h3>
 
 		<form action="<%=request.getContextPath()%>/atualizar-dados-motorista"
 			method="get">
-			<label>Selecione o tutor</label> <br> <select name="idMotoristaDados">
+			 <br> <select name="idMotoristaDados">
 				<c:forEach var="motorista" items="${motoristas}">
 					<option value="${motorista.idUsuario}">${motorista.nomeUsuario}
 						${motorista.sobreNomeUsuario}</option>
@@ -24,12 +25,14 @@
 			</select><br> <input type="submit" value="Selecionar Tutor"
 				id="selecionarTutor">
 		</form>
+		</div>
 	</c:if>
 		<c:if test="${motorista!=null }">
+			<div class="formCadastro" >
 		<h3>Atualize os dados</h3>
 		<form action="<%=request.getContextPath()%>/atualizar-dados-motorista-atu" method="post">
 		
-			<input type="text" id="idMotoristaAtu" name="idMotoristaAtu" maxlength ="25" value="${motorista.idUsuario }" hidden>
+			<input type="hidden" id="idMotoristaAtu" name="idMotoristaAtu" maxlength ="25" value="${motorista.idUsuario }" >
 			<fieldset>
 			<label for="nomeMotoristaAtu">Nome</label><br>
 			<input type="text" id="nomeMotoristaAtu" name="nomeMotoristaAtu" maxlength ="25" value="${motorista.nomeUsuario }"><br>
@@ -84,7 +87,7 @@
 						
 							
 		</form><br>
-
+</div>
 </c:if>
 
 </body>

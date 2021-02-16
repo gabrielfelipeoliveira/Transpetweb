@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h1>Insira os dados para cadastro:</h1>
-	<div id="divMotoristaCadastro">
+	<div id="divMotoristaCadastro" 	class="formCadastro" >
 	
 		<h3>Motorista</h3>
 		
@@ -75,7 +75,7 @@
 		
 	</div>
 	
-	<div id="divTutorCadastro">
+	<div id="divTutorCadastro" 	class="formCadastro" >
 		
 		<form action="<%=request.getContextPath()%>/cadastrar-tutor" method="post">
 		

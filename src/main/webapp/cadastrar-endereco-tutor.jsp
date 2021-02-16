@@ -10,12 +10,12 @@
 
 
 <%@ include file="cabecalho-tutor.jsp" %>
-
+	<div class="formCadastro" >
 	<h1>Insira os dados para cadastrar seu Endereço!</h1>
 	
 		
 		<form action="<%=request.getContextPath()%>/cadastrar-endereco-tutor">
-			<label>Tutor</label> 
+			<h3>Informe o tutor</h3><br>
 			<select name="idTutorSelect">
 				<c:forEach var="tutor" items="${tutores}">
 					<option value="${tutor.idUsuario}">${tutor.nomeUsuario}
@@ -44,6 +44,6 @@
 			<input type ="submit" value="Cadastrar Endereço" id="botaoInsEnderecoTutor">
 			
 		</form>
-
+</div>
 </body>
 </html>
