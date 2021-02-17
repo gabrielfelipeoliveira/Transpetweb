@@ -16,13 +16,7 @@
 		
 		<form action="<%=request.getContextPath()%>/cadastrar-endereco-tutor">
 			<h3>Informe o tutor</h3><br>
-			<select name="idTutorSelect">
-				<c:forEach var="tutor" items="${tutores}">
-					<option value="${tutor.idUsuario}">${tutor.nomeUsuario}
-						${tutor.sobreNomeUsuario}</option>
-				</c:forEach>
-			</select> <br>
-	
+			<input type="hidden" value ="${tutor.idUsuario }" id="idTutorEnderecoAtu" name="idTutorEnderecoAtu">
 				
 					
 			<fieldset>

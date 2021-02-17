@@ -62,7 +62,7 @@
 	<div class="formCadastro" >
 	<form action="<%=request.getContextPath()%>/atualizar-corrida-tutor-dados">
 
-			<input type ="text" name="idCorridaAtu" hidden value="${corrida.idCorrida }">
+			<input type ="hidden" name="idCorridaAtu"  value="${corrida.idCorrida }">
 		 <select
 				name="idEnderecoInicialAtu">
 				<c:forEach var="endereco" items="${enderecos}">

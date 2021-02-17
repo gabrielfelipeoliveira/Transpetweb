@@ -68,7 +68,7 @@
 			action="<%=request.getContextPath()%>/atualizar-animal-tutor-dados"
 			method="post">
 
-			<input type = "text" id = "idAnimalDados" name="idAnimalDados" value="${animal.idAnimal}" hidden>
+			<input type = "hidden" id = "idAnimalDados" name="idAnimalDados" value="${animal.idAnimal}" >
 			
 			<fieldset>
 				<label >Nome</label><br> <input

@@ -23,7 +23,7 @@ public abstract class UsuarioDAO <T> extends GenericoJPADAO{
 	ConexaoFactory fabrica = new ConexaoFactory();
 
 
-	public long procurarUsuarioLogin(Usuario usuario) {
+	public Usuario procurarUsuarioLogin(Usuario usuario) {
 		Session sessao = null;
 		Usuario usuarioRetorno= null;
 
@@ -59,7 +59,7 @@ public abstract class UsuarioDAO <T> extends GenericoJPADAO{
 			}
 		}
 
-		return usuarioRetorno.getIdUsuario();
+		return usuarioRetorno;
 	}
 	
 

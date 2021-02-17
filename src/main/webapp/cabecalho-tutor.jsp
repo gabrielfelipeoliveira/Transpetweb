@@ -21,7 +21,8 @@
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="<%=request.getContextPath()%>/dados-tutor">Atualizar</a>
+      <a href="<%=request.getContextPath()%>/dados-tutor-atualizar">Atualizar</a>
+      <a href="<%=request.getContextPath()%>/deslogar">Sair</a>
     </div>
   </div>
   
@@ -31,9 +32,9 @@
     </button>
     <div class="dropdown-content">
       <a href="<%=request.getContextPath()%>/cadastrar-animal">Cadastrar</a>
-      <a href="<%=request.getContextPath()%>/atualizar-animal">Atualizar</a>
-      <a href="<%=request.getContextPath()%>/deletar-animal">Deletar</a>
-      <a href="<%=request.getContextPath()%>/listar-animal">Listar</a>
+      <a href="<%=request.getContextPath()%>/atualizar-animal-tutor">Atualizar</a>
+      <a href="<%=request.getContextPath()%>/deletar-animal-tutor">Deletar</a>
+      <a href="<%=request.getContextPath()%>/listar-animal-tutor">Listar</a>
     </div>
   </div>
   
@@ -43,9 +44,9 @@
     </button>
     <div class="dropdown-content">
       <a href="<%=request.getContextPath()%>/endereco-tutor">Cadastrar</a>
-      <a href="<%=request.getContextPath()%>/atualizar-endereco">Atualizar</a>
-      <a href="<%=request.getContextPath()%>/deletar-endereco">Deletar</a>
-      <a href="<%=request.getContextPath()%>/listar-endereco">Listar</a>
+      <a href="<%=request.getContextPath()%>/atualizar-endereco-tutor">Atualizar</a>
+      <a href="<%=request.getContextPath()%>/deletar-endereco-tutor">Deletar</a>
+      <a href="<%=request.getContextPath()%>/listar-endereco-tutor">Listar</a>
     </div>
   </div>
   
@@ -54,10 +55,10 @@
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="<%=request.getContextPath()%>/iniciar-corrida">Iniciar</a>
-      <a href="<%=request.getContextPath()%>/atualizar-corrida">Editar</a>
-      <a href="<%=request.getContextPath()%>/deletar-corrida">Deletar</a>
-      <a href="<%=request.getContextPath()%>/corrida-tutor">Listar</a>
+      <a href="<%=request.getContextPath()%>/iniciar-corrida-tutor">Iniciar</a>
+      <a href="<%=request.getContextPath()%>/atualizar-corrida-tutor">Editar</a>
+      <a href="<%=request.getContextPath()%>/deletar-corrida-tutor">Deletar</a>
+      <a href="<%=request.getContextPath()%>/listar-corrida-tutor">Listar</a>
       
     </div>
   </div> 

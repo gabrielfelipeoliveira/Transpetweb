@@ -24,6 +24,7 @@
     </button>
     <div class="dropdown-content">
       <a href="<%=request.getContextPath()%>/dados-motorista">Atualizar</a>
+       <a href="<%=request.getContextPath()%>/deslogar">Sair</a>
     </div>
   </div>
   

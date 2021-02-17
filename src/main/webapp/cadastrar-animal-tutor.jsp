@@ -14,13 +14,8 @@
 	<h1>Insira os dados para cadastrar seu Pet!</h1>
 		
 		<form action="<%=request.getContextPath()%>/cadastrar-animal-tutor-inserir">
-		<select name="idTutor">
-			<c:forEach var="tutor" items="${tutores}">
-				<option value="${tutor.idUsuario}">${tutor.nomeUsuario}
-					${tutor.sobreNomeUsuario}</option>
-			</c:forEach>
-		</select> <br>
-	
+		
+		<input type="hidden" value ="${tutor.idUsuario }" id="idTutorAnimalCad" name="idTutorAnimalCad">
 				
 					
 			<fieldset>
@@ -41,7 +36,7 @@
 			<select id="selectTipoAnimalIns" name="selectTipoAnimal">
 				<option value="0">Gato</option>
 				<option value="1">Cachorro</option>
-			</select>
+			</select><br>
 			
 			<label >Observação</label><br>
 			<textarea id="observacaoAnimalTutorIns" name="observacaoAnimalTutorIns" maxlength="100" ></textarea><br><br>

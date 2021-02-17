@@ -60,8 +60,8 @@
 			action="<%=request.getContextPath()%>/atualizar-endereco-tutor-dados"
 			method="post">
 
-			<input type="text" id="idEnderecoDados" name="idEnderecoDados"
-				value="${endereco.idEndereco}" hidden>
+			<input type="hidden" id="idEnderecoDados" name="idEnderecoDados"
+				value="${endereco.idEndereco}">
 
 			<fieldset>
 				<label>Rua</label><br> <input type="text"
