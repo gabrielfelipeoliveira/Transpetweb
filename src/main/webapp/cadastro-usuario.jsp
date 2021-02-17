@@ -6,9 +6,11 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Cadastro</title>
+<link rel="stylesheet" href="<%=request.getContextPath()%>resources/css/estilo.css"/>
+        <style><%@include file="\resources\css\estilo.css"%></style>
 </head>
 <body>
-	<h1>Insira os dados para cadastro:</h1>
+	<h1 id="cadastroUsuario">Insira os dados para cadastro:</h1>
 	<div id="divMotoristaCadastro" 	class="formCadastro" >
 	
 		<h3>Motorista</h3>
