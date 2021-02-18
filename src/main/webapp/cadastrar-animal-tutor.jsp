@@ -18,7 +18,7 @@
 		<input type="hidden" value ="${tutor.idUsuario }" id="idTutorAnimalCad" name="idTutorAnimalCad">
 				
 					
-			<fieldset>
+			
 			<label >Nome</label><br>
 			<input type ="text" id="nomeAnimalTutorIns" name="nomeAnimalTutorIns" maxlength="25" required><br>
 			
@@ -26,7 +26,7 @@
 			<input type ="text" id="pesoAnimalTutorIns" name="pesoAnimalTutorIns" maxlength="5" required><br>
 			
 			
-			<label >Raça</label><br><bR>
+			<label >Raça</label><br>
 			<input type ="text" id="racaAnimalTutorIns" name ="racaAnimalTutorIns" maxlength="25" required><br>
 			
 			<label >Tamanho</label><br>
@@ -39,8 +39,8 @@
 			</select><br>
 			
 			<label >Observação</label><br>
-			<textarea id="observacaoAnimalTutorIns" name="observacaoAnimalTutorIns" maxlength="100" ></textarea><br><br>
-			</fieldset>
+			<textarea id="observacaoAnimalTutorIns" cols="90"  name="observacaoAnimalTutorIns" maxlength="100" ></textarea><br><br>
+			
 			
 			<input type ="submit" value="Cadastrar Pet" id="botaoInsAnimalTutor">
 			

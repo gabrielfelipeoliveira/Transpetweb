@@ -44,6 +44,8 @@
 					<th>Endereço Final</th>
 					<th>Pet</th>
 					<th>Nome Motorista</th>
+					<th>E-mail</th>
+					<th>Telefone</th>
 				</tr>
 
 				<tbody>
@@ -54,6 +56,8 @@
 							<td><c:out value="${corrida.enderecoFinal.ruaEndereco}" /></td>
 							<td><c:out value="${corrida.animal.nomeAnimal}" /></td>
 							<td><c:out value="${corrida.motorista.nomeUsuario}" /></td>
+							<td><c:out value="${corrida.motorista.emailUsuario}" /></td>
+							<td><c:out value="${corrida.motorista.telefoneUsuario}" /></td>
 						</tr>
 					</c:forEach>
 				</tbody>

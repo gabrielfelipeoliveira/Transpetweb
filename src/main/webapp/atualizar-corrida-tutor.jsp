@@ -40,6 +40,7 @@
 				<th>Endereço Inicial</th>
 				<th>Endereço Final</th>
 				<th>Pet</th>
+				<th>Selecionar</th>
 			</tr>
 			<tbody>
 				<c:forEach var="corrida" items="${corridas}">
@@ -48,7 +49,7 @@
 						<td><c:out value="${corrida.enderecoFinal.ruaEndereco}" /></td>
 						<td><c:out value="${corrida.animal.nomeAnimal}" /></td>
 						<td><a class="atualizarBotao"
-							href="<%=request.getContextPath()%>/atualizar-corrida-tutor-tabela?idCorridaTabela=<c:out value='${corrida.idCorrida}'/>&idTutorTabela=<c:out value='${tutor.idUsuario }'/>">Selecionar</a>
+							href="<%=request.getContextPath()%>/atualizar-corrida-tutor-tabela?idCorridaTabela=<c:out value='${corrida.idCorrida}'/>&idTutorTabela=<c:out value='${tutor.idUsuario }'/>">Atualizar</a>
 						</td>
 					</tr>
 				</c:forEach>
@@ -67,11 +68,11 @@
 				name="idEnderecoInicialAtu">
 				<c:forEach var="endereco" items="${enderecos}">
 					<c:if test="${endereco.idEndereco !=enderecoInicial.idEndereco}">
-						<option value="${endereco.idEndereco}">${endereco.ruaEndereco}<
+						<option value="${endereco.idEndereco}">${endereco.ruaEndereco}
 							${endereco.numeroEndereco}</option>
 					</c:if>
 					<c:if test="${endereco.idEndereco ==enderecoInicial.idEndereco}">
-						<option value="${endereco.idEndereco}" selected>${endereco.ruaEndereco}<
+						<option value="${endereco.idEndereco}" selected>${endereco.ruaEndereco}
 							${endereco.numeroEndereco}</option>
 					</c:if>
 				</c:forEach>
@@ -79,11 +80,11 @@
 				name="idEnderecoFinalAtu">
 				<c:forEach var="endereco" items="${enderecos}">
 					<c:if test="${endereco.idEndereco !=enderecoFinal.idEndereco}">
-						<option value="${endereco.idEndereco}">${endereco.ruaEndereco}<
+						<option value="${endereco.idEndereco}">${endereco.ruaEndereco}
 							${endereco.numeroEndereco}</option>
 					</c:if>
 					<c:if test="${endereco.idEndereco ==enderecoFinal.idEndereco}">
-						<option value="${endereco.idEndereco}" selected>${endereco.ruaEndereco}<
+						<option value="${endereco.idEndereco}" selected>${endereco.ruaEndereco}
 							${endereco.numeroEndereco}</option>
 					</c:if>
 				</c:forEach>

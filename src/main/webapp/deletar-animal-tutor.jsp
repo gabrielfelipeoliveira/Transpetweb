@@ -37,9 +37,10 @@
 			<tr>
 				<th>Nome</th>
 				<th>Peso</th>
-				<th>Raça</td>
+				<th>Raça</th>
 				<th>Tamanho</th>
 				<th>Observaçao</th>
+				<th>Deletar</th>
 			</tr>
 			
 			<tbody>
@@ -51,7 +52,7 @@
 							<td><c:out value="${animal.tamanho}" /></td>
 							<td><c:out value="${animal.observacao}" /></td>
 							<td><a class ="deletarBotao"
-							href="<%=request.getContextPath()%>/deletar-animal-tutor-del?idAnimalTutorDel=<c:out value='${animal.idAnimal}'/>">Selecionar</a>
+							href="<%=request.getContextPath()%>/deletar-animal-tutor-del?idAnimalTutorDel=<c:out value='${animal.idAnimal}'/>">Deletar</a>
 							</td>
 						</tr>
 					</c:forEach>

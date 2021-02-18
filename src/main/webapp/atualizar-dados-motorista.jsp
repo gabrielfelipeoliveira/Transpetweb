@@ -33,7 +33,7 @@
 		<form action="<%=request.getContextPath()%>/atualizar-dados-motorista-atu" method="post">
 		
 			<input type="hidden" id="idMotoristaAtu" name="idMotoristaAtu" maxlength ="25" value="${motorista.idUsuario }" >
-			<fieldset>
+			
 			<label for="nomeMotoristaAtu">Nome</label><br>
 			<input type="text" id="nomeMotoristaAtu" name="nomeMotoristaAtu" maxlength ="25" value="${motorista.nomeUsuario }"><br>
 			
@@ -81,7 +81,7 @@
 			
 			<label for="senhaMotoristaAtu">Senha</label><br>
 			<input type="password" id="senhaMotoristaAtu" name="senhaMotoristaAtu" maxlength ="25" required value="${motorista.senha_usuario}" ><br>
-			</fieldset>
+			
 			
 			<input type="submit" id="submitMotoristaAtu" value="Atualizar">
 						

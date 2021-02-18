@@ -51,7 +51,7 @@
 						<td><c:out value="${corrida.tutor.emailUsuario}" /></td>
 						<td><c:out value="${corrida.enderecoInicial.ruaEndereco}" /></td>
 						<td><c:out value="${corrida.enderecoFinal.ruaEndereco}" /></td>
-						<td><c:out value="${corrida.animal.nomeAnimal}" /></td>
+						<td><c:out value="${corrida.animal.raca}" /></td>
 					</tr>
 				</c:forEach>
 			</tbody>

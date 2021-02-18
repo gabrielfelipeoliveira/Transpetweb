@@ -58,385 +58,416 @@ public class TranspetServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String acao = request.getServletPath();
 
-		switch (acao) {
+		if (acao.equals("/login"))
+			logarUsuario(request, response);
+		
+		if(acao.equals("/inicial-cadastro")) 
+			abrirPaginaCadastroUsuario(request, response);
+		
+		if(acao.equals("/cadastrar-tutor"))
+			cadastrarTutor(request, response);
+		
+		if(acao.equals("/cadastrar-motorista"))
+			cadastrarMotorista(request, response);
+		
+		
 
-		case "/deslogar":
+		HttpSession session = request.getSession();
 
-			HttpSession session = request.getSession();
-			session.invalidate();
+		if (session.getAttribute("usuario") != null) {
+
+			switch (acao) {
+
+			case "/deslogar":
+
+				session = request.getSession();
+				session.invalidate();
+				RequestDispatcher dispatcher = request.getRequestDispatcher("tela-inicial.jsp");
+				dispatcher.forward(request, response);
+
+				break;
+
+		/*	case "/inicial-cadastro":
+
+				abrirPaginaCadastroUsuario(request, response);
+
+				break;
+
+			
+			 * case "/login":
+			 * 
+			 * logarUsuario(request, response);
+			 * 
+			 * break;
+			 * 
+			 
+			case "/cadastrar-tutor":
+
+				cadastrarTutor(request, response);
+
+				break;
+
+			case "/cadastrar-motorista":
+
+				cadastrarMotorista(request, response);
+
+				break;
+*/
+			case "/corrida-tutor":
+
+				listarTutoresCorrida(request, response);
+
+				break;
+		 	
+			case "/listar-corrida-tutor":
+
+				listarCorridaAbertoTutor(request, response);
+
+				break;
+
+			case "/iniciar-corrida":
+
+				listarTutoresIniciarCorrida(request, response);
+
+				break;
+
+			case "/iniciar-corrida-tutor":
+
+				carregarDadosTutor(request, response);
+
+				break;
+
+			case "/iniciar-corrida-tutor-ins":
+
+				iniciarCorridaTutor(request, response);
+
+				break;
+
+			case "/atualizar-corrida":
+
+				listarTutoresAtualizar(request, response);
+
+				break;
+
+			case "/atualizar-corrida-tutor":
+
+				listarCorridasTutor(request, response);
+
+				break;
+
+			case "/atualizar-corrida-tutor-tabela":
+
+				atualizarCorridaTutor(request, response);
+
+				break;
+
+			case "/atualizar-corrida-tutor-dados":
+
+				atualizarCorridaTutorDados(request, response);
+
+				break;
+
+			case "/deletar-corrida":
+
+				deletarCorrida(request, response);
+
+				break;
+
+			case "/deletar-corrida-tutor":
+
+				deletarCorridaTutor(request, response);
+
+				break;
+
+			case "/deletar-corrida-tutor-del":
+
+				deletarCorridaTutorDel(request, response);
+
+				break;
+
+			case "/cadastrar-animal":
+
+				listarTutorAnimal(request, response);
+
+				break;
+
+			case "/cadastrar-animal-tutor":
+
+				cadastrarAnimalTutor(request, response);
+
+				break;
+
+			case "/cadastrar-animal-tutor-inserir":
+
+				cadastrarAnimalTutorInserir(request, response);
+
+				break;
+
+			case "/atualizar-animal":
+
+				listarTutorAnimalAtualizar(request, response);
+
+				break;
+
+			case "/atualizar-animal-tutor":
+
+				atualizarAnimalTutor(request, response);
+
+				break;
+			case "/atualizar-animal-tabela":
+
+				atualizarAnimalTutorTabela(request, response);
+
+				break;
+
+			case "/atualizar-animal-tutor-dados":
+
+				atualizarAnimalTutorDados(request, response);
+
+				break;
+
+			case "/deletar-animal":
+
+				listarTutorAnimalDeletar(request, response);
+
+				break;
+
+			case "/deletar-animal-tutor":
+
+				deletarAnimalTutor(request, response);
+
+				break;
+
+			case "/deletar-animal-tutor-del":
+
+				deletarAnimalTutorDel(request, response);
+
+				break;
+
+			case "/dados-tutor":
+
+				listarTutoresDados(request, response);
+
+				break;
+
+			case "/dados-tutor-atualizar":
+
+				atualizarDadosTutor(request, response);
+
+				break;
+
+			case "/dados-tutor-atualizar-atu":
+
+				atualizarDadosTutorDados(request, response);
+
+				break;
+
+			case "/listar-animal":
+
+				listarAnimal(request, response);
+
+				break;
+
+			case "/listar-animal-tutor":
+
+				listarAnimalTutor(request, response);
+
+				break;
+
+			case "/endereco-tutor":
+
+				enderecoTutor(request, response);
+
+				break;
+
+			case "/cadastrar-endereco-tutor":
+
+				enderecoTutorCadastrar(request, response);
+
+				break;
+
+			case "/atualizar-endereco":
+
+				atualizarEndereco(request, response);
+
+				break;
+
+			case "/atualizar-endereco-tutor":
+
+				atualizarEnderecoTutor(request, response);
+
+				break;
+
+			case "/atualizar-endereco-tabela":
+
+				atualizarEnderecoTabela(request, response);
+
+				break;
+
+			case "/atualizar-endereco-tutor-dados":
+
+				atualizarEndereocTutorDados(request, response);
+
+				break;
+
+			case "/deletar-endereco":
+
+				deletarEndereco(request, response);
+
+				break;
+
+			case "/deletar-endereco-tutor":
+
+				deletarEnderecoTutor(request, response);
+
+				break;
+			case "/deletar-endereco-tutor-del":
+
+				deletarEnderecoTutorDel(request, response);
+
+				break;
+
+			case "/listar-endereco":
+
+				listarEndereco(request, response);
+
+				break;
+
+			case "/listar-endereco-tutor":
+
+				listarEnderecoTutor(request, response);
+
+				break;
+
+			// CASES MOTORISTAS
+
+			case "/listar-motoristas-historico":
+
+				listarMotoristasHistorico(request, response);
+
+				break;
+
+			case "/listar-corridas-motoristas":
+
+				listarCorridasMotorista(request, response);
+
+				break;
+
+			case "/procurar-corrida":
+
+				procurarCorrida(request, response);
+
+				break;
+
+			case "/procurar-corrida-motorista":
+
+				carregarMotoristaCorrida(request, response);
+
+				break;
+
+			case "/procurar-corrida-motorista-aceitar":
+
+				procurarCorridaMotorista(request, response);
+
+				break;
+
+			case "/cadastrar-veiculo":
+
+				cadastrarVeiculo(request, response);
+
+				break;
+
+			case "/cadastrar-veiculo-motorista":
+
+				cadastrarVeiculoMotorista(request, response);
+
+				break;
+
+			case "/atualizar-veiculo":
+
+				atualizarVeiculo(request, response);
+
+				break;
+
+			case "/atualizar-veiculo-motorista":
+
+				atualizarVeiculoMotorista(request, response);
+
+				break;
+
+			case "/atualizar-veiculo-tabela":
+
+				atualizarVeiculoMotoristaTabela(request, response);
+
+				break;
+
+			case "/atualizar-veiculo-dados":
+
+				atualizarDadosVeiculos(request, response);
+
+				break;
+
+			case "/deletar-veiculo":
+
+				deletarVeiculo(request, response);
+
+				break;
+
+			case "/deletar-veiculo-motorista":
+
+				deletarVeiculoMotorista(request, response);
+
+				break;
+
+			case "/deletar-veiculo-motorista-del":
+
+				deletarVeiculoMotoristaDel(request, response);
+
+				break;
+
+			case "/dados-motorista":
+
+				dadosMotorista(request, response);
+
+				break;
+
+			case "/atualizar-dados-motorista":
+
+				atualizarDadosMotorista(request, response);
+
+				break;
+
+			case "/atualizar-dados-motorista-atu":
+
+				atualizarDadosMotoristaAtu(request, response);
+
+				break;
+
+			case "/listar-veiculo":
+
+				listarVeiculo(request, response);
+
+				break;
+
+			case "/listar-veiculo-motorista":
+
+				listarVeiculoMotoristas(request, response);
+
+				break;
+				
+			default:
+				
+				
+				break;
+
+			}
+
+		} else {
+
 			RequestDispatcher dispatcher = request.getRequestDispatcher("tela-inicial.jsp");
 			dispatcher.forward(request, response);
 
-			break;
-
-		case "/inicial-cadastro":
-
-			abrirPaginaCadastroUsuario(request, response);
-
-			break;
-
-		case "/login":
-
-			logarUsuario(request, response);
-
-			break;
-
-		case "/cadastrar-tutor":
-
-			cadastrarTutor(request, response);
-
-			break;
-
-		case "/cadastrar-motorista":
-
-			cadastrarMotorista(request, response);
-
-			break;
-
-		case "/corrida-tutor":
-
-			listarTutoresCorrida(request, response);
-
-			break;
-
-		case "/listar-corrida-tutor":
-
-			listarCorridaAbertoTutor(request, response);
-
-			break;
-
-		case "/iniciar-corrida":
-
-			listarTutoresIniciarCorrida(request, response);
-
-			break;
-
-		case "/iniciar-corrida-tutor":
-
-			carregarDadosTutor(request, response);
-
-			break;
-
-		case "/iniciar-corrida-tutor-ins":
-
-			iniciarCorridaTutor(request, response);
-
-			break;
-
-		case "/atualizar-corrida":
-
-			listarTutoresAtualizar(request, response);
-
-			break;
-
-		case "/atualizar-corrida-tutor":
-
-			listarCorridasTutor(request, response);
-
-			break;
-
-		case "/atualizar-corrida-tutor-tabela":
-
-			atualizarCorridaTutor(request, response);
-
-			break;
-
-		case "/atualizar-corrida-tutor-dados":
-
-			atualizarCorridaTutorDados(request, response);
-
-			break;
-
-		case "/deletar-corrida":
-
-			deletarCorrida(request, response);
-
-			break;
-
-		case "/deletar-corrida-tutor":
-
-			deletarCorridaTutor(request, response);
-
-			break;
-
-		case "/deletar-corrida-tutor-del":
-
-			deletarCorridaTutorDel(request, response);
-
-			break;
-
-		case "/cadastrar-animal":
-
-			listarTutorAnimal(request, response);
-
-			break;
-
-		case "/cadastrar-animal-tutor":
-
-			cadastrarAnimalTutor(request, response);
-
-			break;
-
-		case "/cadastrar-animal-tutor-inserir":
-
-			cadastrarAnimalTutorInserir(request, response);
-
-			break;
-
-		case "/atualizar-animal":
-
-			listarTutorAnimalAtualizar(request, response);
-
-			break;
-
-		case "/atualizar-animal-tutor":
-
-			atualizarAnimalTutor(request, response);
-
-			break;
-		case "/atualizar-animal-tabela":
-
-			atualizarAnimalTutorTabela(request, response);
-
-			break;
-
-		case "/atualizar-animal-tutor-dados":
-
-			atualizarAnimalTutorDados(request, response);
-
-			break;
-
-		case "/deletar-animal":
-
-			listarTutorAnimalDeletar(request, response);
-
-			break;
-
-		case "/deletar-animal-tutor":
-
-			deletarAnimalTutor(request, response);
-
-			break;
-
-		case "/deletar-animal-tutor-del":
-
-			deletarAnimalTutorDel(request, response);
-
-			break;
-
-		case "/dados-tutor":
-
-			listarTutoresDados(request, response);
-
-			break;
-
-		case "/dados-tutor-atualizar":
-
-			atualizarDadosTutor(request, response);
-
-			break;
-
-		case "/dados-tutor-atualizar-atu":
-
-			atualizarDadosTutorDados(request, response);
-
-			break;
-
-		case "/listar-animal":
-
-			listarAnimal(request, response);
-
-			break;
-
-		case "/listar-animal-tutor":
-
-			listarAnimalTutor(request, response);
-
-			break;
-
-		case "/endereco-tutor":
-
-			enderecoTutor(request, response);
-
-			break;
-
-		case "/cadastrar-endereco-tutor":
-
-			enderecoTutorCadastrar(request, response);
-
-			break;
-
-		case "/atualizar-endereco":
-
-			atualizarEndereco(request, response);
-
-			break;
-
-		case "/atualizar-endereco-tutor":
-
-			atualizarEnderecoTutor(request, response);
-
-			break;
-
-		case "/atualizar-endereco-tabela":
-
-			atualizarEnderecoTabela(request, response);
-
-			break;
-
-		case "/atualizar-endereco-tutor-dados":
-
-			atualizarEndereocTutorDados(request, response);
-
-			break;
-
-		case "/deletar-endereco":
-
-			deletarEndereco(request, response);
-
-			break;
-
-		case "/deletar-endereco-tutor":
-
-			deletarEnderecoTutor(request, response);
-
-			break;
-		case "/deletar-endereco-tutor-del":
-
-			deletarEnderecoTutorDel(request, response);
-
-			break;
-
-		case "/listar-endereco":
-
-			listarEndereco(request, response);
-
-			break;
-
-		case "/listar-endereco-tutor":
-
-			listarEnderecoTutor(request, response);
-
-			break;
-
-		// CASES MOTORISTAS
-
-		case "/listar-motoristas-historico":
-
-			listarMotoristasHistorico(request, response);
-
-			break;
-
-		case "/listar-corridas-motoristas":
-
-			listarCorridasMotorista(request, response);
-
-			break;
-
-		case "/procurar-corrida":
-
-			procurarCorrida(request, response);
-
-			break;
-
-		case "/procurar-corrida-motorista":
-
-			carregarMotoristaCorrida(request, response);
-
-			break;
-
-		case "/procurar-corrida-motorista-aceitar":
-
-			procurarCorridaMotorista(request, response);
-
-			break;
-
-		case "/cadastrar-veiculo":
-
-			cadastrarVeiculo(request, response);
-
-			break;
-
-		case "/cadastrar-veiculo-motorista":
-
-			cadastrarVeiculoMotorista(request, response);
-
-			break;
-
-		case "/atualizar-veiculo":
-
-			atualizarVeiculo(request, response);
-
-			break;
-
-		case "/atualizar-veiculo-motorista":
-
-			atualizarVeiculoMotorista(request, response);
-
-			break;
-
-		case "/atualizar-veiculo-tabela":
-
-			atualizarVeiculoMotoristaTabela(request, response);
-
-			break;
-
-		case "/atualizar-veiculo-dados":
-
-			atualizarDadosVeiculos(request, response);
-
-			break;
-
-		case "/deletar-veiculo":
-
-			deletarVeiculo(request, response);
-
-			break;
-
-		case "/deletar-veiculo-motorista":
-
-			deletarVeiculoMotorista(request, response);
-
-			break;
-
-		case "/deletar-veiculo-motorista-del":
-
-			deletarVeiculoMotoristaDel(request, response);
-
-			break;
-
-		case "/dados-motorista":
-
-			dadosMotorista(request, response);
-
-			break;
-
-		case "/atualizar-dados-motorista":
-
-			atualizarDadosMotorista(request, response);
-
-			break;
-
-		case "/atualizar-dados-motorista-atu":
-
-			atualizarDadosMotoristaAtu(request, response);
-
-			break;
-
-		case "/listar-veiculo":
-
-			listarVeiculo(request, response);
-
-			break;
-
-		case "/listar-veiculo-motorista":
-
-			listarVeiculoMotoristas(request, response);
-
-			break;
-
 		}
-
 	}
 
 	private void carregarMotoristaCorrida(HttpServletRequest request, HttpServletResponse response)
@@ -489,10 +520,12 @@ public class TranspetServlet extends HttpServlet {
 
 	private void deletarEnderecoTutorDel(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
 		Endereco endereco = ((EnderecoDAOSGDBImpl) enderecoDao)
 				.listarEnderecoPorIdEndereco(Long.parseLong(request.getParameter("idEnderecoTutorDel")));
-		enderecoDao.deletar(endereco);
+		
+		endereco.setTutores(null);
+		enderecoDao.atualizar(endereco);
 
 		listarCorridaAbertoTutor(request, response);
 	}
@@ -583,8 +616,9 @@ public class TranspetServlet extends HttpServlet {
 	private void listarVeiculoMotoristas(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Motorista motorista = ((MotoristaDAOSGDBImpl) motoristaDao)
-				.listarMotoristaId(Long.parseLong(request.getParameter(("idMotoristaLis"))));
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+
+		Motorista motorista = ((MotoristaDAOSGDBImpl) motoristaDao).listarMotoristaId(usuario.getIdUsuario());
 		List<Veiculo> veiculos = ((VeiculoDAOSGDBImpl) veiculoDao).listarVeiculoPorIdMotorista(motorista);
 		request.setAttribute("veiculos", veiculos);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-veiculo-motorista.jsp");
@@ -639,20 +673,30 @@ public class TranspetServlet extends HttpServlet {
 		Usuario usuarioLogin = new Usuario();
 		usuarioLogin.setLogin_usuario(request.getParameter("usuario"));
 		usuarioLogin.setSenha_usuario(request.getParameter("senha"));
-
-		Usuario usuario = ((UsuarioDAO<Tutor>) tutorDao).procurarUsuarioLogin(usuarioLogin);
+		
+		Usuario usuario = ((UsuarioDAO) tutorDao).procurarUsuarioLogin(usuarioLogin);
+		
 		HttpSession session = request.getSession();
-		if (usuario instanceof Tutor) {
-
-			session.setAttribute("usuario", usuario);
-			listarCorridaAbertoTutor(request, response);
-
-		} else {
-			session.setAttribute("usuario", usuario);
-			carregarMotoristaCorrida(request, response);
-
+		if(usuario!=null) {
+			
+				if (usuario instanceof Tutor) {
+					// adiciona o objeto inteiro na sessão
+					session.setAttribute("usuario", usuario);
+					// direciona para pagina de listar corridas tutor
+					listarCorridaAbertoTutor(request, response);
+				} else {
+					session.setAttribute("usuario", usuario);
+					carregarMotoristaCorrida(request, response);
+		
+				}
+		}else {
+			
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("tela-inicial.jsp");
+			dispatcher.forward(request, response);
+			
 		}
-
+		
 	}
 
 	private void cadastrarTutor(HttpServletRequest request, HttpServletResponse response)
@@ -668,6 +712,13 @@ public class TranspetServlet extends HttpServlet {
 		tutor.setLogin_usuario(request.getParameter("loginTutorCad"));
 		tutor.setSenha_usuario(request.getParameter("senhaTutorCad"));
 		tutorDao.inserir(tutor);
+		
+		Usuario usuarioLogin = new Usuario();
+		usuarioLogin.setLogin_usuario(tutor.getLogin_usuario());
+		usuarioLogin.setSenha_usuario(tutor.getSenha_usuario());
+		Usuario usuario = ((UsuarioDAO<Tutor>) tutorDao)
+				.procurarUsuarioLogin(((TutorDAOSGDBImpl) tutorDao).procurarUsuarioLogin(usuarioLogin));
+		request.getSession().setAttribute("usuario", usuario);
 		listarCorridaAbertoTutor(request, response);
 	}
 
@@ -687,12 +738,12 @@ public class TranspetServlet extends HttpServlet {
 		motoristaDao.inserir(motorista);
 
 		Usuario usuarioLogin = new Usuario();
-		usuarioLogin.setLogin_usuario(request.getParameter("loginMotoristaCad"));
-		usuarioLogin.setSenha_usuario(request.getParameter("senhaMotoristaCad"));
+		usuarioLogin.setLogin_usuario(motorista.getLogin_usuario());
+		usuarioLogin.setSenha_usuario(motorista.getSenha_usuario());
 		Usuario usuario = ((UsuarioDAO<Motorista>) tutorDao)
 				.procurarUsuarioLogin(((MotoristaDAOSGDBImpl) motoristaDao).procurarUsuarioLogin(usuarioLogin));
 		request.getSession().setAttribute("usuario", usuario);
-		carregarMotoristaCorrida(request, response);
+		listarCorridasMotorista(request, response);
 
 	}
 
@@ -781,8 +832,9 @@ public class TranspetServlet extends HttpServlet {
 
 	private void listarCorridasTutor(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		// recupera o usuario da sessão
 		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+
 		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao).listarTutorId(usuario.getIdUsuario());
 		List<Corrida> corridas = ((CorridaDAOSGDBImpl) corridaDao).listarCorridaAbertaPorTutor(tutor);
 		request.setAttribute("corridas", corridas);
@@ -911,7 +963,8 @@ public class TranspetServlet extends HttpServlet {
 	private void cadastrarAnimalTutorInserir(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao).listarTutorId(Long.parseLong(request.getParameter("idTutorAnimalCad")));
+		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao)
+				.listarTutorId(Long.parseLong(request.getParameter("idTutorAnimalCad")));
 
 		AnimalDomestico animal = new AnimalDomestico();
 		animal.setNomeAnimal(request.getParameter("nomeAnimalTutorIns"));
@@ -1009,7 +1062,8 @@ public class TranspetServlet extends HttpServlet {
 
 		AnimalDomestico animal = ((AnimalDomesticoDAOSGDBImpl) animalDao)
 				.listarAnimalPorIdAnimal(Long.parseLong(request.getParameter("idAnimalTutorDel")));
-		animalDao.deletar(animal);
+		animal.setTutor(null);
+		animalDao.atualizar(animal);
 		listarCorridaAbertoTutor(request, response);
 	}
 
@@ -1066,8 +1120,9 @@ public class TranspetServlet extends HttpServlet {
 	private void listarCorridasMotorista(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Motorista motorista = ((MotoristaDAOSGDBImpl) motoristaDao)
-				.listarMotoristaId(Long.parseLong(request.getParameter(("idMotorista"))));
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+
+		Motorista motorista = ((MotoristaDAOSGDBImpl) motoristaDao).listarMotoristaId(usuario.getIdUsuario());
 
 		List<Corrida> corridas = ((CorridaDAOSGDBImpl) corridaDao).listarCorridaPorIdMotorista(motorista);
 		request.setAttribute("corridas", corridas);
@@ -1096,13 +1151,15 @@ public class TranspetServlet extends HttpServlet {
 				.listarCorridaPorIdCorrida(Long.parseLong(request.getParameter("idCorrida")));
 		corridaAtu.setMotorista(motoristas);
 		corridaDao.atualizar(corridaAtu);
-		listarMotoristasHistorico(request, response);
+		listarCorridasMotorista(request, response);
 	}
 
 	private void cadastrarVeiculo(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		List<Motorista> motoristas = motoristaDao.listar();
-		request.setAttribute("motoristas", motoristas);
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+
+		Motorista motorista = ((MotoristaDAOSGDBImpl) motoristaDao).listarMotoristaId(usuario.getIdUsuario());
+		request.setAttribute("motoristas", motorista);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastrar-carro-motorista.jsp");
 		dispatcher.forward(request, response);
 
@@ -1120,7 +1177,7 @@ public class TranspetServlet extends HttpServlet {
 		veiculo.setAnoVeiculo(Integer.parseInt(request.getParameter("anoVeiculoMotoristaIns")));
 		veiculo.setMotoristaVeiculo(motorista);
 		veiculoDao.inserir(veiculo);
-		listarMotoristasCorrida(request, response);
+		listarCorridasMotorista(request, response);
 	}
 
 	private void atualizarVeiculo(HttpServletRequest request, HttpServletResponse response)
@@ -1135,8 +1192,9 @@ public class TranspetServlet extends HttpServlet {
 	private void atualizarVeiculoMotorista(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Motorista motorista = ((MotoristaDAOSGDBImpl) motoristaDao)
-				.listarMotoristaId(Long.parseLong(request.getParameter("idMotorista")));
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+
+		Motorista motorista = ((MotoristaDAOSGDBImpl) motoristaDao).listarMotoristaId(usuario.getIdUsuario());
 		List<Veiculo> veiculos = ((VeiculoDAOSGDBImpl) veiculoDao).listarVeiculoPorIdMotorista(motorista);
 		request.setAttribute("veiculos", veiculos);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("atualizar-veiculo-motorista.jsp");
@@ -1165,7 +1223,7 @@ public class TranspetServlet extends HttpServlet {
 		veiculo.setPlacaVeiculo(request.getParameter("placaVeiculoMotoristaAtu"));
 		veiculo.setAnoVeiculo(Integer.parseInt(request.getParameter("anoVeiculoMotoristaAtu")));
 		veiculoDao.atualizar(veiculo);
-		listarMotoristasCorrida(request, response);
+		listarCorridasMotorista(request, response);
 	}
 
 	private void deletarVeiculo(HttpServletRequest request, HttpServletResponse response)
@@ -1180,8 +1238,9 @@ public class TranspetServlet extends HttpServlet {
 	private void deletarVeiculoMotorista(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Motorista motorista = ((MotoristaDAOSGDBImpl) motoristaDao)
-				.listarMotoristaId(Long.parseLong(request.getParameter("idMotorista")));
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+
+		Motorista motorista = ((MotoristaDAOSGDBImpl) motoristaDao).listarMotoristaId(usuario.getIdUsuario());
 		List<Veiculo> veiculos = ((VeiculoDAOSGDBImpl) veiculoDao).listarVeiculoPorIdMotorista(motorista);
 		request.setAttribute("veiculos", veiculos);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("deletar-veiculo-motorista.jsp");
@@ -1195,7 +1254,7 @@ public class TranspetServlet extends HttpServlet {
 		Veiculo veiculo = ((VeiculoDAOSGDBImpl) veiculoDao)
 				.listarVeiculoPorIdVeiculo(Long.parseLong(request.getParameter("idVeiculoTabela")));
 		veiculoDao.deletar(veiculo);
-		listarMotoristasCorrida(request, response);
+		listarCorridasMotorista(request, response);
 
 	}
 
@@ -1212,8 +1271,9 @@ public class TranspetServlet extends HttpServlet {
 	private void atualizarDadosMotorista(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Motorista motorista = ((MotoristaDAOSGDBImpl) motoristaDao)
-				.listarMotoristaId(Long.parseLong(request.getParameter("idMotoristaDados")));
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+
+		Motorista motorista = ((MotoristaDAOSGDBImpl) motoristaDao).listarMotoristaId(usuario.getIdUsuario());
 		request.setAttribute("motorista", motorista);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("atualizar-dados-motorista.jsp");
 		dispatcher.forward(request, response);
@@ -1233,6 +1293,6 @@ public class TranspetServlet extends HttpServlet {
 		motorista.setLogin_usuario(request.getParameter("loginMotoristaAtu"));
 		motorista.setTelefoneUsuario(request.getParameter("telefoneMotoristaAtu"));
 		motoristaDao.atualizar(motorista);
-		listarMotoristasHistorico(request, response);
+		listarCorridasMotorista(request, response);
 	}
 }

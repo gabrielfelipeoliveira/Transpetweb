@@ -26,7 +26,7 @@
 	</c:if>
 	<c:if test="${enderecos !=null}">
 		<div class="formCadastro">
-			<h3>Selecione o endereço para atualizar</h3>
+			<h3>Selecione um endereço para atualizar</h3>
 			<table>
 
 				<tr>
@@ -43,7 +43,7 @@
 							<td><c:out value="${endereco.cepEndereco}" /></td>
 							<td><c:out value="${endereco.numeroEndereco}" /></td>
 							<td><a class="atualizarBotao"
-								href="<%=request.getContextPath()%>/atualizar-endereco-tabela?idEnderecoTabela=<c:out value='${endereco.idEndereco}'/>">Selecionar</a></td>
+								href="<%=request.getContextPath()%>/atualizar-endereco-tabela?idEnderecoTabela=<c:out value='${endereco.idEndereco}'/>">Atualizar</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>

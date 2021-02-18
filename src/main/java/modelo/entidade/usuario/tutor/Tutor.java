@@ -52,16 +52,16 @@ public class Tutor extends Usuario {
 		return animais;
 	}
 
-	public void setAnimais(List<AnimalDomestico> animais) {
-		this.animais = animais;
+	public void setAnimais(AnimalDomestico animais) {
+		this.animais.add(animais);
 	}
 
 	public List<Corrida> getCorridas() {
 		return corridas;
 	}
 
-	public void setCorridas(List<Corrida> corridas) {
-		this.corridas = corridas;
+	public void setCorridas(Corrida corridas) {
+		this.corridas.add(corridas);
 	}
 	
 

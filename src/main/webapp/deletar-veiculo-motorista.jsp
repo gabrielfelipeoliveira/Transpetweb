@@ -43,6 +43,7 @@
 				<th>Modelo</th>
 				<th>Placa</th>
 				<th>Ano</th>
+				<th>Deletar</th>
 			</tr>
 			
 			<tbody>

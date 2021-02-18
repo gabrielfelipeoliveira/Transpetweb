@@ -36,7 +36,7 @@
 
 				<input type="hidden" name="idTutorAtu" maxlength="25"
 					value="${tutor.idUsuario }" >
-				<fieldset>
+				
 					<label>Nome</label><br> <input type="text" name="nomeTutorAtu"
 						maxlength="25" required value="${tutor.nomeUsuario }"><br>
 
@@ -59,7 +59,7 @@
 						value="${tutor.login_usuario }"><br> <label>Senha</label><br>
 					<input type="password" name="senhaTutorAtu" maxlength="25" required
 						value="${tutor.senha_usuario }"><br>
-				</fieldset>
+				
 
 				<input type="submit" id="submitTutorAtu" value="Atualizar">
 

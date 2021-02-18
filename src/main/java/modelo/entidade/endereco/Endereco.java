@@ -35,10 +35,10 @@ public class Endereco implements Serializable {
 	@Column(name = "numero_endereco", length = 5, nullable = false, unique = false)
 	private int numeroEndereco;
 	
-	@Column(name = "cep_endereco", length = 8, nullable = false, unique = true)
+	@Column(name = "cep_endereco", length = 8, nullable = false, unique = false)
 	private long cepEndereco;
 
-	@ManyToMany(mappedBy = "enderecos")
+	@ManyToMany(mappedBy = "enderecos", fetch = FetchType.EAGER )
 	private List<Tutor> tutores = new ArrayList<Tutor>();;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "enderecoInicial", cascade = CascadeType.ALL, orphanRemoval = true)

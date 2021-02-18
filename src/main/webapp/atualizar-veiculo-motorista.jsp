@@ -38,7 +38,7 @@
 			<th>Modelo</th>
 			<th>Placa</th>
 			<th>Ano</th>
-			<th>Atualizar</th>
+			<th>Selecionar</th>
 		</tr>
 		<tbody>
 		<c:forEach var="veiculo" items="${veiculos}">
@@ -50,7 +50,7 @@
 				<td><c:out value="${veiculo.anoVeiculo}" /></td>
 				
 				<td><a class="atualizarBotao"
-					href="<%=request.getContextPath()%>/atualizar-veiculo-tabela?idVeiculoTabela=<c:out value='${veiculo.idVeiculo}'/>">Selecionar</a></td>
+					href="<%=request.getContextPath()%>/atualizar-veiculo-tabela?idVeiculoTabela=<c:out value='${veiculo.idVeiculo}'/>">Atualizar</a></td>
 
 			</tr>
 			</c:forEach>

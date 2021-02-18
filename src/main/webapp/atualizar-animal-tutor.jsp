@@ -51,7 +51,7 @@
 						<td><c:out value="${animal.tamanho}" /></td>
 						<td><c:out value="${animal.observacao}" /></td>
 						<td><a class="atualizarBotao"
-							href="<%=request.getContextPath()%>/atualizar-animal-tabela?idAnimalTabelaAtu=<c:out value='${animal.idAnimal}'/>">Selecionar</a></td>
+							href="<%=request.getContextPath()%>/atualizar-animal-tabela?idAnimalTabelaAtu=<c:out value='${animal.idAnimal}'/>">Atualizar</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

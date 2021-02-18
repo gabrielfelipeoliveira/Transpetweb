@@ -10,18 +10,20 @@
 
     <link rel="stylesheet" href="<%=request.getContextPath()%>resources/css/estilo.css"/>
         <style><%@include file="\resources\css\estilo.css"%></style>
-
+	
+	
 </head>
 <body>
+
 
 <div class="navbar">
 
   <div class="dropdown">
-    <button class="dropbtn">DADOS 
+    <button class="dropbtn" >${usuario.nomeUsuario}  
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="<%=request.getContextPath()%>/dados-tutor-atualizar">Atualizar</a>
+      <a href="<%=request.getContextPath()%>/dados-tutor-atualizar">Atualizar dados</a>
       <a href="<%=request.getContextPath()%>/deslogar">Sair</a>
     </div>
   </div>
@@ -62,6 +64,7 @@
       
     </div>
   </div> 
+  
 </div>
 
 

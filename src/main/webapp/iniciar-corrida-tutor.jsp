@@ -16,7 +16,7 @@
 
 	
 	
-	<h1>Iniciar Corrida</h1><br>
+	
 	
 	<c:if test="${tutores!=null }">
 	<div class="formCadastro" >

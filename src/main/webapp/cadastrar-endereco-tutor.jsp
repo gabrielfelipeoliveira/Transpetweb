@@ -15,11 +15,11 @@
 	
 		
 		<form action="<%=request.getContextPath()%>/cadastrar-endereco-tutor">
-			<h3>Informe o tutor</h3><br>
+			
 			<input type="hidden" value ="${tutor.idUsuario }" id="idTutorEnderecoAtu" name="idTutorEnderecoAtu">
 				
 					
-			<fieldset>
+			
 			<label >Rua</label><br>
 			<input type ="text" id="idRuaEnderecoTutorIns" name="ruaEnderecoTutorIns" maxlength="25" required><br>
 			
@@ -31,7 +31,7 @@
 			
 			<label >Numero</label><br>
 			<input type ="text" id="idNumeroEnderecoTutorIns" name ="numeroEnderecoTutorIns" maxlength="5" required><br>
-			</fieldset>
+			
 			
 			
 			

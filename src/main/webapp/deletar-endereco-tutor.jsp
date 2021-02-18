@@ -47,7 +47,7 @@
 							<td><c:out value="${endereco.cepEndereco}" /></td>
 							<td><c:out value="${endereco.numeroEndereco}" /></td>
 							<td><a class ="deletarBotao"
-							href="<%=request.getContextPath()%>/deletar-endereco-tutor-del?idEnderecoTutorDel=<c:out value='${endereco.idEndereco}'/>">Selecionar</a>
+							href="<%=request.getContextPath()%>/deletar-endereco-tutor-del?idEnderecoTutorDel=<c:out value='${endereco.idEndereco}'/>">Deletar</a>
 							</td>
 						</tr>
 					</c:forEach>

@@ -11,24 +11,18 @@
 
 <%@ include file="cabecalho-motorista.jsp" %>
 	<div class="formCadastro" >
-<h1>Insira os dados para cadastrar seu Veículo e seu Dono!</h1>
+
 		
 		
 	<form id="formProcurarCorrida" action="<%=request.getContextPath()%>/cadastrar-veiculo-motorista">
-		<label >Motorista</label> <br> 
-		<select	name="idMotorista">
-
-				<c:forEach var="motorista" items="${motoristas}">
-				<option value="${motorista.idUsuario}">
-					${motorista.nomeUsuario} ${motorista.sobreNomeUsuario}</option>
-			</c:forEach>
-			
-		</select><br>
-			
 		
 		
+		  
+		  
 			<h3>Veículo</h3>
-			<fieldset>
+			
+			<input type="hidden" value="${motoristas.idUsuario }" name="idMotorista">
+			
 			<label >Marca</label><br>
 			<input type ="text" id="marcaVeiculoMotoristaIns" name="marcaVeiculoMotoristaIns" maxlength ="25" required><br>
 			
@@ -40,7 +34,7 @@
 			
 			<label >Ano</label><br>
 			<input type ="text" id="anoVeiculoMotoristaIns" name="anoVeiculoMotoristaIns" maxlength ="4"  required><br><br>
-			</fieldset>
+		
 			<input type ="submit" value="Cadastrar Veículo" id="botaoInsVeiculoMotorista">
 			
 		</form>

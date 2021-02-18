@@ -19,24 +19,24 @@
 <div class="navbar">
 
   <div class="dropdown">
-    <button class="dropbtn">DADOS 
+    <button class="dropbtn">${usuario.nomeUsuario}  
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="<%=request.getContextPath()%>/dados-motorista">Atualizar</a>
+      <a href="<%=request.getContextPath()%>/atualizar-dados-motorista">Atualizar dados</a>
        <a href="<%=request.getContextPath()%>/deslogar">Sair</a>
     </div>
   </div>
   
    <div class="dropdown">
-    <button class="dropbtn">Veículo 
+    <button class="dropbtn">VEICULO
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
       <a href="<%=request.getContextPath()%>/cadastrar-veiculo">Cadastrar</a>
-      <a href="<%=request.getContextPath()%>/atualizar-veiculo">Atualizar</a>
-      <a href="<%=request.getContextPath()%>/deletar-veiculo">Deletar</a>
-      <a href="<%=request.getContextPath()%>/listar-veiculo">Listar</a>
+      <a href="<%=request.getContextPath()%>/atualizar-veiculo-motorista">Atualizar</a>
+      <a href="<%=request.getContextPath()%>/deletar-veiculo-motorista">Deletar</a>
+      <a href="<%=request.getContextPath()%>/listar-veiculo-motorista">Listar</a>
     </div>
   </div>
   
@@ -45,11 +45,13 @@
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="<%=request.getContextPath()%>/procurar-corrida">Procurar</a>
-      <a href="<%=request.getContextPath()%>/listar-motoristas-historico">Listar</a>
+      <a href="<%=request.getContextPath()%>/procurar-corrida-motorista">Procurar</a>
+      <a href="<%=request.getContextPath()%>/listar-corridas-motoristas">Listar</a>
       
     </div>
-  </div> 
+  </div>
+  
+   
 </div>
 
 </body>
