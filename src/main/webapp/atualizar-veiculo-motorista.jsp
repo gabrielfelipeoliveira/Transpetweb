@@ -12,29 +12,18 @@
 	<%@ include file="cabecalho-motorista.jsp"%>
 
 	
-	<c:if test="${motoristas!=null }">
-	<h3>Selecione o motorista</h3>
-		<form
-			action="<%=request.getContextPath()%>/atualizar-veiculo-motorista">
-			<label>Motorista</label><br> <select name="idMotorista">
-
-				<c:forEach var="motorista" items="${motoristas}">
-					<option value="${motorista.idUsuario}">
-						${motorista.nomeUsuario} ${motorista.sobreNomeUsuario}</option>
-				</c:forEach>
-			</select><br><br>
-			<input type="submit" value="selecionar">
-		</form>
-	</c:if>
+	
 
 <c:if test="${veiculos!=null }">
-	<h3>Selecione o veiculo para atualizar</h3>
+	<div class="formCadastro" >
+	<h3>Selecione o veículo para atualizar</h3>
 	<table>
 		<tr>
 			<th>Marca</th>
 			<th>Modelo</th>
 			<th>Placa</th>
 			<th>Ano</th>
+			<th>Selecionar</th>
 		</tr>
 		<tbody>
 		<c:forEach var="veiculo" items="${veiculos}">
@@ -45,24 +34,26 @@
 				<td><c:out value="${veiculo.placaVeiculo}" /></td>
 				<td><c:out value="${veiculo.anoVeiculo}" /></td>
 				
-				<td><a
-					href="<%=request.getContextPath()%>/atualizar-veiculo-tabela?idVeiculoTabela=<c:out value='${veiculo.idVeiculo}'/>">Selecionar</a></td>
+				<td><a class="atualizarBotao"
+					href="<%=request.getContextPath()%>/atualizar-veiculo-tabela?idVeiculoTabela=<c:out value='${veiculo.idVeiculo}'/>">Atualizar</a></td>
 
 			</tr>
 			</c:forEach>
 		</tbody>
 	</table>
+	</div>
 </c:if>
 
 <c:if test="${veiculo!=null }">
+	<div class="formCadastro" >
 	<h3>Atualize os dados</h3>
 
 	<form action="<%=request.getContextPath()%>/atualizar-veiculo-dados" method="post">
-		<fieldset>
+		
 			
 			<input
-				type="text" id="IdVeiculoAtu"
-				name="IdVeiculoAtu" value="${veiculo.idVeiculo}" maxlength="25" required hidden><br>
+				type="hidden" id="IdVeiculoAtu"
+				name="IdVeiculoAtu" value="${veiculo.idVeiculo}" maxlength="25" required ><br>
 		
 			<label>Marca</label><br> <input
 				type="text" id="marcaVeiculoMotoristaAtu"
@@ -85,14 +76,15 @@
 		
 			<label>Ano</label><br> <input
 				type="text" id="anoVeiculoMotoristaAtu"
-				name="anoVeiculoMotoristaAtu" value="${veiculo.anoVeiculo}" maxlength="4" required><br>
+				name="anoVeiculoMotoristaAtu" pattern="[0-9]+$" value="${veiculo.anoVeiculo}" maxlength="4" required><br>
 			<br> 
-		</fieldset>
+		
 
 		<input type="submit" value="Atualizar Veículo"
 			id="botaoAtuaVeiculoMotorista">
 
 	</form>
+	</div>
 </c:if>
 </body>
 </html>

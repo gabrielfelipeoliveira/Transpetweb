@@ -10,57 +10,41 @@
 <body>
 
 <%@ include file="cabecalho-tutor.jsp" %>
-
+	<div class="formCadastro" >
 	<h1>Insira os dados para cadastrar seu Pet!</h1>
 		
 		<form action="<%=request.getContextPath()%>/cadastrar-animal-tutor-inserir">
-		<label >Tutor</label> <select name="idTutor">
-			<c:forEach var="tutor" items="${tutores}">
-				<option value="${tutor.idUsuario}">${tutor.nomeUsuario}
-					${tutor.sobreNomeUsuario}</option>
-			</c:forEach>
-		</select> <br>
-	
+		
+		<input type="hidden" value ="${tutor.idUsuario }" id="idTutorAnimalCad" name="idTutorAnimalCad">
 				
 					
-			<fieldset>
+			
 			<label >Nome</label><br>
 			<input type ="text" id="nomeAnimalTutorIns" name="nomeAnimalTutorIns" maxlength="25" required><br>
-			</fieldset>
 			
-			<fieldset>
 			<label >Peso</label><br>
-			<input type ="text" id="pesoAnimalTutorIns" name="pesoAnimalTutorIns" maxlength="5" required><br>
+			<input type ="text" id="pesoAnimalTutorIns"  name="pesoAnimalTutorIns" maxlength="5" required><br>
 			
-			</fieldset>
 			
-			<fieldset>
-			<label >Raça</label><br><br>
+			<label >Raça</label><br>
 			<input type ="text" id="racaAnimalTutorIns" name ="racaAnimalTutorIns" maxlength="25" required><br>
-			</fieldset>
 			
-			<fieldset>
 			<label >Tamanho</label><br>
-			<input type ="text" id="tamanhoAnimalTutorIns" name="tamanhoAnimalTutorIns" maxlength="5" required><br>
+			<input type ="text" id="tamanhoAnimalTutorIns"  name="tamanhoAnimalTutorIns" maxlength="5" required><br>
 		
-			</fieldset>
-			
-			<fieldset>
-			<label >Tipo</label>
+			<label >Tipo</label><br>
 			<select id="selectTipoAnimalIns" name="selectTipoAnimal">
 				<option value="0">Gato</option>
 				<option value="1">Cachorro</option>
-			</select>
-			</fieldset>
+			</select><br>
 			
-			<fieldset>
 			<label >Observação</label><br>
-			<textarea id="observacaoAnimalTutorIns" name="observacaoAnimalTutorIns" maxlength="100" ></textarea><br><br>
-			</fieldset>
+			<textarea id="observacaoAnimalTutorIns" cols="90"  name="observacaoAnimalTutorIns" maxlength="100" ></textarea><br><br>
+			
 			
 			<input type ="submit" value="Cadastrar Pet" id="botaoInsAnimalTutor">
 			
 		</form>
-	
+	</div>
 </body>
 </html>

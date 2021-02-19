@@ -58,8 +58,8 @@ public class Motorista extends Usuario {
 		return veiculos;
 	}
 
-	public void setVeiculos(List<Veiculo> veiculos) {
-		this.veiculos = veiculos;
+	public void setVeiculos(Veiculo veiculos) {
+		this.veiculos.add(veiculos);
 	}
 
 	public List<Corrida> getCorridas() {

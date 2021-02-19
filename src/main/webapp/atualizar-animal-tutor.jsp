@@ -11,23 +11,11 @@
 
 	<%@ include file="cabecalho-tutor.jsp"%>
 	
-	<c:if test="${tutores!=null }">
-	<h3>Selecione o tutor</h3>
 	
-	<form action="<%=request.getContextPath()%>/atualizar-animal-tutor"
-		method="post">
-		<label>Tutor</label> <select name="idTutor">
-			<c:forEach var="tutor" items="${tutores}">
-				<option value="${tutor.idUsuario}">${tutor.nomeUsuario}
-					${tutor.sobreNomeUsuario}</option>
-			</c:forEach>
-		</select><br> <input type="submit" value="selecionar">
-	</form>
-	</c:if>
 	
 	
 	<c:if test="${animais !=null}">
-	
+		<div class="formCadastro" >
 	<h3>Selecione o animal para atualizar</h3>
 		<table>
 
@@ -48,23 +36,25 @@
 						<td><c:out value="${animal.raca}" /></td>
 						<td><c:out value="${animal.tamanho}" /></td>
 						<td><c:out value="${animal.observacao}" /></td>
-						<td><a
-							href="<%=request.getContextPath()%>/atualizar-animal-tabela?idAnimalTabelaAtu=<c:out value='${animal.idAnimal}'/>">Selecionar</a></td>
+						<td><a class="atualizarBotao"
+							href="<%=request.getContextPath()%>/atualizar-animal-tabela?idAnimalTabelaAtu=<c:out value='${animal.idAnimal}'/>">Atualizar</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
 
 		</table>
+		</div>
 </c:if>
 
 <c:if test="${animal!= null }">
+	<div class="formCadastro" >
 		<h3>Atualize os animais</h3>
 	
 		<form
 			action="<%=request.getContextPath()%>/atualizar-animal-tutor-dados"
 			method="post">
 
-			<input type = "text" id = "idAnimalDados" name="idAnimalDados" value="${animal.idAnimal}" hidden>
+			<input type = "hidden" id = "idAnimalDados" name="idAnimalDados" value="${animal.idAnimal}" >
 			
 			<fieldset>
 				<label >Nome</label><br> <input
@@ -94,6 +84,7 @@
 			<input type="submit" value="Atualizar Pet" id="botaoAtuaAnimalTutor">
 
 		</form>
+		</div>
 	</c:if>
 
 </body>

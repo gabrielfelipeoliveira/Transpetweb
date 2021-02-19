@@ -45,7 +45,7 @@ public class EnderecoDAOSGDBImpl extends GenericoJPADAO {
 			criteria.where(construtor.equal(juncaoTutor.get("idUsuario") , idTutor));
 			
 
-			//criteria.select(raiz);
+			
 
 			enderecos = sessao.createQuery(criteria).setParameter(idTutor, tutor.getIdUsuario()).getResultList();
 
@@ -84,14 +84,14 @@ public class EnderecoDAOSGDBImpl extends GenericoJPADAO {
 			CriteriaQuery<Endereco> criteria = construtor.createQuery(Endereco.class);
 			Root<Endereco> raiz = criteria.from(Endereco.class);
 			
-			
+		
 			criteria.where(construtor.equal(raiz.get("idEndereco") , id));
 			
-
+			
 			criteria.select(raiz);
 
 			endereco = sessao.createQuery(criteria).getSingleResult();
-
+			
 			sessao.getTransaction().commit();
 
 		} catch (Exception sqlException) {
@@ -111,6 +111,7 @@ public class EnderecoDAOSGDBImpl extends GenericoJPADAO {
 
 		return endereco;
 	}
+	
 	
 	
 }

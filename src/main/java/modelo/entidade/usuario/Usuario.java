@@ -28,13 +28,13 @@ public class Usuario implements Serializable {
 	@Column(name = "sobrenome_usuario", length = 25, nullable = true, unique = false)
 	private String sobreNomeUsuario;
 	
-	@Column(name = "cpf_usuario", length = 11, nullable = false, unique = true)
+	@Column(name = "cpf_usuario", length = 15, nullable = false, unique = true)
 	private String cpfUsuario;
 	
 	@Column(name = "idade_usuario", length = 3, nullable = false, unique = false)
 	private int idadeUsuario;
 	
-	@Column(name = "email_usuario", length = 35, nullable = false, unique = true)
+	@Column(name = "email_usuario", length = 45, nullable = false, unique = true)
 	private String emailUsuario;
 	
 	@Column(name = "telefone_usuario", length = 15, nullable = false, unique = true)
