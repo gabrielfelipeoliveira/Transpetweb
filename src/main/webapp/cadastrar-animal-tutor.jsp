@@ -23,14 +23,14 @@
 			<input type ="text" id="nomeAnimalTutorIns" name="nomeAnimalTutorIns" maxlength="25" required><br>
 			
 			<label >Peso</label><br>
-			<input type ="text" id="pesoAnimalTutorIns" pattern="[0-9]+$" name="pesoAnimalTutorIns" maxlength="5" required><br>
+			<input type ="text" id="pesoAnimalTutorIns"  name="pesoAnimalTutorIns" maxlength="5" required><br>
 			
 			
 			<label >Raça</label><br>
 			<input type ="text" id="racaAnimalTutorIns" name ="racaAnimalTutorIns" maxlength="25" required><br>
 			
 			<label >Tamanho</label><br>
-			<input type ="text" id="tamanhoAnimalTutorIns" pattern="[0-9]+$" name="tamanhoAnimalTutorIns" maxlength="5" required><br>
+			<input type ="text" id="tamanhoAnimalTutorIns"  name="tamanhoAnimalTutorIns" maxlength="5" required><br>
 		
 			<label >Tipo</label><br>
 			<select id="selectTipoAnimalIns" name="selectTipoAnimal">

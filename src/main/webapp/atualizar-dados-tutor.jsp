@@ -35,7 +35,7 @@
 					<input type="text" name="cpfTutorAtu"  oninput="mascara(this, 'cpf')" maxlength="11" required value="${tutor.cpfUsuario }"><br> 
 					
 					<label>Telefone</label><br>
-					<input type="tel" name="telefoneTutorAtu"  oninput="mascara(this, 'tel')" maxlength="15" required placeholder="(99)99999-9999" value="${tutor.telefoneUsuario}"><br>
+					<input type="tel" name="telefoneTutorAtu"  oninput="mascara(this, 'tel')" maxlength="15" required placeholder="(99) 99999-9999" value="${tutor.telefoneUsuario}"><br>
 					
 					<label>E-mail</label><br>
 					<input type="text" name="emailTutorAtu"  onblur="mascaraEmail(this, 'email')" maxlength="35" required

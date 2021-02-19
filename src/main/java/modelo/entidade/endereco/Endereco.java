@@ -35,8 +35,8 @@ public class Endereco implements Serializable {
 	@Column(name = "numero_endereco", length = 5, nullable = false, unique = false)
 	private int numeroEndereco;
 	
-	@Column(name = "cep_endereco", length = 8, nullable = false, unique = false)
-	private long cepEndereco;
+	@Column(name = "cep_endereco", length = 9, nullable = false, unique = false)
+	private String cepEndereco;
 
 	@ManyToMany(mappedBy = "enderecos", fetch = FetchType.EAGER )
 	private List<Tutor> tutores = new ArrayList<Tutor>();;
@@ -47,7 +47,7 @@ public class Endereco implements Serializable {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "enderecoFinal", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Corrida> corridasFinal = new ArrayList<Corrida>();
 
-	public Endereco(int idEndereco, String ruaEndereco, int numeroEndereco, long cepEndereco, List<Tutor> tutores,
+	public Endereco(int idEndereco, String ruaEndereco, int numeroEndereco, String cepEndereco, List<Tutor> tutores,
 			List<Corrida> corridasInicial, List<Corrida> corridasFinal) {
 		this.idEndereco = idEndereco;
 		this.ruaEndereco = ruaEndereco;
@@ -58,7 +58,7 @@ public class Endereco implements Serializable {
 		this.corridasFinal = corridasFinal;
 	}
 
-	public Endereco(String ruaEndereco, int numeroEndereco, long cepEndereco, List<Tutor> tutores,
+	public Endereco(String ruaEndereco, int numeroEndereco, String cepEndereco, List<Tutor> tutores,
 			List<Corrida> corridasInicial, List<Corrida> corridasFinal) {
 		this.ruaEndereco = ruaEndereco;
 		this.numeroEndereco = numeroEndereco;
@@ -96,12 +96,12 @@ public class Endereco implements Serializable {
 		this.numeroEndereco = numeroEndereco;
 	}
 
-	public long getCepEndereco() {
+	public String getCepEndereco() {
 		return cepEndereco;
 	}
 
-	public void setCepEndereco(long cepEndereco) {
-		this.cepEndereco = cepEndereco;
+	public void setCepEndereco(String string) {
+		this.cepEndereco = string;
 	}
 
 	public List<Tutor> getTutores() {

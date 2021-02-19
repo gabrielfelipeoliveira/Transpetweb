@@ -112,14 +112,12 @@ public class TranspetServlet extends HttpServlet {
 			 * 
 			 * break;
 			 */
-			
+
 			case "/listar-corrida-tutor":
 
 				listarCorridaAbertoTutor(request, response);
 
 				break;
-
-			
 
 			case "/iniciar-corrida-tutor":
 
@@ -132,8 +130,6 @@ public class TranspetServlet extends HttpServlet {
 				iniciarCorridaTutor(request, response);
 
 				break;
-
-			
 
 			case "/atualizar-corrida-tutor":
 
@@ -152,8 +148,6 @@ public class TranspetServlet extends HttpServlet {
 				atualizarCorridaTutorDados(request, response);
 
 				break;
-
-			
 
 			case "/deletar-corrida-tutor":
 
@@ -185,8 +179,6 @@ public class TranspetServlet extends HttpServlet {
 
 				break;
 
-			
-
 			case "/atualizar-animal-tutor":
 
 				atualizarAnimalTutor(request, response);
@@ -203,8 +195,6 @@ public class TranspetServlet extends HttpServlet {
 				atualizarAnimalTutorDados(request, response);
 
 				break;
-
-			
 
 			case "/deletar-animal-tutor":
 
@@ -230,8 +220,6 @@ public class TranspetServlet extends HttpServlet {
 
 				break;
 
-			
-
 			case "/listar-animal-tutor":
 
 				listarAnimalTutor(request, response);
@@ -249,8 +237,6 @@ public class TranspetServlet extends HttpServlet {
 				enderecoTutorCadastrar(request, response);
 
 				break;
-
-			
 
 			case "/atualizar-endereco-tutor":
 
@@ -270,8 +256,6 @@ public class TranspetServlet extends HttpServlet {
 
 				break;
 
-			
-
 			case "/deletar-endereco-tutor":
 
 				deletarEnderecoTutor(request, response);
@@ -283,8 +267,6 @@ public class TranspetServlet extends HttpServlet {
 
 				break;
 
-			
-
 			case "/listar-endereco-tutor":
 
 				listarEnderecoTutor(request, response);
@@ -293,15 +275,12 @@ public class TranspetServlet extends HttpServlet {
 
 			// CASES MOTORISTAS
 
-			
-
 			case "/listar-corridas-motoristas":
 
 				listarCorridasMotorista(request, response);
 
 				break;
 
-			
 			case "/procurar-corrida-motorista":
 
 				carregarMotoristaCorrida(request, response);
@@ -326,8 +305,6 @@ public class TranspetServlet extends HttpServlet {
 
 				break;
 
-			
-
 			case "/atualizar-veiculo-motorista":
 
 				atualizarVeiculoMotorista(request, response);
@@ -346,8 +323,6 @@ public class TranspetServlet extends HttpServlet {
 
 				break;
 
-			
-
 			case "/deletar-veiculo-motorista":
 
 				deletarVeiculoMotorista(request, response);
@@ -359,8 +334,6 @@ public class TranspetServlet extends HttpServlet {
 				deletarVeiculoMotoristaDel(request, response);
 
 				break;
-
-			
 
 			case "/atualizar-dados-motorista":
 
@@ -390,6 +363,7 @@ public class TranspetServlet extends HttpServlet {
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("tela-inicial.jsp");
 			dispatcher.forward(request, response);
+			return;
 
 		}
 	}
@@ -417,8 +391,6 @@ public class TranspetServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 
 	}
-
-	
 
 	private void deletarEnderecoTutor(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -448,14 +420,12 @@ public class TranspetServlet extends HttpServlet {
 		listarCorridaAbertoTutor(request, response);
 	}
 
-	
-
 	private void atualizarEndereocTutorDados(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		Endereco endereco = ((EnderecoDAOSGDBImpl) enderecoDao)
 				.listarEnderecoPorIdEndereco(Long.parseLong(request.getParameter("idEnderecoDados")));
-		endereco.setCepEndereco(Long.parseLong(request.getParameter("cepEnderecoTutor")));
+		endereco.setCepEndereco(request.getParameter("cepEnderecoTutor"));
 		endereco.setNumeroEndereco(Integer.parseInt(request.getParameter("numeroEnderecoTutor")));
 		endereco.setRuaEndereco(request.getParameter("ruaEnderecoTutor"));
 		enderecoDao.atualizar(endereco);
@@ -484,8 +454,6 @@ public class TranspetServlet extends HttpServlet {
 
 	}
 
-	
-
 	private void enderecoTutor(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -503,7 +471,7 @@ public class TranspetServlet extends HttpServlet {
 		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao)
 				.listarTutorId(Long.parseLong(request.getParameter("idTutorEnderecoAtu")));
 		Endereco endereco = new Endereco();
-		endereco.setCepEndereco(Long.parseLong(request.getParameter("cepEnderecoTutorIns")));
+		endereco.setCepEndereco(request.getParameter("cepEnderecoTutorIns"));
 		endereco.setNumeroEndereco(Integer.parseInt(request.getParameter("numeroEnderecoTutorIns")));
 		endereco.setRuaEndereco(request.getParameter("ruaEnderecoTutorIns"));
 		enderecoDao.inserir(endereco);
@@ -536,8 +504,6 @@ public class TranspetServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 
 	}
-
-	
 
 	private void abrirPaginaCadastroUsuario(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -625,11 +591,6 @@ public class TranspetServlet extends HttpServlet {
 
 	}
 
-	
-	
-
-	
-
 	private void listarCorridaAbertoTutor(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -666,8 +627,6 @@ public class TranspetServlet extends HttpServlet {
 		corridaDao.inserir(corrida);
 		listarCorridaAbertoTutor(request, response);
 	}
-
-	
 
 	private void listarCorridasTutor(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -743,7 +702,6 @@ public class TranspetServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
-	
 	private void deletarCorridaTutor(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -807,8 +765,6 @@ public class TranspetServlet extends HttpServlet {
 		listarCorridaAbertoTutor(request, response);
 	}
 
-	
-
 	private void atualizarAnimalTutor(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -848,8 +804,6 @@ public class TranspetServlet extends HttpServlet {
 		listarCorridaAbertoTutor(request, response);
 	}
 
-	
-
 	private void deletarAnimalTutor(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -874,8 +828,6 @@ public class TranspetServlet extends HttpServlet {
 		animalDao.atualizar(animal);
 		listarCorridaAbertoTutor(request, response);
 	}
-
-	
 
 	private void atualizarDadosTutor(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -905,8 +857,6 @@ public class TranspetServlet extends HttpServlet {
 		listarCorridaAbertoTutor(request, response);
 	}
 
-	
-
 	private void listarCorridasMotorista(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -921,8 +871,6 @@ public class TranspetServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 
 	}
-
-	
 
 	private void procurarCorridaMotorista(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -962,8 +910,6 @@ public class TranspetServlet extends HttpServlet {
 		listarCorridasMotorista(request, response);
 	}
 
-	
-
 	private void atualizarVeiculoMotorista(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -1001,8 +947,6 @@ public class TranspetServlet extends HttpServlet {
 		listarCorridasMotorista(request, response);
 	}
 
-	
-
 	private void deletarVeiculoMotorista(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -1025,8 +969,6 @@ public class TranspetServlet extends HttpServlet {
 		listarCorridasMotorista(request, response);
 
 	}
-
-	
 
 	private void atualizarDadosMotorista(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

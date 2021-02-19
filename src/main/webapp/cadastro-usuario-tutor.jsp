@@ -36,7 +36,7 @@
 			
 				
 			<label for = "telefoneTutorCad">Telefone</label><br>
-			<input type ="tel" id="telefoneTutorCad" oninput="mascara(this, 'tel')" name = "telefoneTutorCad" maxlength ="15" placeholder="(99)99999-9999" pattern="[0-9]{2}[0-9]{1}[0-9]{4}[0-9]{4}"required><br>
+			<input type ="tel" id="telefoneTutorCad" oninput="mascara(this, 'tel')" name = "telefoneTutorCad" maxlength ="15" placeholder="(99)99999-9999" required><br>
 			
 			
 			
