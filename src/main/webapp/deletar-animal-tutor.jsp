@@ -40,7 +40,7 @@
 				<th>Raça</th>
 				<th>Tamanho</th>
 				<th>Observaçao</th>
-				<th>Deletar</th>
+				<th>Selecionar</th>
 			</tr>
 			
 			<tbody>

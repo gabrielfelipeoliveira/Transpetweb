@@ -12,27 +12,10 @@
 	<%@ include file="cabecalho-motorista.jsp"%>
 
 
-	<c:if test="${motoristas!=null }">
-	<div class="formCadastro">
-		<h3>Selecione o motorista</h3>
-		
-			<form
-				action="<%=request.getContextPath()%>/listar-corridas-motoristas">
-				<br> <select name="idMotorista">
-
-					<c:forEach var="motorista" items="${motoristas}">
-						<option value="${motorista.idUsuario}">
-							${motorista.nomeUsuario} ${motorista.sobreNomeUsuario}</option>
-					</c:forEach>
-				</select><br> <input type="submit" value="selecionar">
-			</form>
-			</div>
-	</c:if>
-	<br>
 
 	<c:if test="${corridas!=null }">
 		<div class="formCadastro" >
-		<h3>Histórico de Corrida Motorista</h3>
+		<h3>Histórico de Corrida</h3>
 		<table>
 
 			<tr>
@@ -57,7 +40,7 @@
 			</tbody>
 
 		</table>
-</tr>
+
 	</c:if>
 
 

@@ -11,21 +11,7 @@
 
 	<%@ include file="cabecalho-tutor.jsp"%>
 	
-	<c:if test="${tutores!=null }">
-		<div class="formCadastro" >
-	<h3>Selecione o tutor</h3>
 	
-	<form action="<%=request.getContextPath()%>/atualizar-animal-tutor"
-		method="post">
-		<select name="idTutor">
-			<c:forEach var="tutor" items="${tutores}">
-				<option value="${tutor.idUsuario}">${tutor.nomeUsuario}
-					${tutor.sobreNomeUsuario}</option>
-			</c:forEach>
-		</select><br> <input type="submit" value="selecionar">
-	</form>
-	</div>
-	</c:if>
 	
 	
 	<c:if test="${animais !=null}">

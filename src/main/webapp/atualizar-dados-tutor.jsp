@@ -6,26 +6,14 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Atualizar Dados Tutor</title>
+   <script><%@include file="\resources\js\metodos.js"%></script>
 </head>
 <body>
 
 	<%@ include file="cabecalho-tutor.jsp"%>
 
 
-	<c:if test="${tutores!=null }">
-		<div class="formCadastro">
-			<h3>Selecione o tutor</h3>
-			<form action="<%=request.getContextPath()%>/dados-tutor-atualizar">
-				<select name="idTutor">
-					<c:forEach var="tutor" items="${tutores}">
-						<option value="${tutor.idUsuario}">${tutor.nomeUsuario}
-							${tutor.sobreNomeUsuario}</option>
-					</c:forEach>
-				</select> <br> <input type="submit" value="Selecionar Tutor"
-					id="selecionarTutor">
-			</form>
-		</div>
-	</c:if>
+	
 
 	<c:if test="${tutor!=null }">
 		<div class="formCadastro">
@@ -37,26 +25,31 @@
 				<input type="hidden" name="idTutorAtu" maxlength="25"
 					value="${tutor.idUsuario }" >
 				
-					<label>Nome</label><br> <input type="text" name="nomeTutorAtu"
-						maxlength="25" required value="${tutor.nomeUsuario }"><br>
+					<label>Nome</label><br> 
+					<input type="text" name="nomeTutorAtu" pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$"	maxlength="25" required value="${tutor.nomeUsuario }"><br>
 
-
-
-					<label>Sobrenome</label><br> <input type="text"
-						name="sobrenomeTutorAtu" maxlength="25" required
-						value="${tutor.sobreNomeUsuario }"><br> <label>Cpf</label><br>
-					<input type="text" name="cpfTutorAtu" maxlength="11" required
-						value="${tutor.cpfUsuario }"><br> <label>Telefone</label><br>
-					<input type="tel" name="telefoneTutorAtu" maxlength="11" required
-						placeholder="(99)99999-9999"
-						pattern="[0-9]{2}[0-9]{1}[0-9]{4}[0-9]{4}"
-						value="${tutor.telefoneUsuario}"><br> <label>E-mail</label><br>
-					<input type="text" name="emailTutorAtu" maxlength="35" required
-						value="${tutor.emailUsuario }"><br> <label>Idade</label><br>
-					<input type="text" name="idadeTutorAtu" maxlength="3" required
-						value="${tutor.idadeUsuario }"><br> <label>Usuário</label><br>
+					<label>Sobrenome</label><br> 
+					<input type="text" name="sobrenomeTutorAtu" pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$" maxlength="25" required value="${tutor.sobreNomeUsuario }"><br> 
+					
+					<label>Cpf</label><br>
+					<input type="text" name="cpfTutorAtu"  oninput="mascara(this, 'cpf')" maxlength="11" required value="${tutor.cpfUsuario }"><br> 
+					
+					<label>Telefone</label><br>
+					<input type="tel" name="telefoneTutorAtu"  oninput="mascara(this, 'tel')" maxlength="15" required placeholder="(99)99999-9999" value="${tutor.telefoneUsuario}"><br>
+					
+					<label>E-mail</label><br>
+					<input type="text" name="emailTutorAtu"  onblur="mascaraEmail(this, 'email')" maxlength="35" required
+						value="${tutor.emailUsuario }"><br>
+					
+					<label>Idade</label><br>
+					<input type="text" name="idadeTutorAtu"  oninput="mascara(this, 'idade')" maxlength="3" required
+						value="${tutor.idadeUsuario }"><br> 
+					
+					<label>Usuário</label><br>
 					<input type="text" name="usuarioTutorAtu" maxlength="25" required
-						value="${tutor.login_usuario }"><br> <label>Senha</label><br>
+						value="${tutor.login_usuario }"><br> 
+					
+					<label>Senha</label><br>
 					<input type="password" name="senhaTutorAtu" maxlength="25" required
 						value="${tutor.senha_usuario }"><br>
 				

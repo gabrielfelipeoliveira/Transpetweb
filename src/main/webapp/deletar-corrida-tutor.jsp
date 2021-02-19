@@ -37,7 +37,7 @@
 					<th>Endereço Inicial</th>
 					<th>Endereço Final</th>
 					<th>Pet</th>
-					<th>Deletar</th>
+					<th>Selecionar</th>
 				</tr>
 
 				<tbody>

@@ -12,26 +12,11 @@
 	<%@ include file="cabecalho-motorista.jsp"%>
 
 	
-	<c:if test="${motoristas!=null }">
-		<div class="formCadastro" >
-	<h3>Selecione o motorista</h3>
-		<form
-			action="<%=request.getContextPath()%>/atualizar-veiculo-motorista">
-			<select name="idMotorista">
-
-				<c:forEach var="motorista" items="${motoristas}">
-					<option value="${motorista.idUsuario}">
-						${motorista.nomeUsuario} ${motorista.sobreNomeUsuario}</option>
-				</c:forEach>
-			</select><br><br>
-			<input type="submit" value="selecionar">
-		</form>
-		</div>
-	</c:if>
+	
 
 <c:if test="${veiculos!=null }">
 	<div class="formCadastro" >
-	<h3>Selecione o veiculo para atualizar</h3>
+	<h3>Selecione o veículo para atualizar</h3>
 	<table>
 		<tr>
 			<th>Marca</th>
@@ -64,11 +49,11 @@
 	<h3>Atualize os dados</h3>
 
 	<form action="<%=request.getContextPath()%>/atualizar-veiculo-dados" method="post">
-		<fieldset>
+		
 			
 			<input
-				type="text" id="IdVeiculoAtu"
-				name="IdVeiculoAtu" value="${veiculo.idVeiculo}" maxlength="25" required hidden><br>
+				type="hidden" id="IdVeiculoAtu"
+				name="IdVeiculoAtu" value="${veiculo.idVeiculo}" maxlength="25" required ><br>
 		
 			<label>Marca</label><br> <input
 				type="text" id="marcaVeiculoMotoristaAtu"
@@ -91,9 +76,9 @@
 		
 			<label>Ano</label><br> <input
 				type="text" id="anoVeiculoMotoristaAtu"
-				name="anoVeiculoMotoristaAtu" value="${veiculo.anoVeiculo}" maxlength="4" required><br>
+				name="anoVeiculoMotoristaAtu" pattern="[0-9]+$" value="${veiculo.anoVeiculo}" maxlength="4" required><br>
 			<br> 
-		</fieldset>
+		
 
 		<input type="submit" value="Atualizar Veículo"
 			id="botaoAtuaVeiculoMotorista">

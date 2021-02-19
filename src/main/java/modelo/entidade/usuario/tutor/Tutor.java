@@ -64,6 +64,12 @@ public class Tutor extends Usuario {
 		this.corridas.add(corridas);
 	}
 	
+	public void removerEndereco(Endereco endereco) {
+		
+		this.enderecos.remove(endereco);
+		
+	}
+	
 
 	
 }

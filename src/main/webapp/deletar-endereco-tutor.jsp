@@ -37,7 +37,7 @@
 				<th>Rua</th>
 				<th>CEP</th>
 				<th>Numero</th>
-				<th>Deletar</th>
+				<th>Selecionar</th>
 			</tr>
 			
 			<tbody>

@@ -16,13 +16,13 @@
 
 	<img src="https://i.imgur.com/DFW3X1bl.png"/>	
 	
-	<div class="login">
-		<div class="loginDentro">
-			
+	<div  class="login">
+		<div id="contact" class="loginDentro">
+			<br><br><br>
 			<form action="<%=request.getContextPath()%>/login" method="post">
 				<label for="usuario">Usuario</label><br> <input type="text"
-					id="usuario" name="usuario"><br> <label for="senha">Senha</label><br>
-				<input type="password" id="senha" name="senha"><br>
+					id="usuario" name="usuario" required ><br> <label for="senha">Senha</label><br>
+				<input type="password" id="senha" name="senha" required><br>
 				<br> <input type="submit" value="Entrar">
 			</form>
 		</div>
@@ -30,7 +30,7 @@
 	
 
 	<div class="cadastro">
-	<p>Caso você queira utilizar nosso serviço ou trabalhar conosco cadastre-se como:</p>
+	<p id="cadastroP">Caso você queira utilizar nosso serviço ou trabalhar conosco cadastre-se como:</p>
 	
 		
 		<a id="cadMot" class= "atualizarBotao" href="<%=request.getContextPath()%>/inicial-cadastro">Motorista</a>

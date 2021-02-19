@@ -127,5 +127,20 @@ public class Endereco implements Serializable {
 	public void setCorridasFinal(Corrida corridasFinal) {
 		this.corridasFinal.add(corridasFinal);
 	}
+	
+public boolean equals(Endereco endereco) {
+		
+		if(this==endereco)
+			return true;
+		if(endereco==null)
+			return false;
+		if(this.getClass() != endereco.getClass())
+			return false;
+		if(this.getIdEndereco()==endereco.getIdEndereco())
+			return true;
+		
+	return false;
+	
+	}
 
 }

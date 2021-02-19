@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<script><%@include file="\resources\js\metodos.js"%></script>
 <title>Atualizar endereço</title>
 </head>
 <body>
@@ -72,7 +73,7 @@
 
 				<label>CEP</label><br> <input type="text" id="cepEnderecoTutor"
 					name="cepEnderecoTutor" value="${endereco.cepEndereco}"
-					maxlength="5" required><br> <label>Numero</label><br>
+					maxlength="5" oninput="mascara(this, 'cep')" required><br> <label>Numero</label><br>
 				<input type="text" id="numeroEnderecoTutor"
 					name="numeroEnderecoTutor" value="${endereco.numeroEndereco}"
 					maxlength="25" required><br>

@@ -5,13 +5,14 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Cadastrar Endereço</title>
+<script><%@include file="\resources\js\metodos.js"%></script>
 </head>
 <body>
 
 
 <%@ include file="cabecalho-tutor.jsp" %>
 	<div class="formCadastro" >
-	<h1>Insira os dados para cadastrar seu Endereço!</h1>
+	<h1>Insira os dados para cadastrar um Endereço!</h1>
 	
 		
 		<form action="<%=request.getContextPath()%>/cadastrar-endereco-tutor">
@@ -25,12 +26,12 @@
 			
 			
 			<label >Cep</label><br>
-			<input type ="text" id="idCepEnderecoTutorIns" name="cepEnderecoTutorIns" maxlength="8" required><br>
+			<input type ="text" id="idCepEnderecoTutorIns" oninput="mascara(this, 'cep')" name="cepEnderecoTutorIns" maxlength="8" required><br>
 			
 			
 			
 			<label >Numero</label><br>
-			<input type ="text" id="idNumeroEnderecoTutorIns" name ="numeroEnderecoTutorIns" maxlength="5" required><br>
+			<input type ="text" id="idNumeroEnderecoTutorIns" pattern="[0-9]+$" name ="numeroEnderecoTutorIns" maxlength="5" required><br>
 			
 			
 			

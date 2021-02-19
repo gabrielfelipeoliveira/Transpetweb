@@ -6,6 +6,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Cadastrar Veículo Motorista</title>
+<script><%@include file="\resources\js\metodos.js"%></script>
 </head>
 <body>
 
@@ -33,7 +34,7 @@
 			<input type ="text" id="placaVeiculoMotoristaIns" name ="placaVeiculoMotoristaIns" maxlength ="7" required><br>
 			
 			<label >Ano</label><br>
-			<input type ="text" id="anoVeiculoMotoristaIns" name="anoVeiculoMotoristaIns" maxlength ="4"  required><br><br>
+			<input type ="text" id="anoVeiculoMotoristaIns" pattern="[0-9]+$" name="anoVeiculoMotoristaIns" maxlength ="4"  required><br><br>
 		
 			<input type ="submit" value="Cadastrar Veículo" id="botaoInsVeiculoMotorista">
 			
