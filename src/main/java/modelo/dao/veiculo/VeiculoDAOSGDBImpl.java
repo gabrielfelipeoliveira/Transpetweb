@@ -23,7 +23,7 @@ public class VeiculoDAOSGDBImpl extends GenericoJPADAO{
 ConexaoFactory fabrica = new ConexaoFactory();
 
 	
-	public List<Veiculo> listarAnimalPorIdMotorista(Motorista motorista) {
+	public List<Veiculo> listarVeiculoPorIdMotorista(Motorista motorista) {
 		Session sessao = null;
 		List<Veiculo> veiculos = null;
 
@@ -62,6 +62,44 @@ ConexaoFactory fabrica = new ConexaoFactory();
 		return veiculos;
 	}
 
-	
+	public Veiculo listarVeiculoPorIdVeiculo(Long id) {
+		Session sessao = null;
+		Veiculo veiculoReturn = null;
+
+		try {
+
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Veiculo> criteria = construtor.createQuery(Veiculo.class);
+			Root<Veiculo> raiz = criteria.from(Veiculo.class);
+			criteria.where(construtor.equal(raiz.get("idVeiculo"), id));
+
+			criteria.select(raiz);
+
+			veiculoReturn = sessao.createQuery(criteria).getSingleResult();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return veiculoReturn;
+	}
+
 	
 }

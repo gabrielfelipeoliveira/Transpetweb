@@ -18,9 +18,7 @@ import modelo.entidade.veiculo.Veiculo;
 @Table(name = "motorista")
 public class Motorista extends Usuario {
 
-	@Column(name = "idade_motorista", length = 3, nullable = false, unique = true)
-	private int idade;
-
+	
 	@Column(name = "cnh_motorista", length = 11, nullable = false, unique = true)
 	private long cnh;
 
@@ -30,42 +28,23 @@ public class Motorista extends Usuario {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "motorista", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Corrida> corridas = new ArrayList<Corrida>();
 
-	public Motorista(String nomeUsuario, String sobreNomeUsuario, String cpfUsuario,
-			String telefoneUsuario, String login_usuario, String senha_usuario, int idade, long cnh,
+	public Motorista(String nomeUsuario, String sobreNomeUsuario, String cpfUsuario, int idadeUsuario,
+			String emailUsuario, String telefoneUsuario, String login_usuario, String senha_usuario, long cnh,
 			List<Veiculo> veiculos, List<Corrida> corridas) {
-		super(nomeUsuario, sobreNomeUsuario, cpfUsuario, telefoneUsuario, login_usuario, senha_usuario);
-		this.idade = idade;
+		super(nomeUsuario, sobreNomeUsuario, cpfUsuario, idadeUsuario, emailUsuario, telefoneUsuario, login_usuario,
+				senha_usuario);
 		this.cnh = cnh;
 		this.veiculos = veiculos;
 		this.corridas = corridas;
 	}
 
-	public Motorista(int idUsuario, String nomeUsuario, String sobreNomeUsuario, String cpfUsuario,
-			String telefoneUsuario, String login_usuario, String senha_usuario, int idade, long cnh,
-			List<Veiculo> veiculos, List<Corrida> corridas) {
-		super(idUsuario, nomeUsuario, sobreNomeUsuario, cpfUsuario, telefoneUsuario, login_usuario, senha_usuario);
-		this.idade = idade;
-		this.cnh = cnh;
-		this.veiculos = veiculos;
-		this.corridas = corridas;
+	public Motorista(String nomeUsuario, String sobreNomeUsuario, String cpfUsuario, int idadeUsuario,
+			String emailUsuario, String telefoneUsuario, String login_usuario, String senha_usuario) {
+		super(nomeUsuario, sobreNomeUsuario, cpfUsuario, idadeUsuario, emailUsuario, telefoneUsuario, login_usuario,
+				senha_usuario);
 	}
-
-	public Motorista(int idUsuario, String nomeUsuario, String sobreNomeUsuario, String cpfUsuario,
-			String telefoneUsuario, String login_usuario, String senha_usuario) {
-		super(idUsuario, nomeUsuario, sobreNomeUsuario, cpfUsuario, telefoneUsuario, login_usuario, senha_usuario);
-	}
-
-	public Motorista() {
-
-	}
-
-	public int getIdade() {
-		return idade;
-	}
-
-	public void setIdade(int idade) {
-		this.idade = idade;
-	}
+	
+	public Motorista() {}
 
 	public long getCnh() {
 		return cnh;
@@ -79,16 +58,17 @@ public class Motorista extends Usuario {
 		return veiculos;
 	}
 
-	public void setVeiculos(Veiculo veiculo) {
-		this.veiculos.add(veiculo);
+	public void setVeiculos(Veiculo veiculos) {
+		this.veiculos.add(veiculos);
 	}
 
 	public List<Corrida> getCorridas() {
 		return corridas;
 	}
 
-	public void setCorridas(Corrida corrida) {
-		this.corridas.add(corrida);
+	public void setCorridas(List<Corrida> corridas) {
+		this.corridas = corridas;
 	}
+	
 
 }
