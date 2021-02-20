@@ -11,13 +11,13 @@
 
 	<%@ include file="cabecalho-tutor.jsp"%>
 
-	<h1>Selecione a corrida para atualizar</h1>
-	
+
 	
 	<c:if test="${tutores!=null }">
+		<div class="formCadastro" >
 	<h3>Selecione o tutor</h3>
 	<form action="<%=request.getContextPath()%>/atualizar-corrida-tutor">
-		<label for="idTutor">Tutor</label> <select name="idTutor">
+		<select name="idTutor">
 			<c:forEach var="tutor" items="${tutores}">
 				<option value="${tutor.idUsuario}">${tutor.nomeUsuario}
 					${tutor.sobreNomeUsuario}</option>
@@ -25,12 +25,14 @@
 		</select> <br> <input type="submit" value="Selecionar Tutor"
 			id="selecionarTutor">
 	</form>
+	</div>
 	</c:if>
 	<c:if test="${corridas!=null }">
+		<div class="formCadastro" >
 	<h3>Selecione a corrida</h3>
 	<form action="<%=request.getContextPath()%>/atualizar-corrida-tutor-tabela">
 	
-			<input type ="text" name="idTutorAtu" hidden value="${tutor.idUsuario}">
+			<input type ="hidden" name="idTutorAtu" value="${tutor.idUsuario}">
 	
 		<table>
 	
@@ -38,6 +40,7 @@
 				<th>Endereço Inicial</th>
 				<th>Endereço Final</th>
 				<th>Pet</th>
+				<th>Selecionar</th>
 			</tr>
 			<tbody>
 				<c:forEach var="corrida" items="${corridas}">
@@ -45,30 +48,31 @@
 						<td><c:out value="${corrida.enderecoInicial.ruaEndereco}" /></td>
 						<td><c:out value="${corrida.enderecoFinal.ruaEndereco}" /></td>
 						<td><c:out value="${corrida.animal.nomeAnimal}" /></td>
-						<td><a
-							href="<%=request.getContextPath()%>/atualizar-corrida-tutor-tabela?idCorridaTabela=<c:out value='${corrida.idCorrida}'/>&idTutorTabela=<c:out value='${tutor.idUsuario }'/>">Selecionar</a>
+						<td><a class="atualizarBotao"
+							href="<%=request.getContextPath()%>/atualizar-corrida-tutor-tabela?idCorridaTabela=<c:out value='${corrida.idCorrida}'/>&idTutorTabela=<c:out value='${tutor.idUsuario }'/>">Atualizar</a>
 						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	</form>
+	</div>
 </c:if>
 
 <c:if test="${corrida!=null }">
+	<div class="formCadastro" >
 	<form action="<%=request.getContextPath()%>/atualizar-corrida-tutor-dados">
 
-			<input type ="text" name="idCorridaAtu" hidden value="${corrida.idCorrida }">
-		<fieldset>
-			<label>Endereço Inicial</label><br> <select
+			<input type ="hidden" name="idCorridaAtu"  value="${corrida.idCorrida }">
+		 <select
 				name="idEnderecoInicialAtu">
 				<c:forEach var="endereco" items="${enderecos}">
 					<c:if test="${endereco.idEndereco !=enderecoInicial.idEndereco}">
-						<option value="${endereco.idEndereco}">${endereco.ruaEndereco}<
+						<option value="${endereco.idEndereco}">${endereco.ruaEndereco}
 							${endereco.numeroEndereco}</option>
 					</c:if>
 					<c:if test="${endereco.idEndereco ==enderecoInicial.idEndereco}">
-						<option value="${endereco.idEndereco}" selected>${endereco.ruaEndereco}<
+						<option value="${endereco.idEndereco}" selected>${endereco.ruaEndereco}
 							${endereco.numeroEndereco}</option>
 					</c:if>
 				</c:forEach>
@@ -76,11 +80,11 @@
 				name="idEnderecoFinalAtu">
 				<c:forEach var="endereco" items="${enderecos}">
 					<c:if test="${endereco.idEndereco !=enderecoFinal.idEndereco}">
-						<option value="${endereco.idEndereco}">${endereco.ruaEndereco}<
+						<option value="${endereco.idEndereco}">${endereco.ruaEndereco}
 							${endereco.numeroEndereco}</option>
 					</c:if>
 					<c:if test="${endereco.idEndereco ==enderecoFinal.idEndereco}">
-						<option value="${endereco.idEndereco}" selected>${endereco.ruaEndereco}<
+						<option value="${endereco.idEndereco}" selected>${endereco.ruaEndereco}
 							${endereco.numeroEndereco}</option>
 					</c:if>
 				</c:forEach>
@@ -99,10 +103,13 @@
 				</c:forEach>
 
 			</select><br> <br>
-		</fieldset>
+		
 		<input type="submit" value="Atualizar Corrida"
 			id="atualizarCorrida">
 	</form>
+	
+	</div>
+	
 </c:if>
 </body>
 </html>

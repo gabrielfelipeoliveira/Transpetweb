@@ -44,7 +44,7 @@ function mascara(i, t) {
 		}
 
 	}
-
+	
 }
 
 function mascaraEmail(i, t){

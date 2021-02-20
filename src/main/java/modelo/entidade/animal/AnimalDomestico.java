@@ -115,8 +115,8 @@ public class AnimalDomestico implements Serializable {
 		return corridas;
 	}
 
-	public void setCorridas(Corrida corridas) {
-		this.corridas.add(corridas);
+	public void setCorridas(Corrida corrida) {
+		this.corridas.add(corrida);
 	}
 
 	public TipoAnimal getTipoAnimal() {

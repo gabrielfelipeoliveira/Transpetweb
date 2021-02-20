@@ -13,25 +13,28 @@
 	<%@ include file="cabecalho-tutor.jsp"%>
 
 	<c:if test="${tutores != null}">
-		<h1>Selecione o tutor</h1>
+		<div class="formCadastro">
+			<h1>Selecione o tutor</h1>
 
-		<form action="<%=request.getContextPath()%>/listar-animal-tutor"
-			method="post">
-			<label>Selecione o tutor</label> <br> <select name="idTutor">
-				<c:forEach var="tutor" items="${tutores}">
-					<option value="${tutor.idUsuario}">${tutor.nomeUsuario}
-						${tutor.sobreNomeUsuario}</option>
-				</c:forEach>
+			<form action="<%=request.getContextPath()%>/listar-animal-tutor"
+				method="post">
+				<label>Selecione o tutor</label> <br> <select name="idTutor">
+					<c:forEach var="tutor" items="${tutores}">
+						<option value="${tutor.idUsuario}">${tutor.nomeUsuario}
+							${tutor.sobreNomeUsuario}</option>
+					</c:forEach>
 
-			</select><br> <input type="submit" value="Selecionar Tutor"
-				id="selecionarTutor">
-		</form>
+				</select><br> <input type="submit" value="Selecionar Tutor"
+					id="selecionarTutor">
+			</form>
+		</div>
 	</c:if>
 
 	<c:if test="${animais!=null }">
-		<h3> Lista de animais</h3>
-		<div>
-			<h3>Lista</h3>
+	<div class="formCadastro">
+		<h3>Lista de animais</h3>
+		
+			
 			<table>
 
 				<tr>

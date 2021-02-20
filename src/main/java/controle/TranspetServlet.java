@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import modelo.dao.GenericoDAO;
 import modelo.dao.animal.AnimalDomesticoDAOSGDBImpl;
@@ -57,383 +58,321 @@ public class TranspetServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String acao = request.getServletPath();
 
-		switch (acao) {
-
-		case "/inicial-cadastro":
-
-			abrirPaginaCadastroUsuario(request, response);
-
-			break;
-
-		case "/login":
-
+		if (acao.equals("/login"))
 			logarUsuario(request, response);
 
-			break;
+		if (acao.equals("/inicial-cadastro"))
+			abrirPaginaCadastroUsuario(request, response);
 
-		case "/cadastrar-tutor":
-
+		if (acao.equals("/cadastrar-tutor"))
 			cadastrarTutor(request, response);
 
-			break;
-
-		case "/cadastrar-motorista":
-
+		if (acao.equals("/cadastrar-motorista"))
 			cadastrarMotorista(request, response);
 
-			break;
+		HttpSession session = request.getSession();
 
-		case "/corrida-tutor":
+		if (session.getAttribute("usuario") != null) {
 
-			listarTutoresCorrida(request, response);
+			switch (acao) {
 
-			break;
+			case "/deslogar":
 
-		case "/listar-corrida-tutor":
+				session = request.getSession();
+				session.invalidate();
+				RequestDispatcher dispatcher = request.getRequestDispatcher("tela-inicial.jsp");
+				dispatcher.forward(request, response);
 
-			listarCorridaAbertoTutor(request, response);
+				break;
 
-			break;
+			/*
+			 * case "/inicial-cadastro":
+			 * 
+			 * abrirPaginaCadastroUsuario(request, response);
+			 * 
+			 * break;
+			 * 
+			 * 
+			 * case "/login":
+			 * 
+			 * logarUsuario(request, response);
+			 * 
+			 * break;
+			 * 
+			 * 
+			 * case "/cadastrar-tutor":
+			 * 
+			 * cadastrarTutor(request, response);
+			 * 
+			 * break;
+			 * 
+			 * case "/cadastrar-motorista":
+			 * 
+			 * cadastrarMotorista(request, response);
+			 * 
+			 * break;
+			 */
 
-		case "/iniciar-corrida":
+			case "/listar-corrida-tutor":
 
-			listarTutoresIniciarCorrida(request, response);
+				listarCorridaAbertoTutor(request, response);
 
-			break;
+				break;
 
-		case "/iniciar-corrida-tutor":
+			case "/iniciar-corrida-tutor":
 
-			carregarDadosTutor(request, response);
+				carregarDadosTutor(request, response);
 
-			break;
+				break;
 
-		case "/iniciar-corrida-tutor-ins":
+			case "/iniciar-corrida-tutor-ins":
 
-			iniciarCorridaTutor(request, response);
+				iniciarCorridaTutor(request, response);
 
-			break;
+				break;
 
-		case "/atualizar-corrida":
+			case "/atualizar-corrida-tutor":
 
-			listarTutoresAtualizar(request, response);
+				listarCorridasTutor(request, response);
 
-			break;
+				break;
 
-		case "/atualizar-corrida-tutor":
+			case "/atualizar-corrida-tutor-tabela":
 
-			listarCorridasTutor(request, response);
+				atualizarCorridaTutor(request, response);
 
-			break;
+				break;
 
-		case "/atualizar-corrida-tutor-tabela":
+			case "/atualizar-corrida-tutor-dados":
 
-			atualizarCorridaTutor(request, response);
+				atualizarCorridaTutorDados(request, response);
 
-			break;
+				break;
 
-		case "/atualizar-corrida-tutor-dados":
+			case "/deletar-corrida-tutor":
 
-			atualizarCorridaTutorDados(request, response);
+				deletarCorridaTutor(request, response);
 
-			break;
+				break;
 
-		case "/deletar-corrida":
+			case "/deletar-corrida-tutor-del":
 
-			deletarCorrida(request, response);
+				deletarCorridaTutorDel(request, response);
 
-			break;
+				break;
 
-		case "/deletar-corrida-tutor":
+			case "/cadastrar-animal":
 
-			deletarCorridaTutor(request, response);
+				listarTutorAnimal(request, response);
 
-			break;
+				break;
 
-		case "/deletar-corrida-tutor-del":
+			case "/cadastrar-animal-tutor":
 
-			deletarCorridaTutorDel(request, response);
+				cadastrarAnimalTutor(request, response);
 
-			break;
+				break;
 
-		case "/cadastrar-animal":
+			case "/cadastrar-animal-tutor-inserir":
 
-			listarTutorAnimal(request, response);
+				cadastrarAnimalTutorInserir(request, response);
 
-			break;
+				break;
 
-		case "/cadastrar-animal-tutor":
+			case "/atualizar-animal-tutor":
 
-			cadastrarAnimalTutor(request, response);
+				atualizarAnimalTutor(request, response);
 
-			break;
+				break;
+			case "/atualizar-animal-tabela":
 
-		case "/cadastrar-animal-tutor-inserir":
+				atualizarAnimalTutorTabela(request, response);
 
-			cadastrarAnimalTutorInserir(request, response);
+				break;
 
-			break;
+			case "/atualizar-animal-tutor-dados":
 
-		case "/atualizar-animal":
+				atualizarAnimalTutorDados(request, response);
 
-			listarTutorAnimalAtualizar(request, response);
+				break;
 
-			break;
+			case "/deletar-animal-tutor":
 
-		case "/atualizar-animal-tutor":
+				deletarAnimalTutor(request, response);
 
-			atualizarAnimalTutor(request, response);
+				break;
 
-			break;
-		case "/atualizar-animal-tabela":
+			case "/deletar-animal-tutor-del":
 
-			atualizarAnimalTutorTabela(request, response);
+				deletarAnimalTutorDel(request, response);
 
-			break;
+				break;
 
-		case "/atualizar-animal-tutor-dados":
+			case "/dados-tutor-atualizar":
 
-			atualizarAnimalTutorDados(request, response);
+				atualizarDadosTutor(request, response);
 
-			break;
+				break;
 
-		case "/deletar-animal":
+			case "/dados-tutor-atualizar-atu":
 
-			listarTutorAnimalDeletar(request, response);
+				atualizarDadosTutorDados(request, response);
 
-			break;
+				break;
 
-		case "/deletar-animal-tutor":
+			case "/listar-animal-tutor":
 
-			deletarAnimalTutor(request, response);
+				listarAnimalTutor(request, response);
 
-			break;
+				break;
 
-		case "/deletar-animal-tutor-del":
+			case "/endereco-tutor":
 
-			deletarAnimalTutorDel(request, response);
+				enderecoTutor(request, response);
 
-			break;
+				break;
 
-		case "/dados-tutor":
+			case "/cadastrar-endereco-tutor":
 
-			listarTutoresDados(request, response);
+				enderecoTutorCadastrar(request, response);
 
-			break;
+				break;
 
-		case "/dados-tutor-atualizar":
+			case "/atualizar-endereco-tutor":
 
-			atualizarDadosTutor(request, response);
+				atualizarEnderecoTutor(request, response);
 
-			break;
+				break;
 
-		case "/dados-tutor-atualizar-atu":
+			case "/atualizar-endereco-tabela":
 
-			atualizarDadosTutorDados(request, response);
+				atualizarEnderecoTabela(request, response);
 
-			break;
+				break;
 
-		case "/listar-animal":
+			case "/atualizar-endereco-tutor-dados":
 
-			listarAnimal(request, response);
+				atualizarEndereocTutorDados(request, response);
 
-			break;
+				break;
 
-		case "/listar-animal-tutor":
+			case "/deletar-endereco-tutor":
 
-			listarAnimalTutor(request, response);
+				deletarEnderecoTutor(request, response);
 
-			break;
+				break;
+			case "/deletar-endereco-tutor-del":
 
-		case "/endereco-tutor":
+				deletarEnderecoTutorDel(request, response);
 
-			enderecoTutor(request, response);
+				break;
 
-			break;
+			case "/listar-endereco-tutor":
 
-		case "/cadastrar-endereco-tutor":
+				listarEnderecoTutor(request, response);
 
-			enderecoTutorCadastrar(request, response);
+				break;
 
-			break;
+			// CASES MOTORISTAS
 
-		case "/atualizar-endereco":
+			case "/listar-corridas-motoristas":
 
-			atualizarEndereco(request, response);
+				listarCorridasMotorista(request, response);
 
-			break;
+				break;
 
-		case "/atualizar-endereco-tutor":
+			case "/procurar-corrida-motorista":
 
-			atualizarEnderecoTutor(request, response);
+				carregarMotoristaCorrida(request, response);
 
-			break;
+				break;
 
-		case "/atualizar-endereco-tabela":
+			case "/procurar-corrida-motorista-aceitar":
 
-			atualizarEnderecoTabela(request, response);
+				procurarCorridaMotorista(request, response);
 
-			break;
+				break;
 
-		case "/atualizar-endereco-tutor-dados":
+			case "/cadastrar-veiculo":
 
-			atualizarEndereocTutorDados(request, response);
+				cadastrarVeiculo(request, response);
 
-			break;
+				break;
 
-		case "/deletar-endereco":
+			case "/cadastrar-veiculo-motorista":
 
-			deletarEndereco(request, response);
+				cadastrarVeiculoMotorista(request, response);
 
-			break;
+				break;
 
-		case "/deletar-endereco-tutor":
+			case "/atualizar-veiculo-motorista":
 
-			deletarEnderecoTutor(request, response);
+				atualizarVeiculoMotorista(request, response);
 
-			break;
-		case "/deletar-endereco-tutor-del":
+				break;
 
-			deletarEnderecoTutorDel(request, response);
+			case "/atualizar-veiculo-tabela":
 
-			break;
+				atualizarVeiculoMotoristaTabela(request, response);
 
-		case "/listar-endereco":
+				break;
 
-			listarEndereco(request, response);
+			case "/atualizar-veiculo-dados":
 
-			break;
+				atualizarDadosVeiculos(request, response);
 
-		case "/listar-endereco-tutor":
+				break;
 
-			listarEnderecoTutor(request, response);
+			case "/deletar-veiculo-motorista":
 
-			break;
+				deletarVeiculoMotorista(request, response);
 
-		// CASES MOTORISTAS
+				break;
 
-		case "/listar-motoristas-historico":
+			case "/deletar-veiculo-motorista-del":
 
-			listarMotoristasHistorico(request, response);
+				deletarVeiculoMotoristaDel(request, response);
 
-			break;
+				break;
 
-		case "/listar-corridas-motoristas":
+			case "/atualizar-dados-motorista":
 
-			listarCorridasMotorista(request, response);
+				atualizarDadosMotorista(request, response);
 
-			break;
+				break;
 
-		case "/procurar-corrida":
+			case "/atualizar-dados-motorista-atu":
 
-			procurarCorrida(request, response);
+				atualizarDadosMotoristaAtu(request, response);
 
-			break;
+				break;
 
-		case "/procurar-corrida-motorista":
+			case "/listar-veiculo-motorista":
 
-			carregarMotoristaCorrida(request, response);
+				listarVeiculoMotoristas(request, response);
 
-			break;
+				break;
 
-		case "/procurar-corrida-motorista-aceitar":
+			default:
 
-			procurarCorridaMotorista(request, response);
+				break;
 
-			break;
+			}
 
-		case "/cadastrar-veiculo":
+		} else {
 
-			cadastrarVeiculo(request, response);
-
-			break;
-
-		case "/cadastrar-veiculo-motorista":
-
-			cadastrarVeiculoMotorista(request, response);
-
-			break;
-
-		case "/atualizar-veiculo":
-
-			atualizarVeiculo(request, response);
-
-			break;
-
-		case "/atualizar-veiculo-motorista":
-
-			atualizarVeiculoMotorista(request, response);
-
-			break;
-
-		case "/atualizar-veiculo-tabela":
-
-			atualizarVeiculoMotoristaTabela(request, response);
-
-			break;
-
-		case "/atualizar-veiculo-dados":
-
-			atualizarDadosVeiculos(request, response);
-
-			break;
-
-		case "/deletar-veiculo":
-
-			deletarVeiculo(request, response);
-
-			break;
-
-		case "/deletar-veiculo-motorista":
-
-			deletarVeiculoMotorista(request, response);
-
-			break;
-
-		case "/deletar-veiculo-motorista-del":
-
-			deletarVeiculoMotoristaDel(request, response);
-
-			break;
-
-		case "/dados-motorista":
-
-			dadosMotorista(request, response);
-
-			break;
-
-		case "/atualizar-dados-motorista":
-
-			atualizarDadosMotorista(request, response);
-
-			break;
-
-		case "/atualizar-dados-motorista-atu":
-
-			atualizarDadosMotoristaAtu(request, response);
-
-			break;
-
-		case "/listar-veiculo":
-
-			listarVeiculo(request, response);
-
-			break;
-
-		case "/listar-veiculo-motorista":
-
-			listarVeiculoMotoristas(request, response);
-
-			break;
+			RequestDispatcher dispatcher = request.getRequestDispatcher("tela-inicial.jsp");
+			dispatcher.forward(request, response);
+			return;
 
 		}
-
 	}
 
 	private void carregarMotoristaCorrida(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Motorista motoristas = ((MotoristaDAOSGDBImpl) motoristaDao)
-				.listarMotoristaId(Long.parseLong(request.getParameter("idMotorista")));
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+		Motorista motoristas = ((MotoristaDAOSGDBImpl) motoristaDao).listarMotoristaId(usuario.getIdUsuario());
 		request.setAttribute("motorista", motoristas);
 		List<Corrida> corridas = ((CorridaDAOSGDBImpl) corridaDao).listarCorridaAberta();
 		request.setAttribute("corridas", corridas);
@@ -444,7 +383,8 @@ public class TranspetServlet extends HttpServlet {
 
 	private void listarEnderecoTutor(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao).listarTutorId(Long.parseLong(request.getParameter("idTutor")));
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao).listarTutorId(usuario.getIdUsuario());
 		List<Endereco> enderecos = ((EnderecoDAOSGDBImpl) enderecoDao).listarEnderecoPorIdUsuario(tutor);
 		request.setAttribute("enderecos", enderecos);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-endereco-tutor.jsp");
@@ -452,22 +392,11 @@ public class TranspetServlet extends HttpServlet {
 
 	}
 
-	private void listarEndereco(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		List<Tutor> tutores;
-
-		tutores = tutorDao.listar();
-		request.setAttribute("tutores", tutores);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/listar-endereco-tutor.jsp");
-		dispatcher.forward(request, response);
-
-	}
-
 	private void deletarEnderecoTutor(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao).listarTutorId(Long.parseLong(request.getParameter("idTutor")));
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao).listarTutorId(usuario.getIdUsuario());
 		List<Endereco> enderecos = ((EnderecoDAOSGDBImpl) enderecoDao).listarEnderecoPorIdUsuario(tutor);
 		request.setAttribute("enderecos", enderecos);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("deletar-endereco-tutor.jsp");
@@ -480,22 +409,15 @@ public class TranspetServlet extends HttpServlet {
 
 		Endereco endereco = ((EnderecoDAOSGDBImpl) enderecoDao)
 				.listarEnderecoPorIdEndereco(Long.parseLong(request.getParameter("idEnderecoTutorDel")));
-		enderecoDao.deletar(endereco);
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao).listarTutorId(usuario.getIdUsuario());
+		tutor.removerEndereco(endereco);
+		tutorDao.atualizar(tutor);
+		endereco.setTutores(null);
 
-		listarTutoresCorrida(request, response);
+		enderecoDao.atualizar(endereco);
 
-	}
-
-	private void deletarEndereco(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		List<Tutor> tutores;
-
-		tutores = tutorDao.listar();
-		request.setAttribute("tutores", tutores);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/deletar-endereco-tutor.jsp");
-		dispatcher.forward(request, response);
-
+		listarCorridaAbertoTutor(request, response);
 	}
 
 	private void atualizarEndereocTutorDados(HttpServletRequest request, HttpServletResponse response)
@@ -503,12 +425,11 @@ public class TranspetServlet extends HttpServlet {
 
 		Endereco endereco = ((EnderecoDAOSGDBImpl) enderecoDao)
 				.listarEnderecoPorIdEndereco(Long.parseLong(request.getParameter("idEnderecoDados")));
-		endereco.setCepEndereco(Long.parseLong(request.getParameter("cepEnderecoTutor")));
+		endereco.setCepEndereco(request.getParameter("cepEnderecoTutor"));
 		endereco.setNumeroEndereco(Integer.parseInt(request.getParameter("numeroEnderecoTutor")));
 		endereco.setRuaEndereco(request.getParameter("ruaEnderecoTutor"));
 		enderecoDao.atualizar(endereco);
-		listarTutoresCorrida(request, response);
-
+		listarCorridaAbertoTutor(request, response);
 	}
 
 	private void atualizarEnderecoTabela(HttpServletRequest request, HttpServletResponse response)
@@ -524,20 +445,10 @@ public class TranspetServlet extends HttpServlet {
 
 	private void atualizarEnderecoTutor(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao).listarTutorId(Long.parseLong(request.getParameter("idTutor")));
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao).listarTutorId(usuario.getIdUsuario());
 		List<Endereco> enderecos = ((EnderecoDAOSGDBImpl) enderecoDao).listarEnderecoPorIdUsuario(tutor);
 		request.setAttribute("enderecos", enderecos);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("atualizar-endereco-tutor.jsp");
-		dispatcher.forward(request, response);
-
-	}
-
-	private void atualizarEndereco(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		List<Tutor> tutores;
-
-		tutores = tutorDao.listar();
-		request.setAttribute("tutores", tutores);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("atualizar-endereco-tutor.jsp");
 		dispatcher.forward(request, response);
 
@@ -546,10 +457,9 @@ public class TranspetServlet extends HttpServlet {
 	private void enderecoTutor(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		List<Tutor> tutores;
-
-		tutores = tutorDao.listar();
-		request.setAttribute("tutores", tutores);
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao).listarTutorId(usuario.getIdUsuario());
+		request.setAttribute("tutor", tutor);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastrar-endereco-tutor.jsp");
 		dispatcher.forward(request, response);
 
@@ -559,23 +469,23 @@ public class TranspetServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao)
-				.listarTutorId(Long.parseLong(request.getParameter("idTutorSelect")));
+				.listarTutorId(Long.parseLong(request.getParameter("idTutorEnderecoAtu")));
 		Endereco endereco = new Endereco();
-		endereco.setCepEndereco(Long.parseLong(request.getParameter("cepEnderecoTutorIns")));
+		endereco.setCepEndereco(request.getParameter("cepEnderecoTutorIns"));
 		endereco.setNumeroEndereco(Integer.parseInt(request.getParameter("numeroEnderecoTutorIns")));
 		endereco.setRuaEndereco(request.getParameter("ruaEnderecoTutorIns"));
 		enderecoDao.inserir(endereco);
 		tutor.setEnderecos(endereco);
 		tutorDao.atualizar(tutor);
-		listarTutoresCorrida(request, response);
-
+		listarCorridaAbertoTutor(request, response);
 	}
 
 	private void listarVeiculoMotoristas(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Motorista motorista = ((MotoristaDAOSGDBImpl) motoristaDao)
-				.listarMotoristaId(Long.parseLong(request.getParameter(("idMotoristaAtu"))));
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+
+		Motorista motorista = ((MotoristaDAOSGDBImpl) motoristaDao).listarMotoristaId(usuario.getIdUsuario());
 		List<Veiculo> veiculos = ((VeiculoDAOSGDBImpl) veiculoDao).listarVeiculoPorIdMotorista(motorista);
 		request.setAttribute("veiculos", veiculos);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-veiculo-motorista.jsp");
@@ -583,34 +493,13 @@ public class TranspetServlet extends HttpServlet {
 
 	}
 
-	private void listarVeiculo(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		List<Motorista> motoristas = motoristaDao.listar();
-		request.setAttribute("motoristas", motoristas);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-veiculo-motorista.jsp");
-		dispatcher.forward(request, response);
-
-	}
-
 	private void listarAnimalTutor(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Tutor tutor = new Tutor();
-		tutor.setIdUsuario(Long.parseLong(request.getParameter("idTutor")));
+
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao).listarTutorId(usuario.getIdUsuario());
 		List<AnimalDomestico> animais = ((AnimalDomesticoDAOSGDBImpl) animalDao).listarAnimalPorIdTutor(tutor);
 		request.setAttribute("animais", animais);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-animal-tutor.jsp");
-		dispatcher.forward(request, response);
-
-	}
-
-	private void listarAnimal(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		List<Tutor> tutores;
-
-		tutores = tutorDao.listar();
-		request.setAttribute("tutores", tutores);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-animal-tutor.jsp");
 		dispatcher.forward(request, response);
 
@@ -626,18 +515,29 @@ public class TranspetServlet extends HttpServlet {
 	private void logarUsuario(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Usuario usuario = new Usuario();
-		usuario.setLogin_usuario(request.getParameter("usuario"));
-		usuario.setSenha_usuario(request.getParameter("senha"));
+		Usuario usuarioLogin = new Usuario();
+		usuarioLogin.setLogin_usuario(request.getParameter("usuario"));
+		usuarioLogin.setSenha_usuario(request.getParameter("senha"));
 
-		long id = ((UsuarioDAO<Motorista>) tutorDao).procurarUsuarioLogin(usuario);
-		if ((((TutorDAOSGDBImpl) tutorDao).procurarTutorId(id))) {
+		Usuario usuario = ((UsuarioDAO) tutorDao).procurarUsuarioLogin(usuarioLogin);
 
-			listarTutoresCorrida(request, response);
+		HttpSession session = request.getSession();
+		if (usuario != null) {
 
+			if (usuario instanceof Tutor) {
+				// adiciona o objeto inteiro na sessão
+				session.setAttribute("usuario", usuario);
+				// direciona para pagina de listar corridas tutor
+				listarCorridaAbertoTutor(request, response);
+			} else {
+				session.setAttribute("usuario", usuario);
+				carregarMotoristaCorrida(request, response);
+
+			}
 		} else {
 
-			listarMotoristasCorrida(request, response);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("tela-inicial.jsp");
+			dispatcher.forward(request, response);
 
 		}
 
@@ -656,8 +556,14 @@ public class TranspetServlet extends HttpServlet {
 		tutor.setLogin_usuario(request.getParameter("loginTutorCad"));
 		tutor.setSenha_usuario(request.getParameter("senhaTutorCad"));
 		tutorDao.inserir(tutor);
-		listarTutoresCorrida(request, response);
 
+		Usuario usuarioLogin = new Usuario();
+		usuarioLogin.setLogin_usuario(tutor.getLogin_usuario());
+		usuarioLogin.setSenha_usuario(tutor.getSenha_usuario());
+		Usuario usuario = ((UsuarioDAO<Tutor>) tutorDao)
+				.procurarUsuarioLogin(((TutorDAOSGDBImpl) tutorDao).procurarUsuarioLogin(usuarioLogin));
+		request.getSession().setAttribute("usuario", usuario);
+		listarCorridaAbertoTutor(request, response);
 	}
 
 	private void cadastrarMotorista(HttpServletRequest request, HttpServletResponse response)
@@ -674,41 +580,14 @@ public class TranspetServlet extends HttpServlet {
 		motorista.setLogin_usuario(request.getParameter("loginMotoristaCad"));
 		motorista.setSenha_usuario(request.getParameter("senhaMotoristaCad"));
 		motoristaDao.inserir(motorista);
-		listarMotoristasCorrida(request, response);
 
-	}
-
-	private void listarTutoresCorrida(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		List<Tutor> tutores;
-
-		tutores = tutorDao.listar();
-		request.setAttribute("tutores", tutores);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-corrida-tutor.jsp");
-		dispatcher.forward(request, response);
-
-	}
-
-	private void listarTutoresIniciarCorrida(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		List<Tutor> tutores;
-
-		tutores = tutorDao.listar();
-		request.setAttribute("tutores", tutores);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("iniciar-corrida-tutor.jsp");
-		dispatcher.forward(request, response);
-
-	}
-
-	private void listarMotoristasCorrida(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		List<Motorista> motoristas = motoristaDao.listar();
-		request.setAttribute("motoristas", motoristas);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("procurar-corrida-motorista.jsp");
-		dispatcher.forward(request, response);
+		Usuario usuarioLogin = new Usuario();
+		usuarioLogin.setLogin_usuario(motorista.getLogin_usuario());
+		usuarioLogin.setSenha_usuario(motorista.getSenha_usuario());
+		Usuario usuario = ((UsuarioDAO<Motorista>) tutorDao)
+				.procurarUsuarioLogin(((MotoristaDAOSGDBImpl) motoristaDao).procurarUsuarioLogin(usuarioLogin));
+		request.getSession().setAttribute("usuario", usuario);
+		listarCorridasMotorista(request, response);
 
 	}
 
@@ -716,7 +595,8 @@ public class TranspetServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		Tutor tutor = new Tutor();
-		tutor.setIdUsuario(Long.parseLong(request.getParameter("idTutor")));
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+		tutor.setIdUsuario(usuario.getIdUsuario());
 
 		List<Corrida> corridasFeitas;
 		corridasFeitas = ((CorridaDAOSGDBImpl) corridaDao).listarCorridaFeitaPorTutor(tutor);
@@ -745,25 +625,15 @@ public class TranspetServlet extends HttpServlet {
 				.listarAnimalPorIdAnimal(Long.parseLong(request.getParameter("idAnimal")));
 		corrida.setAnimal(animal);
 		corridaDao.inserir(corrida);
-		listarTutoresCorrida(request, response);
-	}
-
-	private void listarTutoresAtualizar(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		List<Tutor> tutores;
-
-		tutores = tutorDao.listar();
-		request.setAttribute("tutores", tutores);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("atualizar-corrida-tutor.jsp");
-		dispatcher.forward(request, response);
-
+		listarCorridaAbertoTutor(request, response);
 	}
 
 	private void listarCorridasTutor(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		// recupera o usuario da sessão
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 
-		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao).listarTutorId(Long.parseLong(request.getParameter("idTutor")));
+		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao).listarTutorId(usuario.getIdUsuario());
 		List<Corrida> corridas = ((CorridaDAOSGDBImpl) corridaDao).listarCorridaAbertaPorTutor(tutor);
 		request.setAttribute("corridas", corridas);
 		request.setAttribute("tutor", tutor);
@@ -814,13 +684,14 @@ public class TranspetServlet extends HttpServlet {
 				.listarAnimalPorIdAnimal(Long.parseLong(request.getParameter("idAnimalAtu")));
 		corrida.setAnimal(animal);
 		corridaDao.atualizar(corrida);
-		listarTutoresCorrida(request, response);
+		listarCorridaAbertoTutor(request, response);
 	}
 
 	private void carregarDadosTutor(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao).listarTutorId(Long.parseLong(request.getParameter("idTutor")));
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao).listarTutorId(usuario.getIdUsuario());
 		List<Endereco> enderecos = (List<Endereco>) ((EnderecoDAOSGDBImpl) enderecoDao)
 				.listarEnderecoPorIdUsuario(tutor);
 		List<AnimalDomestico> animais = ((AnimalDomesticoDAOSGDBImpl) animalDao).listarAnimalPorIdTutor(tutor);
@@ -831,22 +702,11 @@ public class TranspetServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
-	private void deletarCorrida(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		List<Tutor> tutores;
-
-		tutores = tutorDao.listar();
-		request.setAttribute("tutores", tutores);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("deletar-corrida-tutor.jsp");
-		dispatcher.forward(request, response);
-
-	}
-
 	private void deletarCorridaTutor(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao).listarTutorId(Long.parseLong(request.getParameter("idTutor")));
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao).listarTutorId(usuario.getIdUsuario());
 		List<Corrida> corridas = ((CorridaDAOSGDBImpl) corridaDao).listarCorridaAbertaPorTutor(tutor);
 		request.setAttribute("corridas", corridas);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("deletar-corrida-tutor.jsp");
@@ -861,17 +721,15 @@ public class TranspetServlet extends HttpServlet {
 				.listarCorridaPorIdCorrida(Long.parseLong(request.getParameter("idCorridaTabela")));
 
 		corridaDao.deletar(corridaDel);
-		listarTutoresCorrida(request, response);
-
+		listarCorridaAbertoTutor(request, response);
 	}
 
 	private void listarTutorAnimal(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		List<Tutor> tutores;
-
-		tutores = tutorDao.listar();
-		request.setAttribute("tutores", tutores);
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao).listarTutorId(usuario.getIdUsuario());
+		request.setAttribute("tutor", tutor);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastrar-animal-tutor.jsp");
 		dispatcher.forward(request, response);
 
@@ -880,7 +738,8 @@ public class TranspetServlet extends HttpServlet {
 	private void cadastrarAnimalTutor(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao).listarTutorId(Long.parseLong(request.getParameter("idTutorCad")));
+		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao)
+				.listarTutorId(Long.parseLong(request.getParameter("idTutorAnimalCad")));
 		request.setAttribute("tutor", tutor);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastrar-animal-tutor.jsp");
 		dispatcher.forward(request, response);
@@ -890,7 +749,8 @@ public class TranspetServlet extends HttpServlet {
 	private void cadastrarAnimalTutorInserir(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao).listarTutorId(Long.parseLong(request.getParameter("idTutor")));
+		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao)
+				.listarTutorId(Long.parseLong(request.getParameter("idTutorAnimalCad")));
 
 		AnimalDomestico animal = new AnimalDomestico();
 		animal.setNomeAnimal(request.getParameter("nomeAnimalTutorIns"));
@@ -902,26 +762,14 @@ public class TranspetServlet extends HttpServlet {
 		animal.setTipoAnimal(tipoAnimal);
 		animal.setTutor(tutor);
 		animalDao.inserir(animal);
-		listarTutoresCorrida(request, response);
-
-	}
-
-	private void listarTutorAnimalAtualizar(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		List<Tutor> tutores;
-
-		tutores = tutorDao.listar();
-		request.setAttribute("tutores", tutores);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("atualizar-animal-tutor.jsp");
-		dispatcher.forward(request, response);
-
+		listarCorridaAbertoTutor(request, response);
 	}
 
 	private void atualizarAnimalTutor(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao).listarTutorId(Long.parseLong(request.getParameter("idTutor")));
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao).listarTutorId(usuario.getIdUsuario());
 
 		List<AnimalDomestico> animais = ((AnimalDomesticoDAOSGDBImpl) animalDao).listarAnimalPorIdTutor(tutor);
 		request.setAttribute("tutor", tutor);
@@ -953,26 +801,14 @@ public class TranspetServlet extends HttpServlet {
 		animal.setPeso(Double.parseDouble(request.getParameter("pesoAnimalTutorAtu")));
 		animal.setTamanho(Double.parseDouble(request.getParameter("tamanhoAnimalTutorAtu")));
 		animalDao.atualizar(animal);
-		listarTutoresCorrida(request, response);
-
-	}
-
-	private void listarTutorAnimalDeletar(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		List<Tutor> tutores;
-
-		tutores = tutorDao.listar();
-		request.setAttribute("tutores", tutores);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("deletar-animal-tutor.jsp");
-		dispatcher.forward(request, response);
-
+		listarCorridaAbertoTutor(request, response);
 	}
 
 	private void deletarAnimalTutor(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao).listarTutorId(Long.parseLong(request.getParameter("idTutor")));
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao).listarTutorId(usuario.getIdUsuario());
 
 		List<AnimalDomestico> animais = ((AnimalDomesticoDAOSGDBImpl) animalDao).listarAnimalPorIdTutor(tutor);
 		request.setAttribute("tutor", tutor);
@@ -988,27 +824,16 @@ public class TranspetServlet extends HttpServlet {
 
 		AnimalDomestico animal = ((AnimalDomesticoDAOSGDBImpl) animalDao)
 				.listarAnimalPorIdAnimal(Long.parseLong(request.getParameter("idAnimalTutorDel")));
-		animalDao.deletar(animal);
-		listarTutoresCorrida(request, response);
-
-	}
-
-	private void listarTutoresDados(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		List<Tutor> tutores;
-
-		tutores = tutorDao.listar();
-		request.setAttribute("tutores", tutores);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("atualizar-dados-tutor.jsp");
-		dispatcher.forward(request, response);
-
+		animal.setTutor(null);
+		animalDao.atualizar(animal);
+		listarCorridaAbertoTutor(request, response);
 	}
 
 	private void atualizarDadosTutor(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao).listarTutorId(Long.parseLong(request.getParameter("idTutor")));
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao).listarTutorId(usuario.getIdUsuario());
 
 		request.setAttribute("tutor", tutor);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("atualizar-dados-tutor.jsp");
@@ -1022,47 +847,27 @@ public class TranspetServlet extends HttpServlet {
 		Tutor tutor = ((TutorDAOSGDBImpl) tutorDao).listarTutorId(Long.parseLong(request.getParameter("idTutorAtu")));
 		tutor.setNomeUsuario(request.getParameter("nomeTutorAtu"));
 		tutor.setSobreNomeUsuario(request.getParameter("sobrenomeTutorAtu"));
-		tutor.setCpfUsuario((request.getParameter("cpfutorAtu")));
+		tutor.setCpfUsuario((request.getParameter("cpfTutorAtu")));
 		tutor.setTelefoneUsuario(request.getParameter("telefoneTutorAtu"));
 		tutor.setIdadeUsuario(Integer.parseInt(request.getParameter("idadeTutorAtu")));
 		tutor.setEmailUsuario(request.getParameter("emailTutorAtu"));
 		tutor.setLogin_usuario(request.getParameter("usuarioTutorAtu"));
 		tutor.setSenha_usuario(request.getParameter("senhaTutorAtu"));
 		tutorDao.atualizar(tutor);
-		listarTutoresCorrida(request, response);
-
-	}
-
-	private void listarMotoristasHistorico(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		List<Motorista> motoristas = motoristaDao.listar();
-		request.setAttribute("motoristas", motoristas);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-corridas-motorista.jsp");
-		dispatcher.forward(request, response);
-
+		listarCorridaAbertoTutor(request, response);
 	}
 
 	private void listarCorridasMotorista(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Motorista motorista = ((MotoristaDAOSGDBImpl) motoristaDao)
-				.listarMotoristaId(Long.parseLong(request.getParameter(("idMotorista"))));
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+
+		Motorista motorista = ((MotoristaDAOSGDBImpl) motoristaDao).listarMotoristaId(usuario.getIdUsuario());
 
 		List<Corrida> corridas = ((CorridaDAOSGDBImpl) corridaDao).listarCorridaPorIdMotorista(motorista);
 		request.setAttribute("corridas", corridas);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-corridas-motorista.jsp");
-		dispatcher.forward(request, response);
-
-	}
-
-	private void procurarCorrida(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		List<Motorista> motoristas = motoristaDao.listar();
-		request.setAttribute("motoristas", motoristas);
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("procurar-corrida-motorista.jsp");
 		dispatcher.forward(request, response);
 
 	}
@@ -1076,13 +881,15 @@ public class TranspetServlet extends HttpServlet {
 				.listarCorridaPorIdCorrida(Long.parseLong(request.getParameter("idCorrida")));
 		corridaAtu.setMotorista(motoristas);
 		corridaDao.atualizar(corridaAtu);
-		listarMotoristasHistorico(request, response);
+		listarCorridasMotorista(request, response);
 	}
 
 	private void cadastrarVeiculo(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		List<Motorista> motoristas = motoristaDao.listar();
-		request.setAttribute("motoristas", motoristas);
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+
+		Motorista motorista = ((MotoristaDAOSGDBImpl) motoristaDao).listarMotoristaId(usuario.getIdUsuario());
+		request.setAttribute("motoristas", motorista);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastrar-carro-motorista.jsp");
 		dispatcher.forward(request, response);
 
@@ -1100,23 +907,15 @@ public class TranspetServlet extends HttpServlet {
 		veiculo.setAnoVeiculo(Integer.parseInt(request.getParameter("anoVeiculoMotoristaIns")));
 		veiculo.setMotoristaVeiculo(motorista);
 		veiculoDao.inserir(veiculo);
-		listarMotoristasCorrida(request, response);
-	}
-
-	private void atualizarVeiculo(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		List<Motorista> motoristas = motoristaDao.listar();
-		request.setAttribute("motoristas", motoristas);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("atualizar-veiculo-motorista.jsp");
-		dispatcher.forward(request, response);
-
+		listarCorridasMotorista(request, response);
 	}
 
 	private void atualizarVeiculoMotorista(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Motorista motorista = ((MotoristaDAOSGDBImpl) motoristaDao)
-				.listarMotoristaId(Long.parseLong(request.getParameter("idMotorista")));
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+
+		Motorista motorista = ((MotoristaDAOSGDBImpl) motoristaDao).listarMotoristaId(usuario.getIdUsuario());
 		List<Veiculo> veiculos = ((VeiculoDAOSGDBImpl) veiculoDao).listarVeiculoPorIdMotorista(motorista);
 		request.setAttribute("veiculos", veiculos);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("atualizar-veiculo-motorista.jsp");
@@ -1145,23 +944,15 @@ public class TranspetServlet extends HttpServlet {
 		veiculo.setPlacaVeiculo(request.getParameter("placaVeiculoMotoristaAtu"));
 		veiculo.setAnoVeiculo(Integer.parseInt(request.getParameter("anoVeiculoMotoristaAtu")));
 		veiculoDao.atualizar(veiculo);
-		listarMotoristasCorrida(request, response);
-	}
-
-	private void deletarVeiculo(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		List<Motorista> motoristas = motoristaDao.listar();
-		request.setAttribute("motoristas", motoristas);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("deletar-veiculo-motorista.jsp");
-		dispatcher.forward(request, response);
-
+		listarCorridasMotorista(request, response);
 	}
 
 	private void deletarVeiculoMotorista(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Motorista motorista = ((MotoristaDAOSGDBImpl) motoristaDao)
-				.listarMotoristaId(Long.parseLong(request.getParameter("idMotorista")));
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+
+		Motorista motorista = ((MotoristaDAOSGDBImpl) motoristaDao).listarMotoristaId(usuario.getIdUsuario());
 		List<Veiculo> veiculos = ((VeiculoDAOSGDBImpl) veiculoDao).listarVeiculoPorIdMotorista(motorista);
 		request.setAttribute("veiculos", veiculos);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("deletar-veiculo-motorista.jsp");
@@ -1175,25 +966,16 @@ public class TranspetServlet extends HttpServlet {
 		Veiculo veiculo = ((VeiculoDAOSGDBImpl) veiculoDao)
 				.listarVeiculoPorIdVeiculo(Long.parseLong(request.getParameter("idVeiculoTabela")));
 		veiculoDao.deletar(veiculo);
-		listarMotoristasCorrida(request, response);
-
-	}
-
-	private void dadosMotorista(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		List<Motorista> motoristas = motoristaDao.listar();
-		request.setAttribute("motoristas", motoristas);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("atualizar-dados-motorista.jsp");
-		dispatcher.forward(request, response);
+		listarCorridasMotorista(request, response);
 
 	}
 
 	private void atualizarDadosMotorista(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Motorista motorista = ((MotoristaDAOSGDBImpl) motoristaDao)
-				.listarMotoristaId(Long.parseLong(request.getParameter("idMotoristaDados")));
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+
+		Motorista motorista = ((MotoristaDAOSGDBImpl) motoristaDao).listarMotoristaId(usuario.getIdUsuario());
 		request.setAttribute("motorista", motorista);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("atualizar-dados-motorista.jsp");
 		dispatcher.forward(request, response);
@@ -1213,6 +995,6 @@ public class TranspetServlet extends HttpServlet {
 		motorista.setLogin_usuario(request.getParameter("loginMotoristaAtu"));
 		motorista.setTelefoneUsuario(request.getParameter("telefoneMotoristaAtu"));
 		motoristaDao.atualizar(motorista);
-		listarMotoristasHistorico(request, response);
+		listarCorridasMotorista(request, response);
 	}
 }
