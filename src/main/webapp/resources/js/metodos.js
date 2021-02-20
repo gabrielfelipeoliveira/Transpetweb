@@ -48,7 +48,7 @@ function mascara(i, t) {
 }
 
 function mascaraEmail(i, t){
-
+	
 	var v = i.value;
 	if (t == 'email') {
 		var email = i.value;
@@ -60,3 +60,6 @@ function mascaraEmail(i, t){
 
 	}
 }
+
+
+
